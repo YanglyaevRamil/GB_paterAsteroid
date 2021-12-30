@@ -21,6 +21,7 @@ public class SpaceShip : Ship, ITakeDamage
         {
             Death();
         }
+        Shooting();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -56,6 +57,7 @@ public class SpaceShip : Ship, ITakeDamage
         if (Input.GetKey(KeyCode.Space))
         {
             Debug.Log("Piw-Piw");
+            BulletSpawner.fire = true;
         }
     }
     public void Damage(int damageTaken)
