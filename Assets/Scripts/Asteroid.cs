@@ -5,13 +5,11 @@ using UnityEngine;
 public class Asteroid : SpaceObject
 {
     public GameObject ship;
-    public float x; 
-
+    public int damage = 0;
 
     private Transform transformShip;
     private Transform transformAsteroid;
     private Vector3 normVecdMoment;
-    private int damage = 0;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -20,6 +18,7 @@ public class Asteroid : SpaceObject
 
     private void OnEnable()
     {
+        Debug.Log("+++");
         transformShip = ship.GetComponent<Transform>();
         transformAsteroid = gameObject.transform;
         var distance = GetDistanceAtoB(transformShip, transformAsteroid);
@@ -40,8 +39,6 @@ public class Asteroid : SpaceObject
         transformAsteroid = gameObject.transform;
 
         var vec = transformShip.position - transformAsteroid.position;
-
-        x = vec.magnitude;
 
         if (vec.magnitude > 100.0f)
         {

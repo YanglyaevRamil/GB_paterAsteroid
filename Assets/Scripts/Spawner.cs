@@ -5,11 +5,10 @@ using UnityEngine;
 public abstract class Spawner : MonoBehaviour
 {
     [SerializeField] protected GameObject objectPrefab;
-    [SerializeField] protected Transform spawnPosition;
+    //[SerializeField] protected Transform spawnPosition;
 
     protected virtual void Spawn()
     {
-        GameObject.Instantiate(objectPrefab, spawnPosition.position, Quaternion.identity);
-
+        GameObject.Instantiate(objectPrefab, transform.position/*spawnPosition.position*/, Quaternion.identity);
     }
 }
