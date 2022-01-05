@@ -54,7 +54,7 @@ public class SpaceShip : Ship, ITakeDamage
 
     public override void Shooting()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("Piw-Piw");
             BulletSpawner.fire = true;
