@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectPrefab: {fileID: 3543349494990951450, guid: ed2444da980d88943a980574f309f978, type: 3}
+  ship: {fileID: 227952537}
   startDelay: 5
   spawnInterval: 1.5
 --- !u!1 &227952537
