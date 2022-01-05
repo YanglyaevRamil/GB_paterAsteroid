@@ -23,6 +23,9 @@ public class Bullet : SpaceObject
     public override void Motion()
     {
         transform.Translate(Vector3.forward * Time.deltaTime * speed);
+        
+        
+        
     }
 
     private void OnTriggerEnter(Collider other)
