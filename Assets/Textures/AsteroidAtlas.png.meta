@@ -1,0 +1,972 @@
+fileFormatVersion: 2
+guid: 4e893ef3c08a18d4cb2d3c3f73a7a7ce
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7599282376849575548
+    second: AsteroidAtlas_0
+  - first:
+      213: -7187300753281126243
+    second: AsteroidAtlas_1
+  - first:
+      213: 7640811444275756054
+    second: AsteroidAtlas_2
+  - first:
+      213: 4154129032529639264
+    second: AsteroidAtlas_3
+  - first:
+      213: 540012914908939765
+    second: AsteroidAtlas_4
+  - first:
+      213: -153019989939325727
+    second: AsteroidAtlas_5
+  - first:
+      213: 5274501294634612461
+    second: AsteroidAtlas_6
+  - first:
+      213: 7746700784530838991
+    second: AsteroidAtlas_7
+  - first:
+      213: -5401656117686473299
+    second: AsteroidAtlas_8
+  - first:
+      213: 840587697106806997
+    second: AsteroidAtlas_9
+  - first:
+      213: -1396674132257911948
+    second: AsteroidAtlas_10
+  - first:
+      213: 3315804772069401790
+    second: AsteroidAtlas_11
+  - first:
+      213: 3515861453681386461
+    second: AsteroidAtlas_12
+  - first:
+      213: 5138106292831874026
+    second: AsteroidAtlas_13
+  - first:
+      213: 6363980516924112357
+    second: AsteroidAtlas_14
+  - first:
+      213: 8027529562056510921
+    second: AsteroidAtlas_15
+  - first:
+      213: -490107282277007187
+    second: AsteroidAtlas_16
+  - first:
+      213: -5207815194773697444
+    second: AsteroidAtlas_17
+  - first:
+      213: -6163188619708452089
+    second: AsteroidAtlas_18
+  - first:
+      213: -3935185025719260995
+    second: AsteroidAtlas_19
+  - first:
+      213: 6296082770556013070
+    second: AsteroidAtlas_20
+  - first:
+      213: 6044202739803243770
+    second: AsteroidAtlas_21
+  - first:
+      213: 252931685826951523
+    second: AsteroidAtlas_22
+  - first:
+      213: -3018125460346661160
+    second: AsteroidAtlas_23
+  - first:
+      213: 3137279388945471540
+    second: AsteroidAtlas_24
+  - first:
+      213: 8897225407627713566
+    second: AsteroidAtlas_25
+  - first:
+      213: 310388874006932029
+    second: AsteroidAtlas_26
+  - first:
+      213: 1854989643407001367
+    second: AsteroidAtlas_27
+  - first:
+      213: -7764540436984105807
+    second: AsteroidAtlas_28
+  - first:
+      213: -2147491031097857890
+    second: AsteroidAtlas_29
+  - first:
+      213: 7322989873040517947
+    second: AsteroidAtlas_30
+  - first:
+      213: -4208991565005402729
+    second: AsteroidAtlas_31
+  - first:
+      213: -4440101885145803677
+    second: AsteroidAtlas_32
+  - first:
+      213: -1255975958111263468
+    second: AsteroidAtlas_33
+  - first:
+      213: 3042799890125329534
+    second: AsteroidAtlas_34
+  - first:
+      213: 6576964081403726757
+    second: AsteroidAtlas_35
+  - first:
+      213: 8528479756883072568
+    second: AsteroidAtlas_36
+  - first:
+      213: 2449885859387530249
+    second: AsteroidAtlas_37
+  - first:
+      213: -6131721580033667845
+    second: AsteroidAtlas_38
+  - first:
+      213: 1318947486225413895
+    second: AsteroidAtlas_39
+  - first:
+      213: 1113663615632738709
+    second: AsteroidAtlas_40
+  - first:
+      213: 5012095501550769780
+    second: AsteroidAtlas_41
+  - first:
+      213: 7191789771105667347
+    second: AsteroidAtlas_42
+  - first:
+      213: 5154975779295734501
+    second: AsteroidAtlas_43
+  - first:
+      213: 2733235914648359830
+    second: AsteroidAtlas_44
+  - first:
+      213: -7971429871570341589
+    second: AsteroidAtlas_45
+  - first:
+      213: 2397332903776241344
+    second: AsteroidAtlas_46
+  - first:
+      213: 4339706068050103340
+    second: AsteroidAtlas_47
+  - first:
+      213: -3702164530411707118
+    second: AsteroidAtlas_48
+  - first:
+      213: 2248844124788196767
+    second: AsteroidAtlas_49
+  - first:
+      213: 6336211136705992250
+    second: AsteroidAtlas_50
+  - first:
+      213: 4486308338669952716
+    second: AsteroidAtlas_51
+  - first:
+      213: 2996182742479163356
+    second: AsteroidAtlas_52
+  - first:
+      213: 2055472724854572639
+    second: AsteroidAtlas_53
+  - first:
+      213: 1749690117749975403
+    second: AsteroidAtlas_54
+  - first:
+      213: 8418010900130372448
+    second: AsteroidAtlas_55
+  - first:
+      213: 1075356487381682497
+    second: AsteroidAtlas_56
+  - first:
+      213: -8214951965056130454
+    second: AsteroidAtlas_57
+  - first:
+      213: -6173129129334500111
+    second: AsteroidAtlas_58
+  - first:
+      213: 3886229888330632116
+    second: AsteroidAtlas_59
+  - first:
+      213: -2230715561254655306
+    second: AsteroidAtlas_60
+  - first:
+      213: -1409333365167002154
+    second: AsteroidAtlas_61
+  - first:
+      213: 6347117946863286633
+    second: AsteroidAtlas_62
+  - first:
+      213: -498809697501198612
+    second: AsteroidAtlas_63
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: AsteroidAtlas_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1796
+        width: 164
+        height: 154
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7e410c1f03167960800000000000000
+      internalID: 7599282376849575548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_1
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 1794
+        width: 169
+        height: 164
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d90f7ca7b04914c90800000000000000
+      internalID: -7187300753281126243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_2
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 1789
+        width: 172
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61cbbcb968d990a60800000000000000
+      internalID: 7640811444275756054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_3
+      rect:
+        serializedVersion: 2
+        x: 765
+        y: 1786
+        width: 173
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 067f017785e66a930800000000000000
+      internalID: 4154129032529639264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_4
+      rect:
+        serializedVersion: 2
+        x: 1022
+        y: 1786
+        width: 174
+        height: 187
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f5454f82e28e7700800000000000000
+      internalID: 540012914908939765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_5
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 1785
+        width: 173
+        height: 190
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e4f120412d50edf0800000000000000
+      internalID: -153019989939325727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_6
+      rect:
+        serializedVersion: 2
+        x: 1539
+        y: 1786
+        width: 171
+        height: 188
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de6b8026bfac23940800000000000000
+      internalID: 5274501294634612461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_7
+      rect:
+        serializedVersion: 2
+        x: 1799
+        y: 1783
+        width: 166
+        height: 187
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc5533bd15fc18b60800000000000000
+      internalID: 7746700784530838991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_8
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 1524
+        width: 162
+        height: 182
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dad6b7251667905b0800000000000000
+      internalID: -5401656117686473299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_9
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 1523
+        width: 164
+        height: 176
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d86d909e0e5aab00800000000000000
+      internalID: 840587697106806997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_10
+      rect:
+        serializedVersion: 2
+        x: 519
+        y: 1525
+        width: 165
+        height: 171
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47b4acfc6440e9ce0800000000000000
+      internalID: -1396674132257911948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_11
+      rect:
+        serializedVersion: 2
+        x: 775
+        y: 1528
+        width: 163
+        height: 171
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb4edbf4fda140e20800000000000000
+      internalID: 3315804772069401790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_12
+      rect:
+        serializedVersion: 2
+        x: 1031
+        y: 1534
+        width: 161
+        height: 167
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd3ea224d59dac030800000000000000
+      internalID: 3515861453681386461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_13
+      rect:
+        serializedVersion: 2
+        x: 1287
+        y: 1543
+        width: 158
+        height: 159
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aeb617253783e4740800000000000000
+      internalID: 5138106292831874026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_14
+      rect:
+        serializedVersion: 2
+        x: 1544
+        y: 1549
+        width: 156
+        height: 152
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5edb4c4ff86615850800000000000000
+      internalID: 6363980516924112357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_15
+      rect:
+        serializedVersion: 2
+        x: 1798
+        y: 1546
+        width: 159
+        height: 154
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9cd4352ea93876f60800000000000000
+      internalID: 8027529562056510921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_16
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 1285
+        width: 165
+        height: 158
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da00c02060ac239f0800000000000000
+      internalID: -490107282277007187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_17
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 1283
+        width: 171
+        height: 164
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5cc1ab2caf1ab7b0800000000000000
+      internalID: -5207815194773697444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_18
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 1282
+        width: 175
+        height: 169
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7033c86ba94f77aa0800000000000000
+      internalID: -6163188619708452089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_19
+      rect:
+        serializedVersion: 2
+        x: 767
+        y: 1279
+        width: 175
+        height: 174
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db82190911a6369c0800000000000000
+      internalID: -3935185025719260995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_20
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1279
+        width: 175
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0ac277fbed206750800000000000000
+      internalID: 6296082770556013070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_21
+      rect:
+        serializedVersion: 2
+        x: 1283
+        y: 1279
+        width: 171
+        height: 173
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af44a684e5251e350800000000000000
+      internalID: 6044202739803243770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_22
+      rect:
+        serializedVersion: 2
+        x: 1544
+        y: 1279
+        width: 165
+        height: 169
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 369f7263708928300800000000000000
+      internalID: 252931685826951523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_23
+      rect:
+        serializedVersion: 2
+        x: 1803
+        y: 1281
+        width: 160
+        height: 161
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d6997072e67d16d0800000000000000
+      internalID: -3018125460346661160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_24
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 1027
+        width: 159
+        height: 157
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 438df337bfad98b20800000000000000
+      internalID: 3137279388945471540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_25
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 1025
+        width: 165
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1cda346e5b497b70800000000000000
+      internalID: 8897225407627713566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_26
+      rect:
+        serializedVersion: 2
+        x: 518
+        y: 1026
+        width: 170
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3aaa615909be4400800000000000000
+      internalID: 310388874006932029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_27
+      rect:
+        serializedVersion: 2
+        x: 772
+        y: 1028
+        width: 171
+        height: 161
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7178d45a04f3eb910800000000000000
+      internalID: 1854989643407001367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_28
+      rect:
+        serializedVersion: 2
+        x: 1027
+        y: 1031
+        width: 169
+        height: 158
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b4f7616c9fce3490800000000000000
+      internalID: -7764540436984105807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_29
+      rect:
+        serializedVersion: 2
+        x: 1282
+        y: 1033
+        width: 166
+        height: 153
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e98231df8449232e0800000000000000
+      internalID: -2147491031097857890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_30
+      rect:
+        serializedVersion: 2
+        x: 1540
+        y: 1031
+        width: 160
+        height: 150
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3bec5c9d7c70a560800000000000000
+      internalID: 7322989873040517947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidAtlas_31
+      rect:
+        serializedVersion: 2
+        x: 1794
+        y: 1029
+        width: 162
+        height: 150
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79dcc39c878a695c0800000000000000
+      internalID: -4208991565005402729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

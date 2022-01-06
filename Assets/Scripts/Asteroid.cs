@@ -18,14 +18,13 @@ public class Asteroid : SpaceObject
 
     private void OnEnable()
     {
-        Debug.Log("+++");
         transformShip = ship.GetComponent<Transform>();
         transformAsteroid = gameObject.transform;
         var distance = GetDistanceAtoB(transformShip, transformAsteroid);
 
         normVecdMoment = (transformShip.position - transformAsteroid.position) / distance;
 
-        speed = Random.Range(0.1f, 0.5f);
+        speed = Random.Range(0.2f, 0.8f);
     }
 
     private void FixedUpdate()
@@ -40,7 +39,7 @@ public class Asteroid : SpaceObject
 
         var vec = transformShip.position - transformAsteroid.position;
 
-        if (vec.magnitude > 100.0f)
+        if (vec.magnitude > 200.0f)
         {
             Death();
         }
