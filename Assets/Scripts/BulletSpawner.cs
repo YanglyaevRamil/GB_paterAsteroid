@@ -26,8 +26,6 @@ public class BulletSpawner : Spawner
     }
     private void Shoot()
     {
-        
-
         if (fire == true)
         {
             if (isReloading == false)
@@ -51,7 +49,6 @@ public class BulletSpawner : Spawner
 
     protected override void Spawn()
     {
-        
         var transformShip = ship.GetComponent<Transform>();
         Instantiate(objectPrefab, transform.position, transformShip.rotation);
     }
