@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SpaceShip : Ship, ITakeDamage
 {
+    public bool isRotatingRight = false;
+    public bool isRotatingLeft = false;
+    private Animator animator;
 
     private const float SPEED = 0.1f;
     private const int HEALTH = 100;
@@ -11,6 +14,7 @@ public class SpaceShip : Ship, ITakeDamage
     private const float ROTATESPEED = 3.0f;
     void Start()
     {
+        animator = GetComponent<Animator>();
         speed = SPEED;
         health = HEALTH;
         ammunition = AMMUNITION;
@@ -19,6 +23,22 @@ public class SpaceShip : Ship, ITakeDamage
     private void FixedUpdate()
     {
         Motion();
+        if (isRotatingRight)
+        {
+            animator.SetBool("Right", true);
+        }
+        else
+        {
+            animator.SetBool("Right", false);
+        }
+        if (isRotatingLeft)
+        {
+            animator.SetBool("Left", true);
+        }
+        else
+        {
+            animator.SetBool("Left", false);
+        }
     }
     private void Update()
     {
@@ -48,10 +68,20 @@ public class SpaceShip : Ship, ITakeDamage
         if (Input.GetKey(KeyCode.D))
         {
             transform.Rotate(0, rotateSpeed, 0);
+            isRotatingRight = true;
+        }
+        else
+        {
+            isRotatingRight = false;
         }
         if (Input.GetKey(KeyCode.A))
         {
             transform.Rotate(0, -rotateSpeed, 0);
+            isRotatingLeft = true;
+        }
+        else
+        {
+            isRotatingLeft = false;
         }
     }
 
