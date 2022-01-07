@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class SpaceShip : Ship, ITakeDamage
 {
+
+    private const float SPEED = 0.1f;
+    private const int HEALTH = 100;
+    private const int AMMUNITION = 5;
+    private const float ROTATESPEED = 3.0f;
     void Start()
     {
-        speed = 0.1f;
-        health = 100;
-        ammunition = 3;
-        rotateSpeed = 3.0f;
+        speed = SPEED;
+        health = HEALTH;
+        ammunition = AMMUNITION;
+        rotateSpeed = ROTATESPEED;
     }
     private void FixedUpdate()
     {
@@ -17,7 +22,7 @@ public class SpaceShip : Ship, ITakeDamage
     }
     private void Update()
     {
-        if (health == 0)
+        if (health <= 0)
         {
             Death();
         }
@@ -26,11 +31,9 @@ public class SpaceShip : Ship, ITakeDamage
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Asteroid")
-        {
-            //other.GetComponent<GameObject>()
-            //Damage();
-        }
+        int damage = other.GetComponent<IDamage>().Damage;
+        DamageTake(damage);
+        Debug.Log(health);
     }
 
     public override bool Death()
@@ -60,7 +63,7 @@ public class SpaceShip : Ship, ITakeDamage
             BulletSpawner.fire = true;
         }
     }
-    public void Damage(int damageTaken)
+    public void DamageTake(int damageTaken)
     {
         health -= damageTaken;
     }
