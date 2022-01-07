@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class Asteroid : SpaceObject, IDamage
 {
+    private const int MIN_DAMAGE = 5;
+    private const int MAX_DAMAGE = 15;
+    private const float MAX_DELETION = 300.0f;
+    private const float MIN_SPEED = 0.2f;
+    private const float MAX_SPEED = 0.8f;
+
     public GameObject ship;
 
     private Transform transformShip;
     private Transform transformAsteroid;
     private Vector3 normVecdMoment;
     private int damage;
-
-    private const int MIN_DAMAGE = 10;
-    private const int MAX_DAMAGE = 20;
 
     public int Damage { get => damage; }
 
@@ -31,7 +34,7 @@ public class Asteroid : SpaceObject, IDamage
 
         normVecdMoment = (transformShip.position - transformAsteroid.position) / distance;
 
-        speed = Random.Range(0.2f, 0.8f);
+        speed = Random.Range(MIN_SPEED, MAX_SPEED);
     }
 
     private void FixedUpdate()
@@ -46,7 +49,7 @@ public class Asteroid : SpaceObject, IDamage
 
         var vec = transformShip.position - transformAsteroid.position;
 
-        if (vec.magnitude > 200.0f)
+        if (vec.magnitude > MAX_DELETION)
         {
             Death();
         }
