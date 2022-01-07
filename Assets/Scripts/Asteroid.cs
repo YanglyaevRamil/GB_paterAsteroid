@@ -2,14 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Asteroid : SpaceObject
+public class Asteroid : SpaceObject, IDamage
 {
     public GameObject ship;
-    public int damage = 0;
 
     private Transform transformShip;
     private Transform transformAsteroid;
     private Vector3 normVecdMoment;
+    private int damage;
+
+    private const int MIN_DAMAGE = 10;
+    private const int MAX_DAMAGE = 20;
+
+    public int Damage { get => damage; }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -18,6 +23,8 @@ public class Asteroid : SpaceObject
 
     private void OnEnable()
     {
+        damage = Random.Range(MIN_DAMAGE, MAX_DAMAGE);
+
         transformShip = ship.GetComponent<Transform>();
         transformAsteroid = gameObject.transform;
         var distance = GetDistanceAtoB(transformShip, transformAsteroid);

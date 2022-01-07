@@ -2,5 +2,5 @@
 
 public interface ITakeDamage
 {
-    void Damage(int damageTaken);
+    void DamageTake(int damageTaken);
 }
