@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BulletSpawner : Spawner
 {
+    private const float WAIT_SEC = 3.0f;
+
     public static bool fire = false;
     public GameObject ship;
     //private float timeBetweenShooting;
@@ -13,7 +15,7 @@ public class BulletSpawner : Spawner
     private void Start()
     {
         isReloading = false;
-        bulletCount = 3;
+        bulletCount = ship.GetComponent<SpaceShip>().ammunition;
         //timeBetweenShooting = 2f;
     }
 
@@ -55,8 +57,8 @@ public class BulletSpawner : Spawner
 
     IEnumerator Reload()
     {
-        yield return new WaitForSecondsRealtime(6f);
-        bulletCount = 3;
+        yield return new WaitForSecondsRealtime(WAIT_SEC);
+        bulletCount = ship.GetComponent<SpaceShip>().ammunition;
         isReloading = false;
         StopCoroutine(Reload());
     }

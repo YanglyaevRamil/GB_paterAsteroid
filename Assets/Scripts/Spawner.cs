@@ -5,7 +5,13 @@ using UnityEngine;
 public abstract class Spawner : MonoBehaviour
 {
     [SerializeField] protected GameObject objectPrefab;
+    protected List<GameObject> objectPrefabList;
     //[SerializeField] protected Transform spawnPosition;
+
+    private void Start()
+    {
+        
+    }
 
     protected virtual void Spawn()
     {
