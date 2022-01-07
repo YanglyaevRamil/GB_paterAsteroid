@@ -2,43 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpaceShip : Ship, ITakeDamage
+public class SpaceShip : Ship, ITakeDamage, IRotation
 {
-    public bool isRotatingRight = false;
-    public bool isRotatingLeft = false;
-    private Animator animator;
+    private SpaceShipAnim SpaceShipAnim; 
 
     private const float SPEED = 0.1f;
     private const int HEALTH = 100;
     private const int AMMUNITION = 5;
     private const float ROTATESPEED = 3.0f;
+
+    private Quaternion rotateRight, rotateLeft;
     void Start()
     {
-        animator = GetComponent<Animator>();
         speed = SPEED;
         health = HEALTH;
         ammunition = AMMUNITION;
         rotateSpeed = ROTATESPEED;
+
+        rotateRight = Quaternion.AngleAxis(rotateSpeed, Vector3.up);
+        rotateLeft = Quaternion.AngleAxis(-rotateSpeed, Vector3.up);
     }
     private void FixedUpdate()
     {
         Motion();
-        if (isRotatingRight)
-        {
-            animator.SetBool("Right", true);
-        }
-        else
-        {
-            animator.SetBool("Right", false);
-        }
-        if (isRotatingLeft)
-        {
-            animator.SetBool("Left", true);
-        }
-        else
-        {
-            animator.SetBool("Left", false);
-        }
+        Rotation();
     }
     private void Update()
     {
@@ -65,23 +52,23 @@ public class SpaceShip : Ship, ITakeDamage
     public override void Motion()
     {
         transform.Translate(new Vector3(0, 0, speed));
+        //if (Input.GetKey(KeyCode.W))
+        //{
+        //    //transform.Translate(new Vector3(0, 0, speed));
+        //    rb.AddForce(transform.forward * speed);
+        //} 
+    }
+
+    public void Rotation()
+    {
         if (Input.GetKey(KeyCode.D))
         {
-            transform.Rotate(0, rotateSpeed, 0);
-            isRotatingRight = true;
-        }
-        else
-        {
-            isRotatingRight = false;
+            transform.rotation *= rotateRight;
+            //Quaternion.Lerp(transform.rotation, quaternion, rotateSpeed); !!!
         }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Rotate(0, -rotateSpeed, 0);
-            isRotatingLeft = true;
-        }
-        else
-        {
-            isRotatingLeft = false;
+            transform.rotation *= rotateLeft;
         }
     }
 
