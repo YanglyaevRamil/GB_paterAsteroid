@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 634937958282250140}
   - component: {fileID: 7819399695177654329}
   - component: {fileID: 8493791783138120728}
-  - component: {fileID: 8910581980136464752}
+  - component: {fileID: 8608587347866975361}
   m_Layer: 0
   m_Name: AsteroidAtlas_0
   m_TagString: Untagged
@@ -163,7 +163,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8910581980136464752
+--- !u!114 &8608587347866975361
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,6 +172,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8910581980136464759}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ad0336a989eb26428241a4e7de25900, type: 3}
+  m_Script: {fileID: 11500000, guid: 20011e69fea3f7048b0d4689ea67a84a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ship: {fileID: 0}

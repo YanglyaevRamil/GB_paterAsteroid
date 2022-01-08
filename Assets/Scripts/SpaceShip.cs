@@ -14,7 +14,7 @@ public class SpaceShip : Ship, ITakeDamage, IRotation
     private int score = 0;
     private const float SPEED = 0.2f;
     private const int HEALTH = 10000;
-    private const int AMMUNITION = 5;
+    private const int AMMUNITION = 50;
     private const float ROTATESPEED = 3.0f;
 
     private Quaternion rotateRight, rotateLeft;
@@ -88,7 +88,6 @@ public class SpaceShip : Ship, ITakeDamage, IRotation
 
     public override bool Death()
     {
-        Debug.Log("Death ship");
         SceneManager.LoadScene("DeathScreen");
         return true;
     }
