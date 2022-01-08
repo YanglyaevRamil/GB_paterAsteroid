@@ -13,7 +13,7 @@ public class Transition : MonoBehaviour
 
     IEnumerator Introend()
     {
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(0.8f);
         transition.SetActive(false);
     }
 }
