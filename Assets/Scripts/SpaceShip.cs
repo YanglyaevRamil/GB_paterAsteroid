@@ -1,19 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SpaceShip : Ship, ITakeDamage, IRotation
 {
-    private SpaceShipAnim SpaceShipAnim; 
+    private SpaceShipAnim SpaceShipAnim;
 
-    private const float SPEED = 0.1f;
-    private const int HEALTH = 100;
+
+    public Text ScoreText;
+    public Text HealthText;
+    private int score = 0;
+    private const float SPEED = 0.2f;
+    private const int HEALTH = 10000;
     private const int AMMUNITION = 5;
     private const float ROTATESPEED = 3.0f;
 
     private Quaternion rotateRight, rotateLeft;
     void Start()
     {
+        //filePath = Application.persistentDataPath + "/save.gamesave";
+        StartCoroutine(Score());
+
         speed = SPEED;
         health = HEALTH;
         ammunition = AMMUNITION;
@@ -22,8 +31,38 @@ public class SpaceShip : Ship, ITakeDamage, IRotation
         rotateRight = Quaternion.AngleAxis(rotateSpeed, Vector3.up);
         rotateLeft = Quaternion.AngleAxis(-rotateSpeed, Vector3.up);
     }
+
+    IEnumerator Score()
+    {
+        yield return new WaitForSeconds(1f);
+        score++;
+        ScoreText.text = "Score: " + score.ToString();
+        StartCoroutine(Score());
+        
+    }
     private void FixedUpdate()
     {
+        if (health > 70)
+        {
+            HealthText.material.color = Color.green;
+        }
+
+        if (health <= 70)
+        {
+            HealthText.material.color = Color.cyan;
+        }
+
+        if (health <= 40)
+        {
+            HealthText.material.color = Color.yellow;
+        }
+
+        if (health <= 20)
+        {
+            HealthText.material.color = Color.red;
+        }
+
+
         Motion();
         Rotation();
     }
@@ -32,8 +71,12 @@ public class SpaceShip : Ship, ITakeDamage, IRotation
         if (health <= 0)
         {
             Death();
+            health = 0;
         }
+
+
         Shooting();
+        HealthText.text = "Health: " + health.ToString();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -46,7 +89,7 @@ public class SpaceShip : Ship, ITakeDamage, IRotation
     public override bool Death()
     {
         Debug.Log("Death ship");
-        Destroy(gameObject);
+        SceneManager.LoadScene("DeathScreen");
         return true;
     }
     public override void Motion()

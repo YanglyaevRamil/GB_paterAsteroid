@@ -9,6 +9,18 @@ public class SceneManage : MonoBehaviour
     public void NewGame()
     {
         SceneManager.LoadScene("Game");
-        Debug.Log("yes");
+    }
+
+
+
+
+
+    public void Retry()
+    {
+        SceneManager.LoadScene("Game");
+    }
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }
