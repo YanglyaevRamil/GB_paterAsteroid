@@ -4,22 +4,20 @@ using UnityEngine;
 
 public class SpaceShipAnim : MonoBehaviour
 {
-    private bool isRotatingRight = false;
-    private bool isRotatingLeft = false;
     private Animator animator;
-    // Start is called before the first frame update
+    private SpaceShip spaceShip;
     private void Start()
     {
         animator = GetComponent<Animator>();
+        spaceShip = GetComponent<SpaceShip>();
     }
     private void FixedUpdate()
     {
         ShipAnim();
     }
-
     public void ShipAnim()
     {
-        if (Input.GetKey(KeyCode.D))
+        if (spaceShip.shipSpin == 1)
         {
             animator.SetBool("Right", true);
         }
@@ -27,7 +25,7 @@ public class SpaceShipAnim : MonoBehaviour
         {
             animator.SetBool("Right", false);
         }
-        if (Input.GetKey(KeyCode.A))
+        if (spaceShip.shipSpin == -1)
         {
             animator.SetBool("Left", true);
         }

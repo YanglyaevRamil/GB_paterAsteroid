@@ -7,34 +7,34 @@ public class Asteroid : SpaceObject, IDamage
     private const int MIN_DAMAGE = 5;
     private const int MAX_DAMAGE = 15;
     private const float MAX_DELETION = 300.0f;
-    private const float MIN_SPEED = 0.2f;
-    private const float MAX_SPEED = 0.8f;
-
-    public GameObject ship;
+    private const float MIN_SPEED = 0.1f;
+    private const float MAX_SPEED = 0.3f;
 
     private Transform transformShip;
     private Transform transformAsteroid;
     private Vector3 normVecdMoment;
     private int damage;
 
+    public GameObject ship;
+    public bool isDead; 
     public int Damage { get => damage; }
 
     private void OnTriggerEnter(Collider other)
     {
-        Death();
+        isDead = Death();
     }
 
     private void OnEnable()
     {
-        damage = Random.Range(MIN_DAMAGE, MAX_DAMAGE);
-
         transformShip = ship.GetComponent<Transform>();
+
         transformAsteroid = gameObject.transform;
         var distance = GetDistanceAtoB(transformShip, transformAsteroid);
 
         normVecdMoment = (transformShip.position - transformAsteroid.position) / distance;
 
         speed = Random.Range(MIN_SPEED, MAX_SPEED);
+        damage = Random.Range(MIN_DAMAGE, MAX_DAMAGE);
     }
 
     private void FixedUpdate()

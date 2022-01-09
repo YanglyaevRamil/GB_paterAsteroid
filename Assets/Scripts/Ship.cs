@@ -8,5 +8,5 @@ public abstract class Ship : SpaceObject
     public int ammunition;
     public float rotateSpeed;
 
-    public abstract void Shooting();
+    public abstract bool Shooting();
 }

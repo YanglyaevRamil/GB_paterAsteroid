@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : SpaceObject
 {
     private const float TIME_DEATH = 10f;
-    private const float SPEED_BULLET = 1f;
+    private const float SPEED_BULLET = 1.5f;
 
     private void Start()
     {
