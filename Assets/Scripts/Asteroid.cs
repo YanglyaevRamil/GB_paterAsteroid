@@ -4,34 +4,55 @@ using UnityEngine;
 
 public class Asteroid : SpaceObject, IDamage
 {
-    public GameObject ship;
+    private const int MIN_DAMAGE = 5;
+    private const int MAX_DAMAGE = 15;
+    private const float MAX_DELETION = 300.0f;
+    private const float MIN_SPEED = 0.1f;
+    private const float MAX_SPEED = 0.3f;
+    private const float DURATION_OF_DEATH = 3.0f;
 
+    private SpriteRenderer spriteRenderer;
+    private ParticleSystem partsSystem;
+    private SphereCollider sphereCollider;
     private Transform transformShip;
     private Transform transformAsteroid;
     private Vector3 normVecdMoment;
     private int damage;
 
-    private const int MIN_DAMAGE = 10;
-    private const int MAX_DAMAGE = 20;
-
+    public GameObject ship;
+    public bool isDead; 
     public int Damage { get => damage; }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Death();
-    }
 
     private void OnEnable()
     {
+        speed = Random.Range(MIN_SPEED, MAX_SPEED);
         damage = Random.Range(MIN_DAMAGE, MAX_DAMAGE);
 
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        partsSystem = GetComponentInChildren<ParticleSystem>();
         transformShip = ship.GetComponent<Transform>();
+        sphereCollider = gameObject.GetComponent<SphereCollider>();
+
         transformAsteroid = gameObject.transform;
         var distance = GetDistanceAtoB(transformShip, transformAsteroid);
 
         normVecdMoment = (transformShip.position - transformAsteroid.position) / distance;
 
-        speed = Random.Range(0.2f, 0.8f);
+        partsSystem.Stop();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (Destruction())
+        {
+            StartCoroutine(CountToDeath());
+        }
+        
+
+        if (isDead == true)
+        {
+            Death();
+        }
     }
 
     private void FixedUpdate()
@@ -46,7 +67,7 @@ public class Asteroid : SpaceObject, IDamage
 
         var vec = transformShip.position - transformAsteroid.position;
 
-        if (vec.magnitude > 200.0f)
+        if (vec.magnitude > MAX_DELETION)
         {
             Death();
         }
@@ -55,6 +76,21 @@ public class Asteroid : SpaceObject, IDamage
     public override void Motion()
     {
         transform.position += normVecdMoment * speed;
+    }
+
+    private bool Destruction()
+    {
+        spriteRenderer.enabled = false;
+        sphereCollider.enabled = false;
+
+        partsSystem.Play();
+        return true;
+    }
+    IEnumerator CountToDeath()
+    {
+        yield return new WaitForSecondsRealtime(DURATION_OF_DEATH);
+        isDead = true;
+        StopCoroutine(CountToDeath());
     }
     public override bool Death()
     {

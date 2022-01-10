@@ -4,7 +4,8 @@ using UnityEngine;
 
 public abstract class Spawner : MonoBehaviour
 {
-    [SerializeField] protected GameObject objectPrefab;
+    public GameObject objectPrefab;
+    protected List<GameObject> objectPrefabList;
     //[SerializeField] protected Transform spawnPosition;
 
     protected virtual void Spawn()

@@ -4,46 +4,25 @@ using UnityEngine;
 
 public class BulletSpawner : Spawner
 {
-    public static bool fire = false;
+    private const float WAIT_SEC = 3.0f;
+
     public GameObject ship;
-    //private float timeBetweenShooting;
-    private int bulletCount;
-    private bool isReloading;
+    private SpaceShip spaceShip;
 
     private void Start()
     {
-        isReloading = false;
-        bulletCount = 3;
-        //timeBetweenShooting = 2f;
+        spaceShip = ship.GetComponent<SpaceShip>();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Shoot();
-        }
+        Shoot();
     }
     private void Shoot()
     {
-        if (fire == true)
+        if (spaceShip.shooting)
         {
-            if (isReloading == false)
-            {
-                if (bulletCount > 0)
-                {
-                    Spawn();
-                    fire = false;
-                    --bulletCount;
-                }
-                else
-                {
-                    isReloading = true;
-                    StartCoroutine(Reload());
-                    fire = false;
-                }
-            }
-            
+            Spawn();
         }
     }
 
@@ -52,13 +31,4 @@ public class BulletSpawner : Spawner
         var transformShip = ship.GetComponent<Transform>();
         Instantiate(objectPrefab, transform.position, transformShip.rotation);
     }
-
-    IEnumerator Reload()
-    {
-        yield return new WaitForSecondsRealtime(6f);
-        bulletCount = 3;
-        isReloading = false;
-        StopCoroutine(Reload());
-    }
-
 }
