@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletSpawner : Spawner
 {
-    private const float WAIT_SEC = 3.0f;
-
     public GameObject ship;
     private SpaceShip spaceShip;
 
