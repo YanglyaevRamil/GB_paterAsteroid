@@ -11,13 +11,15 @@ public class PauseGameManager : MonoBehaviour
     private void Awake()
     {
         gamePaused = false;
+        Time.timeScale = 1f;
+        menuObject.SetActive(gamePaused);
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape)) 
         {
-            if (gamePaused)
+            if (!gamePaused)
             {
                 Paused();
             }
@@ -30,14 +32,16 @@ public class PauseGameManager : MonoBehaviour
     }
     public void Paused()
     {
-        gamePaused = false;
-        Time.timeScale = 1f;
+        gamePaused = true;
+        Time.timeScale = 0f;
         menuObject.SetActive(gamePaused);
     }
     public void Continue() 
     {
-        gamePaused = true;
-        Time.timeScale = 0f;
+        
+        gamePaused = false;
+        Time.timeScale = 1f;
         menuObject.SetActive(gamePaused);
+        Debug.Log(gamePaused);
     }
 }
