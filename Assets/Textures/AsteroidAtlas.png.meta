@@ -216,6 +216,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -964,6 +965,39 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      AsteroidAtlas_1: -7187300753281126243
+      AsteroidAtlas_22: 252931685826951523
+      AsteroidAtlas_15: 8027529562056510921
+      AsteroidAtlas_28: -7764540436984105807
+      AsteroidAtlas_23: -3018125460346661160
+      AsteroidAtlas_30: 7322989873040517947
+      AsteroidAtlas_10: -1396674132257911948
+      AsteroidAtlas_21: 6044202739803243770
+      AsteroidAtlas_31: -4208991565005402729
+      AsteroidAtlas_4: 540012914908939765
+      AsteroidAtlas_18: -6163188619708452089
+      AsteroidAtlas_13: 5138106292831874026
+      AsteroidAtlas_6: 5274501294634612461
+      AsteroidAtlas_7: 7746700784530838991
+      AsteroidAtlas_12: 3515861453681386461
+      AsteroidAtlas_3: 4154129032529639264
+      AsteroidAtlas_2: 7640811444275756054
+      AsteroidAtlas_19: -3935185025719260995
+      AsteroidAtlas_25: 8897225407627713566
+      AsteroidAtlas_11: 3315804772069401790
+      AsteroidAtlas_26: 310388874006932029
+      AsteroidAtlas_27: 1854989643407001367
+      AsteroidAtlas_29: -2147491031097857890
+      AsteroidAtlas_9: 840587697106806997
+      AsteroidAtlas_24: 3137279388945471540
+      AsteroidAtlas_14: 6363980516924112357
+      AsteroidAtlas_5: -153019989939325727
+      AsteroidAtlas_16: -490107282277007187
+      AsteroidAtlas_17: -5207815194773697444
+      AsteroidAtlas_20: 6296082770556013070
+      AsteroidAtlas_0: 7599282376849575548
+      AsteroidAtlas_8: -5401656117686473299
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -10,6 +10,6 @@ public class PlanetSpawner : Spawner
     }
     protected override void Spawn()
     {
-        GameObject.Instantiate(objectPrefab, transform.position, Quaternion.identity);
+        GameObject.Instantiate(objectPrefab, transform.position/*spawnPosition.position*/, Quaternion.identity);
     }
 }

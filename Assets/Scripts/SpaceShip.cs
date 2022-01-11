@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -6,12 +7,14 @@ using UnityEngine.SceneManagement;
 public class SpaceShip : Ship, ITakeDamage, IRotation
 {
     private const float SPEED = 0.5f;
-    private const int HEALTH = 1000;
+    private const int HEALTH = 100;
     private const int AMMUNITION = 10;
     private const float ROTATESPEED = 3.0f;
     private const float WAIT_SEC = 3.0f;
 
-    private Quaternion rotateRight, rotateLeft;
+    //private Quaternion rotateRightZ, rotateLeftZ;
+    private Quaternion rotateRightY, rotateLeftY;
+    //private Quaternion originRotation;
 
     public bool shooting;
     public int shipSpin;
@@ -23,8 +26,12 @@ public class SpaceShip : Ship, ITakeDamage, IRotation
         ammunition = AMMUNITION;
         rotateSpeed = ROTATESPEED;
 
-        rotateRight = Quaternion.AngleAxis(rotateSpeed, Vector3.up);
-        rotateLeft = Quaternion.AngleAxis(-rotateSpeed, Vector3.up);
+        //rotateRightZ = Quaternion.AngleAxis(1, Vector3.forward);
+        //rotateLeftZ = Quaternion.AngleAxis(-1, Vector3.forward);
+        rotateRightY = Quaternion.AngleAxis(rotateSpeed, Vector3.up);
+        rotateLeftY = Quaternion.AngleAxis(-rotateSpeed, Vector3.up);
+
+        //originRotation = transform.rotation;
 
         isReloading = false;
     }
@@ -33,6 +40,7 @@ public class SpaceShip : Ship, ITakeDamage, IRotation
     {
         Motion();
         shipSpin = Rotation();
+        //RotationZ();
     }
     private void Update()
     {
@@ -61,33 +69,27 @@ public class SpaceShip : Ship, ITakeDamage, IRotation
 
     public override bool Death()
     {
-        SceneManager.LoadScene("DeathScreen");
+        EventAggregator.SpaceObjectDied.Publish(this);
         return true;
     }
     public override void Motion()
     {
         transform.Translate(new Vector3(0, 0, speed));
-        //if (Input.GetKey(KeyCode.W))
-        //{
-        //    //transform.Translate(new Vector3(0, 0, speed));
-        //    rb.AddForce(transform.forward * speed);
-        //} 
     }
 
     public int Rotation()
     {
         if (Input.GetKey(KeyCode.D))
         {
-            transform.rotation *= rotateRight;
+            transform.rotation *= rotateRightY;
             return 1;
-            //Quaternion.Lerp(transform.rotation, quaternion, rotateSpeed); !!!
         }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.rotation *= rotateLeft;
+            transform.rotation *= rotateLeftY;
             return -1;
         }
-        return 0;
+            return 0;
     }
     public override bool Shooting()
     {
