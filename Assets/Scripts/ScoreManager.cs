@@ -6,15 +6,17 @@ public class ScoreManager : MonoBehaviour
 {
     public int score;
 
-    private void Start()
+    private void Awake()
     {
         score = 0;
-        StartCoroutine(ScoreCnt());
+        EventAggregator.SpaceObjectDied.Subscribe(OnAsteroidtDied);
     }
-    IEnumerator ScoreCnt()
+
+    private void OnAsteroidtDied(SpaceObject asteroid)
     {
-        yield return new WaitForSeconds(1f);
-        score++;
-        StartCoroutine(ScoreCnt());
+        if (asteroid as Asteroid)
+        {
+            score += 1;
+        }
     }
 }
