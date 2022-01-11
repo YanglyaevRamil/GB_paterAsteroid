@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Asteroid : SpaceObject, IDamage
@@ -93,9 +92,6 @@ public class Asteroid : SpaceObject, IDamage
     }
     public override bool Death()
     {
-        //EventAggregator.AsteroidDied.Publish(this);
-        //spriteRenderer.enabled = false;
-        //sphereCollider.enabled = false;
         Destroy(gameObject);
         return true;
     }

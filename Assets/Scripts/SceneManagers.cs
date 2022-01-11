@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -30,9 +27,6 @@ public class SceneManagers : MonoBehaviour
     public void LoadExit() 
     {
         Debug.Log("Exit - в редакторе не закроется");
-//#if UNITY_EDITOR	
-//        EditorApplication.Exit(0);
-//#endif
         Application.Quit();
     }
 }
