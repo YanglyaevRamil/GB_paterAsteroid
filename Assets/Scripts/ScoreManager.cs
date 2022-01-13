@@ -1,18 +1,16 @@
 using UnityEngine;
 
-public class ScoreManager : MonoBehaviour
+public class ScoreManager
 {
     public int score;
-
-    private void Awake()
+    public ScoreManager()
     {
         score = 0;
         EventAggregator.SpaceObjectDied.Subscribe(OnAsteroidtDied);
     }
-
     private void OnAsteroidtDied(SpaceObject asteroid)
     {
-        if (asteroid as Asteroid)
+        if (asteroid is SpaceStone)
         {
             score += 1;
         }

@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class BulletSpawner : Spawner
 {
-    public GameObject ship;
-    private SpaceShip spaceShip;
+    public GameObject playerGameObject;
+    private Player player;
 
     private void Start()
     {
-        spaceShip = ship.GetComponent<SpaceShip>();
+        player = playerGameObject.GetComponent<Player>();
     }
 
     private void Update()
@@ -16,7 +16,7 @@ public class BulletSpawner : Spawner
     }
     private void Shoot()
     {
-        if (spaceShip.shooting)
+        if (player.Shooting)
         {
             Spawn();
         }
@@ -24,7 +24,7 @@ public class BulletSpawner : Spawner
 
     protected override void Spawn()
     {
-        var transformShip = ship.GetComponent<Transform>();
+        var transformShip = player.GetComponent<Transform>();
         Instantiate(objectPrefab, transform.position, transformShip.rotation);
     }
 }

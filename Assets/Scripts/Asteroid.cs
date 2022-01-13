@@ -1,63 +1,77 @@
 using System.Collections;
 using UnityEngine;
 
-public class Asteroid : SpaceObject, IDamage
+public class Asteroid : MonoBehaviour, IDamage
 {
     private const int MIN_DAMAGE = 5;
     private const int MAX_DAMAGE = 15;
+    private const int MIN_HP = 1;
+    private const int MAX_HP = 1;
     private const float MAX_DELETION = 300.0f;
     private const float MIN_SPEED = 0.1f;
     private const float MAX_SPEED = 0.3f;
     private const float DURATION_OF_DEATH = 3.0f;
+
+    public GameObject ship;
+
+    [SerializeField] private float speed;
+    [SerializeField] private int damage;
+    [SerializeField] private int health;
 
     private SpriteRenderer spriteRenderer;
     private ParticleSystem partsSystem;
     private SphereCollider sphereCollider;
     private Transform transformShip;
     private Transform transformAsteroid;
-    private Vector3 normVecdMoment;
-    private int damage;
 
-    public GameObject ship;
-    public bool isDead; 
+    private SpaceStone spaceStone;
+    private SpaceStoneDead spaceStoneDead;
+    private SpaceStoneMoving spaceStoneMoving;
     public int Damage { get => damage; }
 
     private void OnEnable()
     {
-        speed = Random.Range(MIN_SPEED, MAX_SPEED);
-        damage = Random.Range(MIN_DAMAGE, MAX_DAMAGE);
-
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         partsSystem = GetComponentInChildren<ParticleSystem>();
         transformShip = ship.GetComponent<Transform>();
+        transformAsteroid = gameObject.transform;
         sphereCollider = gameObject.GetComponent<SphereCollider>();
 
-        transformAsteroid = gameObject.transform;
-        var distance = GetDistanceAtoB(transformShip, transformAsteroid);
-
-        normVecdMoment = (transformShip.position - transformAsteroid.position) / distance;
+        speed = Random.Range(MIN_SPEED, MAX_SPEED);
+        damage = Random.Range(MIN_DAMAGE, MAX_DAMAGE);
+        health = Random.Range(MIN_HP, MAX_HP);
 
         partsSystem.Stop();
+
+        spaceStoneMoving = new SpaceStoneMoving(transformAsteroid, transformShip, speed);
+        spaceStoneDead = new SpaceStoneDead(health);
+        spaceStone = new SpaceStone(spaceStoneMoving, spaceStoneDead);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (Destruction())
+        Debug.Log("Bullet");
+        if (other.tag == "Player")
         {
-            StartCoroutine(CountToDeath());
+            Destroy(gameObject);
         }
-
-        if (isDead == true)
+        if (other.tag == "Bullet")
         {
-            Death();
+            spaceStone.DamageTake(other.GetComponent<IDamage>().Damage);
+            spaceStone.DamageTake(other.GetComponent<Bullet>().Damage);
+            if (spaceStone.DeathCheck())
+            {
+                spaceStone.Death();
+                DestructionAsteroid();
+            }
         }
+        //spaceStone.DamageTake(other.GetComponent<IDamage>().Damage);
+        //if (spaceStone.DeathCheck())
+        //{
+        //    spaceStone.Death();
+        //    DestructionAsteroid();
+        //}
     }
-
-    private void FixedUpdate()
-    {
-        Motion();
-    }
-
     private void Update()
     {
         transformShip = ship.GetComponent<Transform>();
@@ -67,41 +81,21 @@ public class Asteroid : SpaceObject, IDamage
 
         if (vec.magnitude > MAX_DELETION)
         {
-            Death();
+            Destroy(gameObject);
         }
     }
 
-    public override void Motion()
+    private void DestructionAsteroid()
     {
-        transform.position += normVecdMoment * speed;
-    }
-
-    private bool Destruction()
-    {
+        StartCoroutine(CountToDeath());
         spriteRenderer.enabled = false;
         sphereCollider.enabled = false;
-        EventAggregator.SpaceObjectDied.Publish(this);
         partsSystem.Play();
-        return true;
     }
-    IEnumerator CountToDeath()
+    private IEnumerator CountToDeath()
     {
         yield return new WaitForSecondsRealtime(DURATION_OF_DEATH);
-        isDead = true;
-        StopCoroutine(CountToDeath());
-    }
-    public override bool Death()
-    {
         Destroy(gameObject);
-        return true;
-    }
-
-    private float GetDistanceAtoB(Transform a, Transform b)
-    {
-        transformShip = ship.GetComponent<Transform>();
-        transformAsteroid = gameObject.transform;
-
-        var vec = a.position - b.position;
-        return vec.magnitude;
+        StopCoroutine(CountToDeath());
     }
 }

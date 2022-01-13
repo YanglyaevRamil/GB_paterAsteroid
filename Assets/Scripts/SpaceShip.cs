@@ -1,108 +1,58 @@
 using System.Collections;
 using UnityEngine;
 
-public class SpaceShip : Ship, ITakeDamage, IRotation
+public class SpaceShip : Ship
 {
-    private const float SPEED = 0.5f;
-    private const int HEALTH = 100;
-    private const int AMMUNITION = 10;
-    private const float ROTATESPEED = 3.0f;
-    private const float WAIT_SEC = 3.0f;
-
-    //private Quaternion rotateRightZ, rotateLeftZ;
-    private Quaternion rotateRightY, rotateLeftY;
-    //private Quaternion originRotation;
-
-    public bool shooting;
-    public int shipSpin;
-    public bool isReloading;
-    void Start()
+    private IRotation spaceShipRotation;
+    private IMoving spaceShipMoving;
+    private IDead spaceShipDead;
+    private SpaceShipGun spaceShipGun;
+    public SpaceShip(IMoving moving, IRotation rotation, IDead dead, SpaceShipGun gun)
     {
-        speed = SPEED;
-        health = HEALTH;
-        ammunition = AMMUNITION;
-        rotateSpeed = ROTATESPEED;
-
-        //rotateRightZ = Quaternion.AngleAxis(1, Vector3.forward);
-        //rotateLeftZ = Quaternion.AngleAxis(-1, Vector3.forward);
-        rotateRightY = Quaternion.AngleAxis(rotateSpeed, Vector3.up);
-        rotateLeftY = Quaternion.AngleAxis(-rotateSpeed, Vector3.up);
-
-        //originRotation = transform.rotation;
-
-        isReloading = false;
+        spaceShipMoving = moving;
+        spaceShipRotation = rotation;
+        spaceShipDead = dead;
+        spaceShipGun = gun;
     }
-
-    private void FixedUpdate()
+    public override void RotationRightY()
     {
-        Motion();
-        shipSpin = Rotation();
-        //RotationZ();
+        spaceShipRotation.RotationRightY();
     }
-    private void Update()
+    public override void RotationLeftY()
     {
-        if (health <= 0)
-        {
-            Death();
-            health = 0;
-        }
-
-        if (shooting = Shooting() & !isReloading)
-        {
-            --ammunition;
-            if (ammunition == 0)
-            {
-                isReloading = true;
-                StartCoroutine(Reload());
-            }
-        }
+        spaceShipRotation.RotationLeftY();
     }
-
-    private void OnTriggerEnter(Collider other)
+    public override void Moving()
     {
-        int damage = other.GetComponent<IDamage>().Damage;
-        DamageTake(damage);
+        spaceShipMoving.Moving();
     }
-
     public override bool Death()
     {
         EventAggregator.SpaceObjectDied.Publish(this);
         return true;
     }
-    public override void Motion()
+    public override void DamageTake(int damageTaken)
     {
-        transform.Translate(new Vector3(0, 0, speed));
+        spaceShipDead.DamageTake(damageTaken);
     }
-
-    public int Rotation()
+    public override bool DeathCheck()
     {
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.rotation *= rotateRightY;
-            return 1;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.rotation *= rotateLeftY;
-            return -1;
-        }
-            return 0;
+        return spaceShipDead.DeathCheck();
     }
     public override bool Shooting()
     {
-        return Input.GetKeyDown(KeyCode.Space);
+        return spaceShipGun.Shot();
     }
-
-    public void DamageTake(int damageTaken)
+    public bool CheckEmptyAmmunition()
     {
-        health -= damageTaken;
+        return spaceShipGun.EmptyAmmunition;
     }
-
-     IEnumerator Reload()
-     {
-         yield return new WaitForSecondsRealtime(WAIT_SEC);
-         ammunition = AMMUNITION;
-         isReloading = false;
-         StopCoroutine(Reload());
-     }
+    public void ReloadGunAmmunition(int ammunition)
+    {
+        spaceShipGun.Ammunition = ammunition;
+    }
+    public int CheckAmmunition()
+    {
+        return spaceShipGun.Ammunition;
+    }
 }

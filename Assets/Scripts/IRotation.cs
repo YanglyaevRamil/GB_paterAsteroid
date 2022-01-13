@@ -1,5 +1,6 @@
 
 public interface IRotation
 {
-    int Rotation();
+    void RotationRightY();
+    void RotationLeftY();
 }

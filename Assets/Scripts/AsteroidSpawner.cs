@@ -7,13 +7,13 @@ public class AsteroidSpawner : Spawner
     private const float MAX_X = -20.0f;
     private const float MIN_X = 20.0f;
 
-    public GameObject ship;
+    public GameObject shipGameObject;
 
     private float startDelay = START_DELAY;
     private float spawnInterval = SPAWN_INTERVAL;
     void Start()
     {
-        (objectPrefab.GetComponent<Asteroid>()).ship = ship;
+        (objectPrefab.GetComponent<Asteroid>()).ship = shipGameObject;
         InvokeRepeating("Spawn", startDelay, spawnInterval);
     }
 

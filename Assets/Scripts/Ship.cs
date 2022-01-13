@@ -1,9 +1,7 @@
 
 public abstract class Ship : SpaceObject
 {
-    public int health;
-    public int ammunition;
-    public float rotateSpeed;
-
     public abstract bool Shooting();
+    public abstract void RotationRightY();
+    public abstract void RotationLeftY();
 }
