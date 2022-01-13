@@ -6,7 +6,7 @@ public class Asteroid : MonoBehaviour, IDamage
     private const int MIN_DAMAGE = 5;
     private const int MAX_DAMAGE = 15;
     private const int MIN_HP = 1;
-    private const int MAX_HP = 1;
+    private const int MAX_HP = 2;
     private const float MAX_DELETION = 300.0f;
     private const float MIN_SPEED = 0.1f;
     private const float MAX_SPEED = 0.3f;
@@ -50,27 +50,14 @@ public class Asteroid : MonoBehaviour, IDamage
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Bullet");
-        if (other.tag == "Player")
+        IDamage damage = other.gameObject.GetComponent<IDamage>();
+
+        spaceStone.DamageTake(damage.Damage);
+        if (spaceStone.DeathCheck())
         {
-            Destroy(gameObject);
+            spaceStone.Death();
+            DestructionAsteroid();
         }
-        if (other.tag == "Bullet")
-        {
-            spaceStone.DamageTake(other.GetComponent<IDamage>().Damage);
-            spaceStone.DamageTake(other.GetComponent<Bullet>().Damage);
-            if (spaceStone.DeathCheck())
-            {
-                spaceStone.Death();
-                DestructionAsteroid();
-            }
-        }
-        //spaceStone.DamageTake(other.GetComponent<IDamage>().Damage);
-        //if (spaceStone.DeathCheck())
-        //{
-        //    spaceStone.Death();
-        //    DestructionAsteroid();
-        //}
     }
     private void Update()
     {

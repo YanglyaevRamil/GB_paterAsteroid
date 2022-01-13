@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour, IDamage
@@ -60,20 +59,21 @@ public class Player : MonoBehaviour, IDamage
         if (Input.GetKey(KeyCode.A))
         {
             spaceShip.RotationLeftY();
-            animator.SetBool("Right", true);
-        }
-        else
-        {
-            animator.SetBool("Right", false);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            spaceShip.RotationRightY();
             animator.SetBool("Left", true);
         }
         else
         {
             animator.SetBool("Left", false);
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            spaceShip.RotationRightY();
+            animator.SetBool("Right", true);
+            
+        }
+        else
+        {
+            animator.SetBool("Right", false);
         }
     }
     private void Update()
@@ -95,15 +95,14 @@ public class Player : MonoBehaviour, IDamage
         {
             shooting = false;
         }
+
         ammunition = spaceShip.CheckAmmunition();
+        health = spaceShip.HealthCheck();
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other is IDamage)
-        {
-            Debug.Log("IDamage");
-        }
-        spaceShip.DamageTake(other.GetComponent<IDamage>().Damage);
+        IDamage damage = other.gameObject.GetComponent<IDamage>();
+        spaceShip.DamageTake(damage.Damage);
         if (spaceShip.DeathCheck())
         {
             spaceShip.Death();

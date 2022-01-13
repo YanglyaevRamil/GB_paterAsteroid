@@ -280,7 +280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectPrefab: {fileID: 6355995261552042889, guid: 8c015388661019f4593c993304d6a0a1, type: 3}
-  ship: {fileID: 227952537}
+  shipGameObject: {fileID: 227952537}
 --- !u!1 &76602037
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,13 +441,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 227952541}
-  - component: {fileID: 227952542}
-  - component: {fileID: 227952539}
   - component: {fileID: 227952543}
   - component: {fileID: 227952538}
+  - component: {fileID: 227952539}
+  - component: {fileID: 227952542}
+  - component: {fileID: 227952540}
   m_Layer: 0
   m_Name: SpaceShip
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -480,9 +481,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 227952537}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01d7b2a2e93767548b9d89ec88ef409f, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ee702d2983ef5a4f8c0ef2d6c2c4fd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
+  health: 0
+  ammunition: 0
+  rotatesSpeedRightY: 0
+  rotatesSpeedLeftY: 0
+  rechargeTime: 0
+  shooting: 0
+  isReloadingAmmunition: 0
+  damage: 0
+--- !u!65 &227952540
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227952537}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1.5}
+  m_Center: {x: 0, y: 0, z: 0.8}
 --- !u!4 &227952541
 Transform:
   m_ObjectHideFlags: 0
@@ -500,25 +523,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &227952542
-MonoBehaviour:
+--- !u!65 &227952542
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 227952537}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a246c7601f01ce1439c1e2285eecb274, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0
-  health: 0
-  ammunition: 0
-  rotateSpeed: 0
-  shooting: 0
-  shipSpin: 0
-  isReloading: 0
+  serializedVersion: 2
+  m_Size: {x: 3, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: -0.5}
 --- !u!54 &227952543
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -641,7 +658,6 @@ GameObject:
   m_Component:
   - component: {fileID: 515721868}
   - component: {fileID: 515721867}
-  - component: {fileID: 515721869}
   - component: {fileID: 515721870}
   - component: {fileID: 515721871}
   m_Layer: 0
@@ -678,19 +694,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &515721869
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 515721866}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ac98d98859fe9a4da6d10a023186c81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  score: 0
 --- !u!114 &515721870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -843,7 +846,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectPrefab: {fileID: 3270196955331018583, guid: d8087e2bdb3765440bd5d2780ed7a2b1, type: 3}
-  ship: {fileID: 227952537}
+  playerGameObject: {fileID: 227952537}
 --- !u!4 &659318837 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 729727525275602216, guid: af9a5d52d544a6540981ab0bc035e836, type: 3}
@@ -1155,6 +1158,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StarShipModel
       objectReference: {fileID: 0}
+    - target: {fileID: 736035148637683204, guid: af9a5d52d544a6540981ab0bc035e836, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 2647861367771778441, guid: af9a5d52d544a6540981ab0bc035e836, type: 3}
       propertyPath: m_Range
       value: 0.2
@@ -1238,7 +1245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectPrefab: {fileID: 3270196955331018583, guid: d8087e2bdb3765440bd5d2780ed7a2b1, type: 3}
-  ship: {fileID: 227952537}
+  playerGameObject: {fileID: 227952537}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1251,6 +1258,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1419,6 +1427,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1e05f568249344aa722e42400c11b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 227952541}
+  speed: 2
+  offset: {x: 0, y: 2, z: -6}
 --- !u!1 &969148161
 GameObject:
   m_ObjectHideFlags: 0
@@ -2484,8 +2507,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34221bccfcd42a443b93d8e3eb6828f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ship: {fileID: 227952537}
-  Manager: {fileID: 515721866}
+  playerCameObject: {fileID: 227952537}
+  manager: {fileID: 515721866}
   ScoreText: {fileID: 870841156}
   HealthText: {fileID: 1798446185}
   AmmunitionText: {fileID: 969148163}

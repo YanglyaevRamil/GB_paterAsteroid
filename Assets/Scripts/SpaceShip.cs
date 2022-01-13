@@ -39,6 +39,10 @@ public class SpaceShip : Ship
     {
         return spaceShipDead.DeathCheck();
     }
+    public int HealthCheck()
+    {
+        return spaceShipDead.health;
+    }
     public override bool Shooting()
     {
         return spaceShipGun.Shot();
