@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SpaceStoneMoving : IMoving
+public class SpaceStoneMoving : SpaceObjectMoving
 {
-    public float speed { set; get; }
     private Transform transformSpaceStone;
     private Vector3 normVecdMoment;
     public SpaceStoneMoving(Transform transformSpaceStone, Transform transformShip, float speed)
@@ -14,7 +11,7 @@ public class SpaceStoneMoving : IMoving
 
         normVecdMoment = (transformShip.position - transformSpaceStone.position) / (transformShip.position - transformSpaceStone.position).magnitude;
     }
-    public void Moving()
+    public override void Moving()
     {
         transformSpaceStone.position += normVecdMoment * speed;
     }

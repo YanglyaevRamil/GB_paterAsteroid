@@ -5,8 +5,8 @@ public class Asteroid : MonoBehaviour, IDamage
 {
     private const int MIN_DAMAGE = 5;
     private const int MAX_DAMAGE = 15;
-    private const int MIN_HP = 1;
-    private const int MAX_HP = 2;
+    private const int MIN_HP = 3;
+    private const int MAX_HP = 5;
     private const float MAX_DELETION = 300.0f;
     private const float MIN_SPEED = 0.1f;
     private const float MAX_SPEED = 0.3f;
