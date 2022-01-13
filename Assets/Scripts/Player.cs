@@ -101,11 +101,14 @@ public class Player : MonoBehaviour, IDamage
     }
     private void OnTriggerEnter(Collider other)
     {
-        IDamage damage = other.gameObject.GetComponent<IDamage>();
-        spaceShip.DamageTake(damage.Damage);
-        if (spaceShip.DeathCheck())
+        IDamage damage;
+        if ((damage = other.gameObject.GetComponent<IDamage>()) != null)
         {
-            spaceShip.Death();
+            spaceShip.DamageTake(damage.Damage);
+            if (spaceShip.DeathCheck())
+            {
+                spaceShip.Death();
+            }
         }
     }
     IEnumerator ReloadAmmunition()

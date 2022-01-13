@@ -5,8 +5,8 @@ public class Asteroid : MonoBehaviour, IDamage
 {
     private const int MIN_DAMAGE = 5;
     private const int MAX_DAMAGE = 15;
-    private const int MIN_HP = 3;
-    private const int MAX_HP = 5;
+    private const int MIN_HP = 1;
+    private const int MAX_HP = 3;
     private const float MAX_DELETION = 300.0f;
     private const float MIN_SPEED = 0.1f;
     private const float MAX_SPEED = 0.3f;
@@ -18,6 +18,7 @@ public class Asteroid : MonoBehaviour, IDamage
     [SerializeField] private int damage;
     [SerializeField] private int health;
 
+    private MeshRenderer meshRenderer;
     private SpriteRenderer spriteRenderer;
     private ParticleSystem partsSystem;
     private SphereCollider sphereCollider;
@@ -31,7 +32,8 @@ public class Asteroid : MonoBehaviour, IDamage
 
     private void OnEnable()
     {
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        if (GetComponentInChildren<SpriteRenderer>() != null) { spriteRenderer = GetComponentInChildren<SpriteRenderer>(); }
+        if (GetComponentInChildren<MeshRenderer>() != null) { meshRenderer = GetComponentInChildren<MeshRenderer>(); }
         partsSystem = GetComponentInChildren<ParticleSystem>();
         transformShip = ship.GetComponent<Transform>();
         transformAsteroid = gameObject.transform;
@@ -50,14 +52,20 @@ public class Asteroid : MonoBehaviour, IDamage
 
     private void OnTriggerEnter(Collider other)
     {
-        IDamage damage = other.gameObject.GetComponent<IDamage>();
-
-        spaceStone.DamageTake(damage.Damage);
-        if (spaceStone.DeathCheck())
+        IDamage damage;
+        if ((damage = other.GetComponent<IDamage>()) != null)
         {
-            spaceStone.Death();
-            DestructionAsteroid();
+            spaceStone.DamageTake(damage.Damage);
+            if (spaceStone.DeathCheck())
+            {
+                spaceStone.Death();
+                DestructionAsteroid();
+            }
         }
+    }
+    private void FixedUpdate()
+    {
+        spaceStone.Moving();
     }
     private void Update()
     {
@@ -75,7 +83,8 @@ public class Asteroid : MonoBehaviour, IDamage
     private void DestructionAsteroid()
     {
         StartCoroutine(CountToDeath());
-        spriteRenderer.enabled = false;
+        if (spriteRenderer != null) { spriteRenderer.enabled = false; }
+        if (meshRenderer != null) { meshRenderer.enabled = false; }
         sphereCollider.enabled = false;
         partsSystem.Play();
     }
