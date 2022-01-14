@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class SpaceStone : SpaceObject
 {
     private IMoving spaceStoneMoving;
@@ -11,23 +7,19 @@ public class SpaceStone : SpaceObject
         spaceStoneMoving = moving;
         spaceStoneDead = dead;
     }
-
     public override void DamageTake(int damageTaken)
     {
         spaceStoneDead.DamageTake(damageTaken);
     }
-
     public override bool Death()
     {
         EventAggregator.SpaceObjectDied.Publish(this);
         return true;
     }
-
     public override bool DeathCheck()
     {
         return spaceStoneDead.DeathCheck();
     }
-
     public override void Moving()
     {
         spaceStoneMoving.Moving();

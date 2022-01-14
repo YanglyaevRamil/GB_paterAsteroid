@@ -59,7 +59,7 @@ public class Asteroid : MonoBehaviour, IDamage
             if (spaceStone.DeathCheck())
             {
                 spaceStone.Death();
-                DestructionAsteroid();
+                StartCoroutine(CountToDeath());
             }
         }
     }
@@ -82,7 +82,6 @@ public class Asteroid : MonoBehaviour, IDamage
 
     private void DestructionAsteroid()
     {
-        StartCoroutine(CountToDeath());
         if (spriteRenderer != null) { spriteRenderer.enabled = false; }
         if (meshRenderer != null) { meshRenderer.enabled = false; }
         sphereCollider.enabled = false;
@@ -90,6 +89,7 @@ public class Asteroid : MonoBehaviour, IDamage
     }
     private IEnumerator CountToDeath()
     {
+        DestructionAsteroid();
         yield return new WaitForSecondsRealtime(DURATION_OF_DEATH);
         Destroy(gameObject);
         StopCoroutine(CountToDeath());

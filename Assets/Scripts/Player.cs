@@ -5,10 +5,11 @@ public class Player : MonoBehaviour, IDamage
 {
     private const float SPEED = 0.5f;
     private const int HEALTH = 100;
-    private const int AMMUNITION = 10;
+    private const int AMMUNITION = 20;
     private const float ROTATESPEED = 3.0f;
-    private const float RECHARGE = 3.0f;
+    private const float RECHARGE = 3f;
     private const int DAMAGE = 100;
+    private const int OFSET_REY = 2;
     public int Health { get => health; }
     public bool Shooting { get => shooting; }
     public int Ammunition { get => ammunition; }
@@ -31,6 +32,8 @@ public class Player : MonoBehaviour, IDamage
     private SpaceShipDead spaceShipDead;
     private SpaceShipGun spaceShipGun;
     private Animator animator;
+    private RaycastHit raycastHit;
+    Ray ray;
     private void Awake()
     {
         speed = SPEED;
@@ -47,6 +50,8 @@ public class Player : MonoBehaviour, IDamage
         spaceShipDead = new SpaceShipDead(health);
         spaceShipGun = new SpaceShipGun(ammunition);
         spaceShip = new SpaceShip(spaceShipMoving, spaceShipRotation, spaceShipDead, spaceShipGun);
+
+        ray = new Ray(transform.position, transform.forward);
     }
     private void Start()
     {
@@ -69,7 +74,6 @@ public class Player : MonoBehaviour, IDamage
         {
             spaceShip.RotationRightY();
             animator.SetBool("Right", true);
-            
         }
         else
         {
@@ -78,6 +82,24 @@ public class Player : MonoBehaviour, IDamage
     }
     private void Update()
     {
+        //ray = new Ray(transform.position + new Vector3(0,0,OFSET_REY), transform.forward);
+        //Physics.Raycast(ray, out raycastHit);
+        //if (raycastHit.transform != null)
+        //{
+        //    if (raycastHit.transform.gameObject.CompareTag("Asteroid"))
+        //    {
+        //        shooting = spaceShip.Shooting();
+        //        if (!spaceShip.CheckEmptyAmmunition())
+        //        {
+        //            isReloadingAmmunition = false;
+        //        }
+        //        else
+        //        {
+        //            isReloadingAmmunition = true;
+        //            StartCoroutine(ReloadAmmunition());
+        //        }
+        //    }
+        //}
         if (Input.GetKeyDown(KeyCode.Space))
         {
             shooting = spaceShip.Shooting();
@@ -95,6 +117,7 @@ public class Player : MonoBehaviour, IDamage
         {
             shooting = false;
         }
+
 
         ammunition = spaceShip.CheckAmmunition();
         health = spaceShip.HealthCheck();

@@ -6,8 +6,9 @@ public class SpaceShip : Ship
     private IRotation spaceShipRotation;
     private IMoving spaceShipMoving;
     private IDead spaceShipDead;
-    private SpaceShipGun spaceShipGun;
-    public SpaceShip(IMoving moving, IRotation rotation, IDead dead, SpaceShipGun gun)
+    private IGun spaceShipGun;
+    
+    public SpaceShip(IMoving moving, IRotation rotation, IDead dead, IGun gun)
     {
         spaceShipMoving = moving;
         spaceShipRotation = rotation;

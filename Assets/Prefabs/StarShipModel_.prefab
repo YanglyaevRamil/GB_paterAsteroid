@@ -1784,7 +1784,7 @@ GameObject:
   m_Component:
   - component: {fileID: 730051331857484144}
   m_Layer: 0
-  m_Name: StarShipModel
+  m_Name: StarShipModel_
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
