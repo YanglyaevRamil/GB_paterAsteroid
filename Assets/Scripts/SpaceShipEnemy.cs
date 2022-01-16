@@ -45,6 +45,7 @@ public class SpaceShipEnemy : MonoBehaviour, IDamage
             if (shipEnemy.DeathCheck())
             {
                 shipEnemy.Death();
+                Destroy(gameObject);
             }
         }
     }

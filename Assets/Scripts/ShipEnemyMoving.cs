@@ -2,17 +2,20 @@ using UnityEngine;
 
 public class ShipEnemyMoving : SpaceObjectMoving
 {
-    private Transform transformSpaceStone;
+    private Transform transformShipEnemy;
+    private Transform transformShipPlayer;
     private Vector3 normVecdMoment;
-    public ShipEnemyMoving(Transform transformSpaceStone, Transform transformShip, float speed)
+    public ShipEnemyMoving(Transform transformShipEnemy, Transform transformShipPlayer, float speed)
     {
-        this.transformSpaceStone = transformSpaceStone;
+        this.transformShipPlayer = transformShipPlayer;
+        this.transformShipEnemy = transformShipEnemy;
         this.speed = speed;
 
-        normVecdMoment = (transformShip.position - transformSpaceStone.position) / (transformShip.position - transformSpaceStone.position).magnitude;
+        
     }
     public override void Moving()
     {
-        transformSpaceStone.position += normVecdMoment * speed;
+        normVecdMoment = (transformShipPlayer.position - transformShipEnemy.position) / (transformShipPlayer.position - transformShipEnemy.position).magnitude;
+        transformShipEnemy.position += normVecdMoment * speed;
     }
 }
