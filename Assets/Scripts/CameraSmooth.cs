@@ -4,56 +4,22 @@ using UnityEngine;
 
 public class CameraSmooth : MonoBehaviour
 {
+	public Transform target;
+	private float smoothSpeed = 3f;               // how smooth the camera movement is
+    private Vector3 offset = new Vector3(0,2,-6);
+    private Vector3 smoothPosition;
+    private void LateUpdate()
+    {
+        Debug.Log(transform.position);
+        smoothPosition = Vector3.Lerp(transform.position, target.position+ offset, smoothSpeed);
+        
+        transform.position = smoothPosition;
 
-	private float distanceAway = 3f;
-	private float distanceUp = 2f;
-	private float smooth = 2f;               // how smooth the camera movement is
+        //transform.position = Vector3.SmoothDamp(transform.position, target.position, ref offset, smoothSpeed) + offset; //плавно перемещает камеру в точку координату персонажа
+        //transform.forward = Vector3.SmoothDamp(transform.forward, target.forward, ref offset, smoothSpeed); //плавно перемещает forward (поворачивает) cameraRig чтобы смотреть в то же место, куда и персонаж.
 
-	private Vector3 m_TargetPosition;       // the position the camera is trying to be in)
+        //можно еще иметь ссылку на саму камеру и сделать что-то типа
+        //cam.transform.LookAt(character.position); // смотрит на персонажа
 
-	Transform follow;        //the position of Player
-
-	void Start()
-	{
-		follow = GameObject.FindWithTag("Player").transform;
-	}
-
-	void LateUpdate()
-	{
-		// setting the target position to be the correct offset from the 
-		m_TargetPosition = follow.position + Vector3.up * distanceUp - follow.forward * distanceAway;
-
-		// making a smooth transition between it's current position and the position it wants to be in
-		transform.position = Vector3.Lerp(transform.position, m_TargetPosition, Time.deltaTime * smooth);
-
-		// make sure the camera is looking the right way!
-		transform.LookAt(follow);
-
-		//    public float distance = 8;
-		//    // Горизонтальный угол
-		//    public float rot = 0; // Выражается в радианах
-		//                          // Продольный угол
-		//    private float roll = 30f * Mathf.PI * 2 / 360; // радианы
-		//                                                   // Целевой объект
-		//    public GameObject target;
-		//    void LateUpdate()
-		//    {
-		//        // Некоторые суждения
-		//        if (target == null)
-		//            return;
-		//        if (Camera.main == null)
-		//            return;
-		//        // Координаты цели
-		//        Vector3 targetPos = target.transform.position;
-		//        // Используем тригонометрическую функцию для расчета положения камеры
-		//        Vector3 cameraPos;
-		//        float d = distance * Mathf.Cos(roll);
-		//        float height = distance * Mathf.Sin(roll);
-		//        cameraPos.x = targetPos.x + d * Mathf.Cos(rot);
-		//        cameraPos.z = targetPos.z + d * Mathf.Sin(rot);
-		//        cameraPos.y = targetPos.y + height;
-		//        Camera.main.transform.position = cameraPos;
-		//        // Цельтесь в цель
-		//        Camera.main.transform.LookAt(target.transform);
-	}
+    }
 }

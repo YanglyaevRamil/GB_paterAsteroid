@@ -6,4 +6,5 @@ public abstract class SpaceObject
     public abstract bool Death();
     public abstract bool DeathCheck();
     public abstract void Moving();
+    public abstract void Rotation(Quaternion quaternion);
 }

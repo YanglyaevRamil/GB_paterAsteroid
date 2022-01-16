@@ -15,14 +15,11 @@ public class SpaceShip : Ship
         spaceShipDead = dead;
         spaceShipGun = gun;
     }
-    public override void RotationRightY()
+    public override void Rotation(Quaternion quaternion)
     {
-        spaceShipRotation.RotationRightY();
+        spaceShipRotation.Rotation(quaternion);
     }
-    public override void RotationLeftY()
-    {
-        spaceShipRotation.RotationLeftY();
-    }
+
     public override void Moving()
     {
         spaceShipMoving.Moving();

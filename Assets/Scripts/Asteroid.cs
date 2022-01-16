@@ -1,8 +1,8 @@
 using System.Collections;
 using UnityEngine;
-
 public class Asteroid : MonoBehaviour, IDamage
 {
+    private const float MIN_SIZE = 0.5f;
     private const int MIN_DAMAGE = 5;
     private const int MAX_DAMAGE = 15;
     private const int MIN_HP = 1;
@@ -11,23 +11,28 @@ public class Asteroid : MonoBehaviour, IDamage
     private const float MIN_SPEED = 0.1f;
     private const float MAX_SPEED = 0.3f;
     private const float DURATION_OF_DEATH = 3.0f;
+    private const float ROTATESPEEDASTEROID = 1.0f;
 
     public GameObject ship;
 
     [SerializeField] private float speed;
     [SerializeField] private int damage;
     [SerializeField] private int health;
+    [SerializeField] private int coefficientSize;
 
+    private GameObject asteroidPrefab;
     private MeshRenderer meshRenderer;
     private SpriteRenderer spriteRenderer;
     private ParticleSystem partsSystem;
     private SphereCollider sphereCollider;
     private Transform transformShip;
     private Transform transformAsteroid;
+    private Quaternion rotateAsteroid;
 
     private SpaceStone spaceStone;
     private SpaceStoneDead spaceStoneDead;
     private SpaceStoneMoving spaceStoneMoving;
+    private SpaceObjectRotation spaceObjectRotation;
     public int Damage { get => damage; }
 
     private void OnEnable()
@@ -35,19 +40,26 @@ public class Asteroid : MonoBehaviour, IDamage
         if (GetComponentInChildren<SpriteRenderer>() != null) { spriteRenderer = GetComponentInChildren<SpriteRenderer>(); }
         if (GetComponentInChildren<MeshRenderer>() != null) { meshRenderer = GetComponentInChildren<MeshRenderer>(); }
         partsSystem = GetComponentInChildren<ParticleSystem>();
+
         transformShip = ship.GetComponent<Transform>();
+
         transformAsteroid = gameObject.transform;
+        coefficientSize = Random.Range(1, 3);
+        transformAsteroid.localScale = new Vector3(MIN_SIZE*coefficientSize, MIN_SIZE*coefficientSize, MIN_SIZE*coefficientSize);
+
         sphereCollider = gameObject.GetComponent<SphereCollider>();
 
         speed = Random.Range(MIN_SPEED, MAX_SPEED);
-        damage = Random.Range(MIN_DAMAGE, MAX_DAMAGE);
-        health = Random.Range(MIN_HP, MAX_HP);
-
-        partsSystem.Stop();
+        damage = MIN_DAMAGE * coefficientSize; //Random.Range(MIN_DAMAGE, MAX_DAMAGE)
+        health = MIN_HP * coefficientSize; //Random.Range(MIN_HP, MAX_HP);
+        rotateAsteroid = Quaternion.AngleAxis(ROTATESPEEDASTEROID, new Vector3(Random.Range(-1,2), Random.Range(-1, 2), Random.Range(-1, 2)));
 
         spaceStoneMoving = new SpaceStoneMoving(transformAsteroid, transformShip, speed);
         spaceStoneDead = new SpaceStoneDead(health);
-        spaceStone = new SpaceStone(spaceStoneMoving, spaceStoneDead);
+        spaceObjectRotation = new SpaceObjectRotation(transformAsteroid);
+        spaceStone = new SpaceStone(spaceStoneMoving, spaceStoneDead, spaceObjectRotation);
+
+        partsSystem.Stop();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -66,6 +78,7 @@ public class Asteroid : MonoBehaviour, IDamage
     private void FixedUpdate()
     {
         spaceStone.Moving();
+        spaceStone.Rotation(rotateAsteroid);
     }
     private void Update()
     {

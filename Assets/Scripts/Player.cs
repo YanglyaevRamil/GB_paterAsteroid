@@ -34,6 +34,7 @@ public class Player : MonoBehaviour, IDamage
     private Animator animator;
     private RaycastHit raycastHit;
     Ray ray;
+    private Quaternion rotatesRightY, rotatesLeftY;
     private void Awake()
     {
         speed = SPEED;
@@ -44,9 +45,10 @@ public class Player : MonoBehaviour, IDamage
         rechargeTime = RECHARGE;
         isReloadingAmmunition = false;
         damage = DAMAGE;
-
+        rotatesRightY = Quaternion.AngleAxis(rotatesSpeedRightY, Vector3.up);
+        rotatesLeftY = Quaternion.AngleAxis(rotatesSpeedLeftY, Vector3.up);
         spaceShipMoving = new SpaceShipMoving(transform, speed);
-        spaceShipRotation = new SpaceShipRotation(transform, Quaternion.AngleAxis(rotatesSpeedRightY, Vector3.up), Quaternion.AngleAxis(rotatesSpeedLeftY, Vector3.up));
+        spaceShipRotation = new SpaceShipRotation(transform);
         spaceShipDead = new SpaceShipDead(health);
         spaceShipGun = new SpaceShipGun(ammunition);
         spaceShip = new SpaceShip(spaceShipMoving, spaceShipRotation, spaceShipDead, spaceShipGun);
@@ -63,7 +65,7 @@ public class Player : MonoBehaviour, IDamage
         spaceShip.Moving();
         if (Input.GetKey(KeyCode.A))
         {
-            spaceShip.RotationLeftY();
+            spaceShip.Rotation(rotatesLeftY);
             animator.SetBool("Left", true);
         }
         else
@@ -72,7 +74,7 @@ public class Player : MonoBehaviour, IDamage
         }
         if (Input.GetKey(KeyCode.D))
         {
-            spaceShip.RotationRightY();
+            spaceShip.Rotation(rotatesRightY);
             animator.SetBool("Right", true);
         }
         else

@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour, IDamage
 
     public int Damage { get => usualBullet.Damage; }
 
-    private UsualBullet usualBullet; 
+    private UsualBullet usualBullet;
     private void Start()
     {
         usualBullet = new UsualBullet(transform, SPEED_BULLET);

@@ -1,11 +1,15 @@
+using UnityEngine;
+
 public class SpaceStone : SpaceObject
 {
     private IMoving spaceStoneMoving;
     private IDead spaceStoneDead;
-    public SpaceStone(IMoving moving, IDead dead)
+    private IRotation spaceStoneRotation;
+    public SpaceStone(IMoving moving, IDead dead, IRotation rotation)
     {
         spaceStoneMoving = moving;
         spaceStoneDead = dead;
+        spaceStoneRotation = rotation;
     }
     public override void DamageTake(int damageTaken)
     {
@@ -23,5 +27,10 @@ public class SpaceStone : SpaceObject
     public override void Moving()
     {
         spaceStoneMoving.Moving();
+    }
+
+    public override void Rotation(Quaternion quaternion)
+    {
+        spaceStoneRotation.Rotation(quaternion);
     }
 }
