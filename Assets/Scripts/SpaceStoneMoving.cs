@@ -8,7 +8,6 @@ public class SpaceStoneMoving : SpaceObjectMoving
     {
         this.transformSpaceStone = transformSpaceStone;
         this.speed = speed;
-
         normVecdMoment = (transformShip.position - transformSpaceStone.position) / (transformShip.position - transformSpaceStone.position).magnitude;
     }
     public override void Moving()
