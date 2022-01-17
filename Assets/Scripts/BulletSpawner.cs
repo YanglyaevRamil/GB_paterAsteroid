@@ -19,6 +19,7 @@ public class BulletSpawner : Spawner
         if (player.Shooting)
         {
             Spawn();
+            
         }
     }
 
