@@ -10,10 +10,10 @@ public class AsteroidFactory
         asteroid.AsteroidBuilder(spaceStoneMoving, spaceStoneDead, spaceObjectRotation);
         return asteroid;
     }
-    public Asteroid Create(float speed, int damage, int health)
+    public Asteroid Create(float speed, int damage, int health, float radius)
     {
         Asteroid asteroid = Resources.Load<Asteroid>("Asteroid_0");
-        asteroid.AsteroidInitParametr(speed, damage, health);
+        asteroid.AsteroidInitParametr(speed, damage, health, radius);
         return asteroid;
     }
 }

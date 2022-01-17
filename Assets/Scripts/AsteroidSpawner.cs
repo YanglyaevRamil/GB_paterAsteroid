@@ -7,11 +7,11 @@ public class AsteroidSpawner : Spawner
     private const float MAX_X = -20.0f;
     private const float MIN_X = 20.0f;
     private const float MIN_SPEED = 0.1f;
-    private const float MAX_SPEED = 0.3f;
     private const int MIN_DAMAGE = 5;
-    private const int MAX_DAMAGE = 15;
     private const int MIN_HP = 1;
-    private const int MAX_HP = 3;
+    private const float MIN_RAD = 0.5f;
+    private const int NUMBER_DIFF_ASTEROID = 3;
+    private const int NUMBER_ASTEROID_IN_PULL = 50;
 
     public GameObject shipGameObject;
 
@@ -19,6 +19,7 @@ public class AsteroidSpawner : Spawner
     private float speed;
     private int damage;
     private int health;
+    private float radius;
 
     private float startDelay = START_DELAY;
     private float spawnInterval = SPAWN_INTERVAL;
@@ -29,16 +30,21 @@ public class AsteroidSpawner : Spawner
     private Asteroid asteroid;
     void Start()
     {
-        speed = Random.Range(MIN_SPEED, MAX_SPEED);
-        scaleFactor = Random.Range(1, 3);
-        damage = Random.Range(MIN_DAMAGE, MAX_DAMAGE);
-        health = Random.Range(MIN_HP, MAX_HP);
-
+        speed = MIN_SPEED;
+        damage = MIN_DAMAGE;
+        health = MIN_HP;
+        radius = MIN_RAD;
         asteroidFactory = new AsteroidFactory();
-        asteroid = asteroidFactory.Create(speed, damage, health);
-        asteroid.ship = shipGameObject;
+        enemyPool = new EnemyPool();
 
-        enemyPool = new EnemyPool(50, asteroid);
+        for (int i = 0; i < NUMBER_ASTEROID_IN_PULL; i++)
+        {
+            scaleFactor = Random.Range(1, NUMBER_DIFF_ASTEROID);
+            asteroid = asteroidFactory.Create(speed * scaleFactor, damage * scaleFactor, health * scaleFactor, radius * scaleFactor);
+            asteroid.ship = shipGameObject;
+            enemyPool.AddObjectPool("Asteroid", asteroid);
+        }
+
         enemyPool.GetEnemy("Asteroid");
 
         InvokeRepeating("Spawn", startDelay, spawnInterval);

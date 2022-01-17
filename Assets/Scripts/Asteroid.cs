@@ -2,16 +2,15 @@ using System.Collections;
 using UnityEngine;
 public class Asteroid : MonoBehaviour, IDamage
 {
-    private const float MIN_SIZE = 0.5f;
     private const float MAX_DELETION = 300.0f;
     private const float DURATION_OF_DEATH = 3.0f;
-    private const float ROTATESPEEDASTEROID = 1.0f;
 
     public GameObject ship;
 
     [SerializeField] private float speed;
     [SerializeField] private int damage;
     [SerializeField] private int health;
+    [SerializeField] private float radius;
     [SerializeField] private int coefficientSize;
 
     private MeshRenderer meshRenderer;
@@ -36,8 +35,8 @@ public class Asteroid : MonoBehaviour, IDamage
         transformShip = ship.GetComponent<Transform>();
         transformAsteroid = gameObject.transform;
         coefficientSize = Random.Range(1, 3);
-        transformAsteroid.localScale = new Vector3(MIN_SIZE*coefficientSize, MIN_SIZE*coefficientSize, MIN_SIZE*coefficientSize);
-        rotateAsteroid = Quaternion.AngleAxis(ROTATESPEEDASTEROID, new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), Random.Range(-1, 2)));
+        transformAsteroid.localScale = new Vector3(radius, radius, radius);
+        rotateAsteroid = Quaternion.AngleAxis(1, new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), Random.Range(-1, 2)));
         sphereCollider = gameObject.GetComponent<SphereCollider>();
 
         spaceStoneMoving = new SpaceStoneMoving(transformAsteroid, transformShip, speed);
@@ -46,11 +45,12 @@ public class Asteroid : MonoBehaviour, IDamage
         spaceStone = new SpaceStone(spaceStoneMoving, spaceStoneDead, spaceObjectRotation);
         
     }
-    public void AsteroidInitParametr(float speed, int damage, int health)
+    public void AsteroidInitParametr(float speed, int damage, int health, float radius)
     {
         this.speed = speed;
         this.damage = damage;
         this.health = health;
+        this.radius = radius;
     }
     public void AsteroidBuilder(SpaceStoneMoving spaceStoneMoving, SpaceStoneDead spaceStoneDead, SpaceObjectRotation spaceObjectRotation)
     {

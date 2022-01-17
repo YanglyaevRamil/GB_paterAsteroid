@@ -11,7 +11,7 @@ public class TestSpawner : MonoBehaviour
     void Start()
     {
         
-        EnemyPool enemyPool = new EnemyPool(5, new Asteroid());
+        EnemyPool enemyPool = new EnemyPool();
         var enemy = enemyPool.GetEnemy("Asteroid");
         enemy.GetComponent<Asteroid>().ship = shipGameObject;
         float rndX = Random.Range(MAX_X, MIN_X);
