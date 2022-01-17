@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour, IDamage
     private void Start()
     {
         usualBullet = new UsualBullet(transform, SPEED_BULLET);
-        Destroy(gameObject, TIME_DEATH);
+        //Destroy(gameObject, TIME_DEATH);
     }
     private void FixedUpdate()
     {
@@ -19,12 +19,18 @@ public class Bullet : MonoBehaviour, IDamage
     }
     public bool Death()
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        this.gameObject.SetActive(false);
         return true;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         Death();
+    }
+
+    private void OnEnable()
+    {
+        Invoke("Death", TIME_DEATH);
     }
 }
