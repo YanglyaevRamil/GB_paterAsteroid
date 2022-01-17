@@ -41,10 +41,10 @@ namespace GB_starship.ObjectPool
             var enemy = enemies.FirstOrDefault(a => !a.gameObject.activeSelf);
             if (enemy == null)
             {
-                var laser = Resources.Load<Asteroid>("Asteroid_0");
+                var obj = Resources.Load<Asteroid>("Asteroid_0");
                 for (var i = 0; i < _capacityPool; i++)
                 {
-                    var instantiate = Object.Instantiate(laser);
+                    var instantiate = Object.Instantiate(obj);
                     ReturnToPool(instantiate.transform);
                     enemies.Add(instantiate);
                 }
