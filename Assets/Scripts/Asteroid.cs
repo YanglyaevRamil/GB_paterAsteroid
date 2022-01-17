@@ -33,10 +33,12 @@ public class Asteroid : MonoBehaviour, IDamage
     private SpaceStoneDead spaceStoneDead;
     private SpaceStoneMoving spaceStoneMoving;
     private SpaceObjectRotation spaceObjectRotation;
+    
     public int Damage { get => damage; }
 
     private void OnEnable()
     {
+       
         if (GetComponentInChildren<SpriteRenderer>() != null) { spriteRenderer = GetComponentInChildren<SpriteRenderer>(); }
         if (GetComponentInChildren<MeshRenderer>() != null) { meshRenderer = GetComponentInChildren<MeshRenderer>(); }
         partsSystem = GetComponentInChildren<ParticleSystem>();
@@ -106,5 +108,13 @@ public class Asteroid : MonoBehaviour, IDamage
         yield return new WaitForSecondsRealtime(DURATION_OF_DEATH);
         Destroy(gameObject);
         StopCoroutine(CountToDeath());
+    }
+
+    protected void ReturnToPool()
+    {
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
+        gameObject.SetActive(false);
+
     }
 }
