@@ -1,38 +1,36 @@
 using UnityEngine;
 
-public class Bullet : SpaceObject
+public class Bullet : MonoBehaviour, IDamage
 {
     private const float TIME_DEATH = 10f;
     private const float SPEED_BULLET = 1.5f;
 
+    public int Damage { get => usualBullet.Damage; }
+
+    private UsualBullet usualBullet;
     private void Start()
     {
-        Destroy(gameObject, TIME_DEATH);
+        usualBullet = new UsualBullet(transform, SPEED_BULLET);
+        //Destroy(gameObject, TIME_DEATH);
     }
-
     private void FixedUpdate()
     {
-        Motion();
+        usualBullet.Motion();
     }
-
-    private void OnEnable()
+    public bool Death()
     {
-        speed = SPEED_BULLET;
-    }
-
-    public override bool Death()
-    {
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        this.gameObject.SetActive(false);
         return true;
-    }
-
-    public override void Motion()
-    {
-        transform.Translate(Vector3.forward * speed);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         Death();
+    }
+
+    private void OnEnable()
+    {
+        Invoke("Death", TIME_DEATH);
     }
 }

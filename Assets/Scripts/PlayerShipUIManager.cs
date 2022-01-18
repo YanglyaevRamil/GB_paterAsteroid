@@ -7,20 +7,21 @@ public class PlayerShipUIManager : MonoBehaviour
     private const int COLOR_HEALTH_MEDIUM = 40;
     private const int COLOR_HEALTH_LOW = 20;
 
-    public GameObject ship;
-    public GameObject Manager;
+    public GameObject playerCameObject;
+    public GameObject manager;
 
     public Text ScoreText;
     public Text HealthText;
     public Text AmmunitionText;
 
-    private SpaceShip spaceShip;
+    private Player player;
     private ScoreManager scoreManager;
 
     private void Start()
     {
-        spaceShip = ship.GetComponent<SpaceShip>();
-        scoreManager = Manager.GetComponent<ScoreManager>();
+        player = playerCameObject.GetComponent<Player>();
+
+        scoreManager = new ScoreManager();
     }
 
     private void FixedUpdate()
@@ -29,11 +30,11 @@ public class PlayerShipUIManager : MonoBehaviour
     }
     private void Update()
     {
-        HealthText.text = "Health: " + spaceShip.health.ToString();
+        HealthText.text = "Health: " + player.Health.ToString();
         ScoreText.text = "Score: " + scoreManager.score.ToString();
-        if (!spaceShip.isReloading)
+        if (!player.IsReloading)
         {
-            AmmunitionText.text = "Ammunition: " + spaceShip.ammunition.ToString();
+            AmmunitionText.text = "Ammunition: " + player.Ammunition.ToString();
         }
         else
         {
@@ -43,22 +44,22 @@ public class PlayerShipUIManager : MonoBehaviour
     }
     private void HealthColorManagement()
     {
-        if (spaceShip.health > COLOR_HEALTH_HIGH)
+        if (player.Health > COLOR_HEALTH_HIGH)
         {
             HealthText.material.color = Color.green;
         }
 
-        if (spaceShip.health <= COLOR_HEALTH_HIGH)
+        if (player.Health <= COLOR_HEALTH_HIGH)
         {
             HealthText.material.color = Color.cyan;
         }
 
-        if (spaceShip.health <= COLOR_HEALTH_MEDIUM)
+        if (player.Health <= COLOR_HEALTH_MEDIUM)
         {
             HealthText.material.color = Color.yellow;
         }
 
-        if (spaceShip.health <= COLOR_HEALTH_LOW)
+        if (player.Health <= COLOR_HEALTH_LOW)
         {
             HealthText.material.color = Color.red;
         }

@@ -1,63 +1,82 @@
 using System.Collections;
 using UnityEngine;
-
-public class Asteroid : SpaceObject, IDamage
+public class Asteroid : MonoBehaviour, IDamage
 {
-    private const int MIN_DAMAGE = 5;
-    private const int MAX_DAMAGE = 15;
     private const float MAX_DELETION = 300.0f;
-    private const float MIN_SPEED = 0.1f;
-    private const float MAX_SPEED = 0.3f;
     private const float DURATION_OF_DEATH = 3.0f;
 
+    public GameObject ship;
+
+    [SerializeField] private float speed;
+    [SerializeField] private int damage;
+    [SerializeField] private int health;
+    [SerializeField] private float radius;
+    [SerializeField] private int coefficientSize;
+
+    private MeshRenderer meshRenderer;
     private SpriteRenderer spriteRenderer;
     private ParticleSystem partsSystem;
     private SphereCollider sphereCollider;
     private Transform transformShip;
     private Transform transformAsteroid;
-    private Vector3 normVecdMoment;
-    private int damage;
+    private Quaternion rotateAsteroid;
 
-    public GameObject ship;
-    public bool isDead; 
+    private SpaceStone spaceStone;
+    private SpaceStoneDead spaceStoneDead;
+    private SpaceStoneMoving spaceStoneMoving;
+    private SpaceObjectRotation spaceObjectRotation;
     public int Damage { get => damage; }
-
     private void OnEnable()
     {
-        speed = Random.Range(MIN_SPEED, MAX_SPEED);
-        damage = Random.Range(MIN_DAMAGE, MAX_DAMAGE);
-
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        if (GetComponentInChildren<SpriteRenderer>() != null) { spriteRenderer = GetComponentInChildren<SpriteRenderer>(); }
+        if (GetComponentInChildren<MeshRenderer>() != null) { meshRenderer = GetComponentInChildren<MeshRenderer>(); }
         partsSystem = GetComponentInChildren<ParticleSystem>();
+        partsSystem.Stop();
         transformShip = ship.GetComponent<Transform>();
+        transformAsteroid = gameObject.transform;
+        coefficientSize = Random.Range(1, 3);
+        transformAsteroid.localScale = new Vector3(radius, radius, radius);
+        rotateAsteroid = Quaternion.AngleAxis(1, new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), Random.Range(-1, 2)));
         sphereCollider = gameObject.GetComponent<SphereCollider>();
 
-        transformAsteroid = gameObject.transform;
-        var distance = GetDistanceAtoB(transformShip, transformAsteroid);
-
-        normVecdMoment = (transformShip.position - transformAsteroid.position) / distance;
-
-        partsSystem.Stop();
+        spaceStoneMoving = new SpaceStoneMoving(transformAsteroid, transformShip, speed);
+        spaceStoneDead = new SpaceStoneDead(health);
+        spaceObjectRotation = new SpaceObjectRotation(transformAsteroid);
+        spaceStone = new SpaceStone(spaceStoneMoving, spaceStoneDead, spaceObjectRotation);
+        
     }
-
+    public void AsteroidInitParametr(float speed, int damage, int health, float radius)
+    {
+        this.speed = speed;
+        this.damage = damage;
+        this.health = health;
+        this.radius = radius;
+    }
+    public void AsteroidBuilder(SpaceStoneMoving spaceStoneMoving, SpaceStoneDead spaceStoneDead, SpaceObjectRotation spaceObjectRotation)
+    {
+        this.spaceStoneMoving = spaceStoneMoving;
+        this.spaceStoneDead = spaceStoneDead;
+        this.spaceObjectRotation = spaceObjectRotation;
+        spaceStone = new SpaceStone(this.spaceStoneMoving, this.spaceStoneDead, this.spaceObjectRotation);
+    }
     private void OnTriggerEnter(Collider other)
     {
-        if (Destruction())
+        IDamage damage;
+        if ((damage = other.GetComponent<IDamage>()) != null)
         {
-            StartCoroutine(CountToDeath());
-        }
-
-        if (isDead == true)
-        {
-            Death();
+            spaceStone.DamageTake(damage.Damage);
+            if (spaceStone.DeathCheck())
+            {
+                spaceStone.Death();
+                StartCoroutine(CountToDeath());
+            }
         }
     }
-
     private void FixedUpdate()
     {
-        Motion();
+        spaceStone.Moving();
+        spaceStone.Rotation(rotateAsteroid);
     }
-
     private void Update()
     {
         transformShip = ship.GetComponent<Transform>();
@@ -67,41 +86,30 @@ public class Asteroid : SpaceObject, IDamage
 
         if (vec.magnitude > MAX_DELETION)
         {
-            Death();
+            ReturnToPool();
+            //Destroy(gameObject);
         }
     }
 
-    public override void Motion()
+    private void DestructionAsteroid()
     {
-        transform.position += normVecdMoment * speed;
-    }
-
-    private bool Destruction()
-    {
-        spriteRenderer.enabled = false;
+        if (spriteRenderer != null) { spriteRenderer.enabled = false; }
+        if (meshRenderer != null) { meshRenderer.enabled = false; }
         sphereCollider.enabled = false;
-        EventAggregator.SpaceObjectDied.Publish(this);
         partsSystem.Play();
-        return true;
     }
-    IEnumerator CountToDeath()
+    private IEnumerator CountToDeath()
     {
+        DestructionAsteroid();
         yield return new WaitForSecondsRealtime(DURATION_OF_DEATH);
-        isDead = true;
+        //Destroy(gameObject);
+        ReturnToPool();
         StopCoroutine(CountToDeath());
     }
-    public override bool Death()
+    protected void ReturnToPool()
     {
-        Destroy(gameObject);
-        return true;
-    }
-
-    private float GetDistanceAtoB(Transform a, Transform b)
-    {
-        transformShip = ship.GetComponent<Transform>();
-        transformAsteroid = gameObject.transform;
-
-        var vec = a.position - b.position;
-        return vec.magnitude;
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
+        gameObject.SetActive(false);
     }
 }

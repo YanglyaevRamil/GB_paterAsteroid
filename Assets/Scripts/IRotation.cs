@@ -1,5 +1,6 @@
+using UnityEngine;
 
 public interface IRotation
 {
-    int Rotation();
+    void Rotation(Quaternion rotate);
 }

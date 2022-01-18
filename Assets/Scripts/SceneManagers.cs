@@ -21,7 +21,7 @@ public class SceneManagers : MonoBehaviour
     }
     public void LoadDeathScreen(SpaceObject spaceObject)
     {
-        if (spaceObject as SpaceShip)
+        if (spaceObject is SpaceShip)
             SceneManager.LoadScene("DeathScreen");
     }
     public void LoadExit() 
