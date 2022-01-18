@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GB_starship.ObjectPool;
 
 public class TestSpawner : MonoBehaviour
 {
@@ -12,13 +11,12 @@ public class TestSpawner : MonoBehaviour
     void Start()
     {
         
-        EnemyPool enemyPool = new EnemyPool(5);
+        EnemyPool enemyPool = new EnemyPool();
         var enemy = enemyPool.GetEnemy("Asteroid");
         enemy.GetComponent<Asteroid>().ship = shipGameObject;
         float rndX = Random.Range(MAX_X, MIN_X);
         enemy.transform.position = transform.TransformPoint(rndX, 0, 0);
         enemy.gameObject.SetActive(true);
-        
     }
 
     

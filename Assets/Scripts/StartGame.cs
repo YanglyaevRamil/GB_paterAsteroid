@@ -6,7 +6,7 @@ public class StartGame : MonoBehaviour
 {
     private GameObject spaceShipPrefab;
     private void Awake()
-    {
+    {  
         spaceShipPrefab = Resources.Load<GameObject>("");
     }
 }

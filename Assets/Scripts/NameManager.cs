@@ -1,7 +1,5 @@
-namespace GB_starship.ObjectPool
+internal static class NameManager
 {
-    internal static class NameManager
-    {
-        public const string POOL_CONTENT = "[Pool_Content]";
-    }
+    public const string POOL_CONTENT = "[Pool_Content]";
 }
+
