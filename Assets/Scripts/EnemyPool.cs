@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,52 +6,38 @@ using Object = UnityEngine.Object;
 
 public sealed class EnemyPool
 {
-    private readonly Dictionary<string, HashSet<Asteroid>> _enemyPool;
+    private readonly Dictionary<string, HashSet<Enemy>> _enemyPool;
     private readonly int _capacityPool;
     private Transform _rootPool;
 
     public EnemyPool()
     {
-        _enemyPool = new Dictionary<string, HashSet<Asteroid>>();
+        _enemyPool = new Dictionary<string, HashSet<Enemy>>();
         if (!_rootPool)
         {
             _rootPool = new GameObject(NameManager.POOL_CONTENT).transform;
         }
     }
 
-    public Asteroid GetEnemy(string type)
+    public Enemy GetEnemy(string type)
     {
-        Asteroid result;
+        Enemy result;
         result = GetAsteroid(GetListEnemies(type));
 
         return result;
     }
-
-    private HashSet<Asteroid> GetListEnemies(string type)
+    public void AddObjectPool(string type, Enemy enemy)
     {
-        return _enemyPool.ContainsKey(type) ? _enemyPool[type] : _enemyPool[type] = new HashSet<Asteroid>();
+        HashSet<Enemy> enemies = GetListEnemies(type);
+        ReturnToPool(enemy.transform);
+        enemies.Add(enemy);
     }
-    public void AddObjectPool(string type, Asteroid asteroid)
+    private HashSet<Enemy> GetListEnemies(string type)
     {
-        HashSet<Asteroid> enemies = GetListEnemies(type);
-        var instantiate = Object.Instantiate(asteroid);
-        ReturnToPool(instantiate.transform);
-        enemies.Add(instantiate);
+        return _enemyPool.ContainsKey(type) ? _enemyPool[type] : _enemyPool[type] = new HashSet<Enemy>();
     }
-    private Asteroid GetAsteroid(HashSet<Asteroid> enemies)
+    private Enemy GetAsteroid(HashSet<Enemy> enemies)
     {
-        //var enemy = enemies.FirstOrDefault(a => !a.gameObject.activeSelf);
-        //if (enemy == null)
-        //{
-        //    for (var i = 0; i < _capacityPool; i++)
-        //    {
-        //        var instantiate = Object.Instantiate(asteroid);
-        //        ReturnToPool(instantiate.transform);
-        //        enemies.Add(instantiate);
-        //    }
-        //
-        //    GetAsteroid(enemies);
-        //}
         var enemy = enemies.FirstOrDefault(a => !a.gameObject.activeSelf);
         return enemy;
     }

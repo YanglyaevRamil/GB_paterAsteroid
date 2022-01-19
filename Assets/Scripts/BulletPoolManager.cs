@@ -78,7 +78,6 @@ public class BulletPoolManager: MonoBehaviour
         if (player.Shooting)
         {
             GameObject bullet = BulletPoolManager.Instance.FindBullet();
-
         }
     }
 }

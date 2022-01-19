@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class ObjectTurnByPlayer : MonoBehaviour
 {
-    public GameObject ship;
+    public Transform targetTransform;
     void Update()
     {
-        transform.LookAt(ship.transform);
+        transform.LookAt(targetTransform);
     }
 }
