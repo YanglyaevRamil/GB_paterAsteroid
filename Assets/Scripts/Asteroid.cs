@@ -1,19 +1,10 @@
 using System.Collections;
 using UnityEngine;
-public class Asteroid : Enemy, IDamage
+public class Asteroid : Enemy
 {
     private const float MAX_DELETION = 300.0f;
     private const float DURATION_OF_DEATH = 3.0f;
 
-    public Transform TargetTransform { 
-        set { targetTransform = value; } 
-        get { return targetTransform;} 
-    }
-
-    [SerializeField] private Transform targetTransform;
-    [SerializeField] private float speed;
-    [SerializeField] private int damage;
-    [SerializeField] private int health;
     [SerializeField] private float radius;
 
     private MeshRenderer meshRenderer;
@@ -27,7 +18,6 @@ public class Asteroid : Enemy, IDamage
     private SpaceStoneDead spaceStoneDead;
     private SpaceStoneMoving spaceStoneMoving;
     private SpaceObjectRotation spaceObjectRotation;
-    public int Damage { get => damage; }
     private void OnEnable()
     {
         if (GetComponentInChildren<SpriteRenderer>() != null) { spriteRenderer = GetComponentInChildren<SpriteRenderer>(); }
@@ -54,13 +44,6 @@ public class Asteroid : Enemy, IDamage
         this.health = health;
         this.radius = radius;
     }
-    public void AsteroidBuilder(SpaceStoneMoving spaceStoneMoving, SpaceStoneDead spaceStoneDead, SpaceObjectRotation spaceObjectRotation)
-    {
-        this.spaceStoneMoving = spaceStoneMoving;
-        this.spaceStoneDead = spaceStoneDead;
-        this.spaceObjectRotation = spaceObjectRotation;
-        spaceStone = new SpaceStone(this.spaceStoneMoving, this.spaceStoneDead, this.spaceObjectRotation);
-    }
     private void OnTriggerEnter(Collider other)
     {
         IDamage damage;
@@ -86,7 +69,6 @@ public class Asteroid : Enemy, IDamage
         if (vec.magnitude > MAX_DELETION)
         {
             ReturnToPool();
-            //Destroy(gameObject);
         }
     }
 

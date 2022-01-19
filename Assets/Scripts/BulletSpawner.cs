@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class BulletSpawner : Spawner
+public class BulletSpawner : MonoBehaviour
 {
     private const float BULLET_SPEED = 2.0f;
-    private const int BULLET_DAMAGE = 1;
+    private const int BULLET_DAMAGE = 5;
     private const int BULLET_NUMBER = 20;
 
     public GameObject playerGameObject;
