@@ -84,43 +84,24 @@ public class Player : MonoBehaviour, IDamage
     }
     private void Update()
     {
-        //ray = new Ray(transform.position + new Vector3(0,0,OFSET_REY), transform.forward);
-        //Physics.Raycast(ray, out raycastHit);
-        //if (raycastHit.transform != null)
-        //{
-        //    if (raycastHit.transform.gameObject.CompareTag("Asteroid"))
-        //    {
-        //        shooting = spaceShip.Shooting();
-        //        if (!spaceShip.CheckEmptyAmmunition())
-        //        {
-        //            isReloadingAmmunition = false;
-        //        }
-        //        else
-        //        {
-        //            isReloadingAmmunition = true;
-        //            StartCoroutine(ReloadAmmunition());
-        //        }
-        //    }
-        //}
-        if (Input.GetKeyDown(KeyCode.Space))
+        ray = new Ray(transform.position + new Vector3(0,0,OFSET_REY), transform.forward);
+        Physics.Raycast(ray, out raycastHit);
+        if (raycastHit.transform != null)
         {
-            shooting = spaceShip.Shooting();
-            if (!spaceShip.CheckEmptyAmmunition())
+            if (raycastHit.transform.gameObject.CompareTag("Asteroid"))
             {
-                isReloadingAmmunition = false;
-            }
-            else
-            {
-                isReloadingAmmunition = true;
-                StartCoroutine(ReloadAmmunition());
+                shooting = spaceShip.Shooting();
+                if (!spaceShip.CheckEmptyAmmunition())
+                {
+                    isReloadingAmmunition = false;
+                }
+                else
+                {
+                    isReloadingAmmunition = true;
+                    StartCoroutine(ReloadAmmunition());
+                }
             }
         }
-        else
-        {
-            shooting = false;
-        }
-
-
         ammunition = spaceShip.CheckAmmunition();
         health = spaceShip.HealthCheck();
     }

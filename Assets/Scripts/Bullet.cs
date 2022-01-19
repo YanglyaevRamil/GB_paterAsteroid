@@ -2,25 +2,43 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour, IDamage
 {
-    private const float TIME_DEATH = 10f;
-    private const float SPEED_BULLET = 1.5f;
+    private const float MAX_DELETION = 300.0f;
 
-    public int Damage { get => usualBullet.Damage; }
+    public Transform PlayerTransform
+    {
+        set { playerTransform = value; }
+        get { return playerTransform; }
+    }
+
+    [SerializeField] private float speed;
+    [SerializeField] private int damage;
+    private Transform playerTransform;
+    public int Damage { get => damage; }
 
     private UsualBullet usualBullet;
     private void Start()
     {
-        usualBullet = new UsualBullet(transform, SPEED_BULLET);
-        //Destroy(gameObject, TIME_DEATH);
+        usualBullet = new UsualBullet(transform, speed);
+    }
+    public void BulletInitParametr(float speed, int damage)
+    {
+        this.speed = speed;
+        this.damage = damage;
     }
     private void FixedUpdate()
     {
         usualBullet.Motion();
     }
+    private void Update()
+    {
+        if ((playerTransform.position - transform.position).magnitude > MAX_DELETION)
+        {
+            ReturnToPool();
+        }
+    }
     public bool Death()
     {
-        //Destroy(gameObject);
-        this.gameObject.SetActive(false);
+        ReturnToPool();
         return true;
     }
 
@@ -28,9 +46,10 @@ public class Bullet : MonoBehaviour, IDamage
     {
         Death();
     }
-
-    private void OnEnable()
+    private void ReturnToPool()
     {
-        Invoke("Death", TIME_DEATH);
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
+        gameObject.SetActive(false);
     }
 }

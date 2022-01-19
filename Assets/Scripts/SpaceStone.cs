@@ -26,7 +26,7 @@ public class SpaceStone : SpaceObject
     }
     public override void Moving()
     {
-        spaceStoneMoving.Moving();
+        spaceStoneMoving.Moving(); 
     }
 
     public override void Rotation(Quaternion quaternion)
