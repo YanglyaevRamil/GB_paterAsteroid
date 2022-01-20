@@ -9,23 +9,22 @@ public class BulletSpawner : MonoBehaviour
     public GameObject playerGameObject;
     private Player player;
     private BulletFactory bulletFactory;
-    private BulletPool billetPool;
+    private BulletPool bulletPool;
     private Bullet bullet;
     private void Start()
     {
         player = playerGameObject.GetComponent<Player>();
 
         bulletFactory = new BulletFactory();
-        billetPool = new BulletPool(Resources.Load<Bullet>("Bullet_0"));
+        bulletPool = new BulletPool(Resources.Load<Bullet>("Bullet_0"));
 
         for (int i = 0; i < BULLET_NUMBER; i++)
         {
             bullet = bulletFactory.Create(BULLET_SPEED, BULLET_DAMAGE);
             bullet.PlayerTransform = playerGameObject.transform;
-            billetPool.AddObjectPool(bullet);
+            bulletPool.AddObjectPool(bullet);
         }
     }
-
     private void Update()
     {
         Shoot();
@@ -34,7 +33,7 @@ public class BulletSpawner : MonoBehaviour
     {
         if (player.Shooting)
         {
-            var bullet = billetPool.GetObject();
+            var bullet = bulletPool.GetObject();
             bullet.transform.position = transform.position;
             bullet.transform.rotation = transform.rotation;
             bullet.gameObject.SetActive(true);

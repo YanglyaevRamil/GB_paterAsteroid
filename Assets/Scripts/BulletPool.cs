@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
 
 internal sealed class BulletPool
 {
@@ -31,10 +29,5 @@ internal sealed class BulletPool
         transform.localRotation = Quaternion.identity;
         transform.gameObject.SetActive(false);
         transform.SetParent(_root);
-    }
-    private Bullet GetAsteroid(HashSet<Bullet> enemies)
-    {
-        var enemy = enemies.FirstOrDefault(a => !a.gameObject.activeSelf);
-        return enemy;
     }
 }
