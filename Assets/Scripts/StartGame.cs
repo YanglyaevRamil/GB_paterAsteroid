@@ -8,5 +8,6 @@ public class StartGame : MonoBehaviour
     private void Awake()
     {  
         spaceShipPrefab = Resources.Load<GameObject>("");
+        
     }
 }
