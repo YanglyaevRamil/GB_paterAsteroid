@@ -78,6 +78,7 @@ public class Asteroid : Enemy
         if (meshRenderer != null) { meshRenderer.enabled = false; }
         sphereCollider.enabled = false;
         partsSystem.Play();
+        SoundManager.Instance.PlaySound("Blow1");
     }
     private IEnumerator CountToDeath()
     {

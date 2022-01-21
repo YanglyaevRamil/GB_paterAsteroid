@@ -35,6 +35,7 @@ public class Player : MonoBehaviour, IDamage
     private RaycastHit raycastHit;
     Ray ray;
     private Quaternion rotatesRightY, rotatesLeftY;
+
     private void Awake()
     {
         speed = SPEED;
@@ -113,7 +114,11 @@ public class Player : MonoBehaviour, IDamage
             spaceShip.DamageTake(damage.Damage);
             if (spaceShip.DeathCheck())
             {
+
+                SoundManager.Instance.StopMusic();
+                SoundManager.Instance.PlaySound("PlayerDeath");
                 spaceShip.Death();
+                SoundManager.Instance.PlayMusic("UniverseMusic");
             }
         }
     }
