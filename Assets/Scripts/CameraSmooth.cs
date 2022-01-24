@@ -4,22 +4,15 @@ using UnityEngine;
 
 public class CameraSmooth : MonoBehaviour
 {
-	public Transform target;
-	private float smoothSpeed = 3f;               // how smooth the camera movement is
-    private Vector3 offset = new Vector3(0,2,-6);
-    private Vector3 smoothPosition;
+    [SerializeField] private GameObject _object; //An object camera will follow
+    [SerializeField] private Vector3 _distanceFromObject; // Camera's distance from the object
+
     private void LateUpdate()
     {
-        Debug.Log(transform.position);
-        smoothPosition = Vector3.Lerp(transform.position, target.position+ offset, smoothSpeed);
-        
+        Vector3 positionToGo = _object.transform.position + _distanceFromObject; //Target position of the camera
+        Vector3 smoothPosition = Vector3.Lerp(a: transform.position, b: positionToGo, t: 0.125F); //Smooth position of the camera
         transform.position = smoothPosition;
 
-        //transform.position = Vector3.SmoothDamp(transform.position, target.position, ref offset, smoothSpeed) + offset; //плавно перемещает камеру в точку координату персонажа
-        //transform.forward = Vector3.SmoothDamp(transform.forward, target.forward, ref offset, smoothSpeed); //плавно перемещает forward (поворачивает) cameraRig чтобы смотреть в то же место, куда и персонаж.
-
-        //можно еще иметь ссылку на саму камеру и сделать что-то типа
-        //cam.transform.LookAt(character.position); // смотрит на персонажа
-
+        transform.LookAt(_object.transform.position);
     }
 }
