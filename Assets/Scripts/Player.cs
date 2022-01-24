@@ -85,9 +85,9 @@ public class Player : MonoBehaviour, IDamage
     }
     private void Update()
     {
-        ray = new Ray(transform.position + new Vector3(0,0,OFSET_REY), transform.forward);
-        Physics.Raycast(ray, out raycastHit);
-        if (raycastHit.transform != null)
+        ray = new Ray(transform.position, transform.forward);
+        Debug.DrawRay(transform.position, transform.forward * 500, Color.red);
+        if (Physics.Raycast(ray, out raycastHit))
         {
             if (raycastHit.transform.gameObject.CompareTag("Asteroid"))
             {
@@ -102,6 +102,14 @@ public class Player : MonoBehaviour, IDamage
                     StartCoroutine(ReloadAmmunition());
                 }
             }
+            else
+            {
+                shooting = false;
+            }
+        }
+        else
+        {
+            shooting = false;
         }
         ammunition = spaceShip.CheckAmmunition();
         health = spaceShip.HealthCheck();
