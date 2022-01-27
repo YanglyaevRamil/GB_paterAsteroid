@@ -7,21 +7,20 @@ public class BulletSpawner : MonoBehaviour
     private const int BULLET_NUMBER = 20;
 
     public GameObject playerGameObject;
-    private Player player;
+    private SpaceShipBehaviour player;
     private BulletFactory bulletFactory;
     private BulletPool bulletPool;
-    private Bullet bullet;
+    private BulletBehaviour bullet;
     private void Start()
     {
-        player = playerGameObject.GetComponent<Player>();
+        player = playerGameObject.GetComponent<SpaceShipBehaviour>();
 
         bulletFactory = new BulletFactory();
-        bulletPool = new BulletPool(Resources.Load<Bullet>("Bullet_0"));
+        bulletPool = new BulletPool(Resources.Load<BulletBehaviour>("Bullet_0"));
 
         for (int i = 0; i < BULLET_NUMBER; i++)
         {
             bullet = bulletFactory.Create(BULLET_SPEED, BULLET_DAMAGE);
-            bullet.PlayerTransform = playerGameObject.transform;
             bulletPool.AddObjectPool(bullet);
         }
     }

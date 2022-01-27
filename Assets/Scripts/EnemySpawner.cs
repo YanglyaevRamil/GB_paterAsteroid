@@ -20,6 +20,7 @@ public class EnemySpawner : MonoBehaviour
     private const float MIN_ANGL_X_RESP_SHIP_ENEMY = 20.0f;
     private const int ARMOR_SHIP_ENEMY = 1;
     private const int NUMBER_SHIP_ENEMY_IN_PULL = 3;
+    private const int AMMUNITION_SHIP_ENEMY = 10;
 
     public GameObject shipGameObject;
 
@@ -34,6 +35,7 @@ public class EnemySpawner : MonoBehaviour
     private int damageShipEnemy;
     private int healthShipEnemy;
     private int armorShipEnemy;
+    private int ammunitionShipEnemy;
 
     private float startDelayAsteroid = START_DELAY_ASTEROID;
     private float spawnIntervalAsteroid = SPAWN_INTERVAL_ASTEROID;
@@ -42,8 +44,8 @@ public class EnemySpawner : MonoBehaviour
     private AsteroidFactory asteroidFactory;
     private EnemyPool enemyPool;
 
-    private Asteroid asteroid;
-    private SpaceShipEnemy spaceShipEnemy;
+    private AsteroidBehaviour asteroid;
+    private SpaceShipEnemyBehaviour spaceShipEnemy;
     void Start()
     {
         speedAsteroid = MIN_SPEED_ASTEROID;
@@ -55,6 +57,7 @@ public class EnemySpawner : MonoBehaviour
         damageShipEnemy = MIN_DAMAGE_SHIP_ENEMY;
         healthShipEnemy = MIN_HP_SHIP_ENEMY;
         armorShipEnemy = ARMOR_SHIP_ENEMY;
+        ammunitionShipEnemy = AMMUNITION_SHIP_ENEMY;
 
         asteroidFactory = new AsteroidFactory();
         spaceShipEnemyFactory = new SpaceShipEnemyFactory();
@@ -72,7 +75,7 @@ public class EnemySpawner : MonoBehaviour
         }
         for (int i = 0; i < NUMBER_SHIP_ENEMY_IN_PULL; i++)
         {
-            spaceShipEnemy = spaceShipEnemyFactory.Create(speedShipEnemy, damageShipEnemy, healthShipEnemy, armorShipEnemy, shipGameObject.transform);
+            spaceShipEnemy = spaceShipEnemyFactory.Create(speedShipEnemy, damageShipEnemy, healthShipEnemy, armorShipEnemy, ammunitionShipEnemy, shipGameObject.transform);
             enemyPool.AddObjectPool("SpaceShipEnemy", spaceShipEnemy);
         }
         InvokeRepeating("SpawnAsteroid", startDelayAsteroid, spawnIntervalAsteroid);
@@ -89,7 +92,7 @@ public class EnemySpawner : MonoBehaviour
     {
         float rndX = Random.Range(MIN_ANGL_X_RESP_SHIP_ENEMY, MAX_ANGL_X_RESP_SHIP_ENEMY);
         var enemy = enemyPool.GetEnemy("SpaceShipEnemy");
-        enemy.transform.position = transform.TransformPoint(rndX, 0, 0);
+        enemy.transform.position = transform.TransformPoint(rndX, 0, 200);
         enemy.gameObject.SetActive(true);
     }
 }

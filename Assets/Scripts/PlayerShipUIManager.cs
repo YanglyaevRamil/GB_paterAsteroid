@@ -14,12 +14,12 @@ public class PlayerShipUIManager : MonoBehaviour
     public Text HealthText;
     public Text AmmunitionText;
 
-    private Player player;
+    private SpaceShipBehaviour player;
     private ScoreManager scoreManager;
 
     private void Start()
     {
-        player = playerCameObject.GetComponent<Player>();
+        player = playerCameObject.GetComponent<SpaceShipBehaviour>();
 
         scoreManager = new ScoreManager();
     }
