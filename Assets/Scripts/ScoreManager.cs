@@ -1,4 +1,3 @@
-using UnityEngine;
 
 public class ScoreManager
 {
@@ -10,7 +9,7 @@ public class ScoreManager
     }
     private void OnAsteroidtDied(SpaceObject asteroid)
     {
-        if (asteroid is SpaceStone)
+        if (asteroid is Asteroid)
         {
             score += 1;
         }
