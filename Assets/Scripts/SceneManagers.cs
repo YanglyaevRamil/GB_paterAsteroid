@@ -10,14 +10,10 @@ public class SceneManagers : MonoBehaviour
     public void LoadNewGame()
     {
         SceneManager.LoadScene("Game");
-       
-        
     }
     public void LoadRetry()
     {
         SceneManager.LoadScene("Game");
-        
-
     }
     public void LoadMainMenu()
     {
