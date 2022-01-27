@@ -42,7 +42,8 @@ public class EnemySpawner : MonoBehaviour
 
     private SpaceShipEnemyFactory spaceShipEnemyFactory;
     private AsteroidFactory asteroidFactory;
-    private EnemyPool enemyPool;
+    private SceneObjectPool<AsteroidBehaviour> asteroidPool;
+    private SceneObjectPool<SpaceShipEnemyBehaviour> spaceShipEnemyPool;
 
     private AsteroidBehaviour asteroid;
     private SpaceShipEnemyBehaviour spaceShipEnemy;
@@ -61,7 +62,8 @@ public class EnemySpawner : MonoBehaviour
 
         asteroidFactory = new AsteroidFactory();
         spaceShipEnemyFactory = new SpaceShipEnemyFactory();
-        enemyPool = new EnemyPool();
+        asteroidPool = new SceneObjectPool<AsteroidBehaviour>(NameManager.POOL_CONTENT_ASTEROID);
+        spaceShipEnemyPool = new SceneObjectPool<SpaceShipEnemyBehaviour>(NameManager.POOL_CONTENT_SHIP_ENEMY);
         for (int i = 0; i < NUMBER_ASTEROID_IN_PULL; i++)
         {
             scaleFactorAsteroid = Random.Range(1, NUMBER_DIFF_ASTEROID);
@@ -71,12 +73,12 @@ public class EnemySpawner : MonoBehaviour
                 healthAsteroid * scaleFactorAsteroid, 
                 radiusAsteroid * scaleFactorAsteroid, 
                 shipGameObject.transform);
-            enemyPool.AddObjectPool("Asteroid", asteroid);
+            asteroidPool.AddObjectPool(asteroid);
         }
         for (int i = 0; i < NUMBER_SHIP_ENEMY_IN_PULL; i++)
         {
             spaceShipEnemy = spaceShipEnemyFactory.Create(speedShipEnemy, damageShipEnemy, healthShipEnemy, armorShipEnemy, ammunitionShipEnemy, shipGameObject.transform);
-            enemyPool.AddObjectPool("SpaceShipEnemy", spaceShipEnemy);
+            spaceShipEnemyPool.AddObjectPool(spaceShipEnemy);
         }
         InvokeRepeating("SpawnAsteroid", startDelayAsteroid, spawnIntervalAsteroid);
         SpawnSpaceShipEnemy();
@@ -84,14 +86,14 @@ public class EnemySpawner : MonoBehaviour
     protected void SpawnAsteroid()
     {
         float rndX = Random.Range(MIN_ANGL_X_RESP_ASTEROID, MAX_ANGL_X_RESP_ASTEROID);
-        var enemy = enemyPool.GetEnemy("Asteroid");
+        var enemy = asteroidPool.GetObject();
         enemy.transform.position = transform.TransformPoint(rndX, 0, 0);
         enemy.gameObject.SetActive(true);
     }
     protected void SpawnSpaceShipEnemy()
     {
         float rndX = Random.Range(MIN_ANGL_X_RESP_SHIP_ENEMY, MAX_ANGL_X_RESP_SHIP_ENEMY);
-        var enemy = enemyPool.GetEnemy("SpaceShipEnemy");
+        var enemy = spaceShipEnemyPool.GetObject();
         enemy.transform.position = transform.TransformPoint(rndX, 0, 200);
         enemy.gameObject.SetActive(true);
     }
