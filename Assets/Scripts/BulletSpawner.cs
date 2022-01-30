@@ -9,14 +9,14 @@ public class BulletSpawner : MonoBehaviour
     public GameObject playerGameObject;
     private SpaceShipBehaviour player;
     private BulletFactory bulletFactory;
-    private BulletPool bulletPool;
+    private SceneObjectPool<BulletBehaviour> bulletPool;
     private BulletBehaviour bullet;
     private void Start()
     {
         player = playerGameObject.GetComponent<SpaceShipBehaviour>();
 
         bulletFactory = new BulletFactory();
-        bulletPool = new BulletPool(Resources.Load<BulletBehaviour>("Bullet_0"));
+        bulletPool = new SceneObjectPool<BulletBehaviour>(NameManager.POOL_CONTENT_BULLET);
 
         for (int i = 0; i < BULLET_NUMBER; i++)
         {
