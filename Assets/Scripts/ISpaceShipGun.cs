@@ -1,6 +1,5 @@
-public interface IGun
+public interface ISpaceShipGun
 {
-    bool EmptyAmmunition { get; }
     int Ammunition { get; set; }
     public bool Shot();
 }

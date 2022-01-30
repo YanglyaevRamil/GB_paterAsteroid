@@ -21,6 +21,7 @@ public class EnemySpawner : MonoBehaviour
     private const int ARMOR_SHIP_ENEMY = 1;
     private const int NUMBER_SHIP_ENEMY_IN_PULL = 3;
     private const int AMMUNITION_SHIP_ENEMY = 10;
+    private const int PRICE_POINT_SHIP_ENEMY = 10;
 
     public GameObject shipGameObject;
 
@@ -59,6 +60,7 @@ public class EnemySpawner : MonoBehaviour
         healthShipEnemy = MIN_HP_SHIP_ENEMY;
         armorShipEnemy = ARMOR_SHIP_ENEMY;
         ammunitionShipEnemy = AMMUNITION_SHIP_ENEMY;
+        scaleFactorShipEnemy = PRICE_POINT_SHIP_ENEMY;
 
         asteroidFactory = new AsteroidFactory();
         spaceShipEnemyFactory = new SpaceShipEnemyFactory();
@@ -71,13 +73,21 @@ public class EnemySpawner : MonoBehaviour
                 speedAsteroid * scaleFactorAsteroid, 
                 damageAsteroid * scaleFactorAsteroid,
                 healthAsteroid * scaleFactorAsteroid, 
-                radiusAsteroid * scaleFactorAsteroid, 
+                radiusAsteroid * scaleFactorAsteroid,
+                scaleFactorAsteroid,
                 shipGameObject.transform);
             asteroidPool.AddObjectPool(asteroid);
         }
         for (int i = 0; i < NUMBER_SHIP_ENEMY_IN_PULL; i++)
         {
-            spaceShipEnemy = spaceShipEnemyFactory.Create(speedShipEnemy, damageShipEnemy, healthShipEnemy, armorShipEnemy, ammunitionShipEnemy, shipGameObject.transform);
+            spaceShipEnemy = spaceShipEnemyFactory.Create(
+                speedShipEnemy, 
+                damageShipEnemy, 
+                healthShipEnemy, 
+                armorShipEnemy, 
+                ammunitionShipEnemy,
+                scaleFactorShipEnemy,
+                shipGameObject.transform);
             spaceShipEnemyPool.AddObjectPool(spaceShipEnemy);
         }
         InvokeRepeating("SpawnAsteroid", startDelayAsteroid, spawnIntervalAsteroid);

@@ -1,19 +1,19 @@
 public class SpaceObjectDead : IDead
 {
-    public int health { get; set; }
+    public int Health { get; set; }
     public SpaceObjectDead(int health)
     {
-        this.health = health;
+        this.Health = health;
     }
     public void DamageTake(int damageTaken)
     {
-        health -= damageTaken;
+        Health -= damageTaken;
     }
     public bool DeathCheck()
     {
-        if (health <= 0)
+        if (Health <= 0)
         {
-            health = 0;
+            Health = 0;
             return true;
         }
         else

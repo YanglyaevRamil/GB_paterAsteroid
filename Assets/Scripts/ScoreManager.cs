@@ -1,17 +1,16 @@
-
+using UnityEngine;
 public class ScoreManager
 {
     public int score;
     public ScoreManager()
     {
         score = 0;
-        EventAggregator.SpaceObjectDied.Subscribe(OnAsteroidtDied);
+        AsteroidBehaviour.onAsteroidDead += OnAsteroidtDied;
+        SpaceShipEnemyBehaviour.onShipEnemyDead += OnAsteroidtDied;
     }
-    private void OnAsteroidtDied(SpaceObject asteroid)
+
+    private void OnAsteroidtDied(IPricePoints obj)
     {
-        if (asteroid is Asteroid)
-        {
-            score += 1;
-        }
+        score += obj.PricePoints;
     }
 }

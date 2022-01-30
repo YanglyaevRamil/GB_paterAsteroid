@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IDead
 {
-    public int health { get; set; }
+    public int Health { get; set; }
     void DamageTake(int damageTaken);
     public bool DeathCheck();
 }
