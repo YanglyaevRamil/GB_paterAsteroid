@@ -7,14 +7,11 @@ public class SpaceObject
     protected IDead spaceObjectDead;
     protected IRotation spaceObjectRotation;
 
-    public delegate void OnObjectDead(SpaceObject gameObject);
-    public static event OnObjectDead onObjectDead;
-
-    protected SpaceObject(int helth, Transform transform, Vector3 direction)
+    protected SpaceObject(int helth, Transform transform, float speed, Quaternion rotation, Vector3 direction)
     {
-        spaceObjectMoving = new SpaceObjectMoving(transform, direction);
+        spaceObjectMoving = new SpaceObjectMoving(transform, direction, speed);
         spaceObjectDead = new SpaceObjectDead(helth);
-        spaceObjectRotation = new SpaceObjectRotation(transform);
+        spaceObjectRotation = new SpaceObjectRotation(transform, rotation);
     }
 
     public void DamageTake(int damageTaken)
@@ -25,7 +22,6 @@ public class SpaceObject
     public bool Death()
     {
         spaceObjectDead.Health = 0;
-        //onObjectDead?.Invoke(this);
         return true;
     }
 
@@ -34,13 +30,13 @@ public class SpaceObject
         return spaceObjectDead.DeathCheck();
     }
 
-    public void Moving(float speed)
+    public void Moving()
     {
-        spaceObjectMoving.Moving(speed);
+        spaceObjectMoving.Moving();
     }
 
-    public void Rotation(Quaternion quaternion)
+    public void Rotation()
     {
-        spaceObjectRotation.Rotation(quaternion);
+        spaceObjectRotation.Rotation();
     }
 }

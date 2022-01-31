@@ -3,9 +3,11 @@ using UnityEngine;
 public interface ISpaceShip 
 {
     public int Health { get; }
+    int Damage { get; }
     public void DamageTake(int damageTaken);
     public bool Death();
     public bool DeathCheck();
-    public void Moving(float speed);
-    public void Rotation(Quaternion quaternion);
+    public void Moving();
+    public void RotationLeft();
+    public void RotationRight();
 }

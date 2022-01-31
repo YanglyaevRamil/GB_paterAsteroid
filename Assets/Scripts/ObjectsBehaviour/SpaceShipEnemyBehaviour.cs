@@ -9,7 +9,7 @@ public class SpaceShipEnemyBehaviour : MonoBehaviour, IDamage, IPricePoints
     [SerializeField] private int armor;
     [SerializeField] private int ammunition;
     [SerializeField] private int pricePoints;
-
+    [SerializeField] private float gunRecoilTime;
     public int Damage { get => damage; }
     public Transform TargetTransform
     {
@@ -26,7 +26,7 @@ public class SpaceShipEnemyBehaviour : MonoBehaviour, IDamage, IPricePoints
     {
         if (targetTransform != null)
         {
-            shipEnemy = new ShipEnemy(health, transform, GetNormVector(transform.position, targetTransform.position), ammunition);
+            shipEnemy = new ShipEnemy(health, transform, speed, GetNormVector(transform.position, targetTransform.position), ammunition, gunRecoilTime);
         }
     }
 
@@ -42,7 +42,7 @@ public class SpaceShipEnemyBehaviour : MonoBehaviour, IDamage, IPricePoints
 
     private void FixedUpdate()
     {
-        shipEnemy.Moving(speed);
+        shipEnemy.Moving();
         if (targetTransform != null)
             transform.LookAt(targetTransform.position);
     }

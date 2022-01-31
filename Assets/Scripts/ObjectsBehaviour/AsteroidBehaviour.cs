@@ -38,7 +38,7 @@ public class AsteroidBehaviour : MonoBehaviour, IDamage, IPricePoints
         rotateAsteroid = Quaternion.AngleAxis(1, new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), Random.Range(-1, 2)));
         if (targetTransform != null)
         {
-            asteroid = new Asteroid(health, transform, GetNormVector(transform.position, targetTransform.position));
+            asteroid = new Asteroid(health, transform, speed, rotateAsteroid, GetNormVector(transform.position, targetTransform.position));
         }
     }
 
@@ -68,8 +68,8 @@ public class AsteroidBehaviour : MonoBehaviour, IDamage, IPricePoints
 
     private void FixedUpdate()
     {
-        asteroid.Moving(speed);
-        asteroid.Rotation(rotateAsteroid);
+        asteroid.Moving();
+        asteroid.Rotation();
     }
 
     private void Update()

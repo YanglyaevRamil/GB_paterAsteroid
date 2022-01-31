@@ -14,12 +14,12 @@ public class PlayerShipUIManager : MonoBehaviour
     public Text HealthText;
     public Text AmmunitionText;
 
-    private SpaceShipBehaviour player;
+    private PlayerView player;
     private ScoreManager scoreManager;
 
     private void Start()
     {
-        player = playerCameObject.GetComponent<SpaceShipBehaviour>();
+        //player = playerCameObject.GetComponent<PlayerView>();
 
         scoreManager = new ScoreManager();
     }
@@ -30,38 +30,37 @@ public class PlayerShipUIManager : MonoBehaviour
     }
     private void Update()
     {
-        HealthText.text = "Health: " + player.Health.ToString();
-        ScoreText.text = "Score: " + scoreManager.score.ToString();
-        if (!player.IsReloading)
-        {
-            AmmunitionText.text = "Ammunition: " + player.Ammunition.ToString();
-        }
-        else
-        {
-            AmmunitionText.text = "Recharge...";
-        }
-
+        //HealthText.text = "Health: " + player.Health.ToString();
+        //ScoreText.text = "Score: " + scoreManager.score.ToString();
+        //if (!player.IsReloading)
+        //{
+        //    AmmunitionText.text = "Ammunition: " + player.Ammunition.ToString();
+        //}
+        //else
+        //{
+        //    AmmunitionText.text = "Recharge...";
+        //}
     }
     private void HealthColorManagement()
     {
-        if (player.Health > COLOR_HEALTH_HIGH)
-        {
-            HealthText.material.color = Color.green;
-        }
-
-        if (player.Health <= COLOR_HEALTH_HIGH)
-        {
-            HealthText.material.color = Color.cyan;
-        }
-
-        if (player.Health <= COLOR_HEALTH_MEDIUM)
-        {
-            HealthText.material.color = Color.yellow;
-        }
-
-        if (player.Health <= COLOR_HEALTH_LOW)
-        {
-            HealthText.material.color = Color.red;
-        }
+        //if (player.Health > COLOR_HEALTH_HIGH)
+        //{
+        //    HealthText.material.color = Color.green;
+        //}
+        //
+        //if (player.Health <= COLOR_HEALTH_HIGH)
+        //{
+        //    HealthText.material.color = Color.cyan;
+        //}
+        //
+        //if (player.Health <= COLOR_HEALTH_MEDIUM)
+        //{
+        //    HealthText.material.color = Color.yellow;
+        //}
+        //
+        //if (player.Health <= COLOR_HEALTH_LOW)
+        //{
+        //    HealthText.material.color = Color.red;
+        //}
     }
 }

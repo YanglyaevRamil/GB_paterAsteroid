@@ -6,15 +6,11 @@ public class BulletSpawner : MonoBehaviour
     private const int BULLET_DAMAGE = 5;
     private const int BULLET_NUMBER = 20;
 
-    public GameObject playerGameObject;
-    private SpaceShipBehaviour player;
     private BulletFactory bulletFactory;
     private SceneObjectPool<BulletBehaviour> bulletPool;
     private BulletBehaviour bullet;
     private void Start()
     {
-        player = playerGameObject.GetComponent<SpaceShipBehaviour>();
-
         bulletFactory = new BulletFactory();
         bulletPool = new SceneObjectPool<BulletBehaviour>(NameManager.POOL_CONTENT_BULLET);
 
@@ -24,18 +20,11 @@ public class BulletSpawner : MonoBehaviour
             bulletPool.AddObjectPool(bullet);
         }
     }
-    private void Update()
+    public void Shoot()
     {
-        Shoot();
-    }
-    private void Shoot()
-    {
-        if (player.Shooting)
-        {
-            var bullet = bulletPool.GetObject();
-            bullet.transform.position = transform.position;
-            bullet.transform.rotation = transform.rotation;
-            bullet.gameObject.SetActive(true);
-        }
+        var bullet = bulletPool.GetObject();
+        bullet.transform.position = transform.position;
+        bullet.transform.rotation = transform.rotation;
+        bullet.gameObject.SetActive(true);
     }
 }

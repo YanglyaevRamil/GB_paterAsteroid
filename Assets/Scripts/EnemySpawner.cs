@@ -7,7 +7,7 @@ public class EnemySpawner : MonoBehaviour
     private const float MAX_ANGL_X_RESP_ASTEROID = -20.0f;
     private const float MIN_ANGL_X_RESP_ASTEROID = 20.0f;
     private const float MIN_SPEED_ASTEROID = 0.2f;
-    private const int MIN_DAMAGE_ASTEROID = 5;
+    private const int MIN_DAMAGE_ASTEROID = 0;
     private const int MIN_HP_ASTEROID = 5;
     private const float MIN_RADIUS_ASTEROID = 0.5f;
     private const int NUMBER_DIFF_ASTEROID = 3;

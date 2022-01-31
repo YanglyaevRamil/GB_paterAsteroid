@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IMoving
 {
-    void Moving(float speed);
+    void Moving();
 }

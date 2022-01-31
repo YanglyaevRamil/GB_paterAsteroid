@@ -2,23 +2,46 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerView : MonoBehaviour
+public class PlayerView : MonoBehaviour, IDamage
 {
     public event Action<IDamage> OnDamageTaken;
     public event Action OnKeyDownButtonShooting;
+    public event Action OnKeyButtonRotationLeft;
+    public event Action OnKeyButtonRotationRight;
+    public event Action OnKeyButtonMoving;
+    public event Action OnGetDamage;
     private InputSystem inputSystem;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+
+    private int damage;
+    public int Damage 
+    { 
+        get 
+        {
+            OnGetDamage?.Invoke();
+            return damage;
+        } 
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             OnKeyDownButtonShooting?.Invoke();
+        }
+    }
+    private void FixedUpdate()
+    {
+        if (Input.GetKey(KeyCode.A))
+        {
+            OnKeyButtonRotationLeft?.Invoke();
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            OnKeyButtonRotationRight?.Invoke();
+        }
+        if (Input.GetKey(KeyCode.W))
+        {
+            OnKeyButtonMoving?.Invoke();
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -32,5 +55,10 @@ public class PlayerView : MonoBehaviour
     public void Dead()
     {
         SceneManager.LoadScene("DeathScreen");
+    }
+
+    public void GetDamage(int damage)
+    {
+        this.damage = damage;
     }
 }

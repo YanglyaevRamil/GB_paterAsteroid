@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerModel
 {
-    private const float TIMER_TICK = 100.0f; // 0.1 sec
     private const float MILLSEC_MUL = 1000.0f;
     private const int START_AMMUNITION_PLAYER = 20;
 
@@ -14,18 +13,18 @@ public class PlayerModel
     public int Health { get { return spaceShip.Health; } }
     public int Ammunition { get { return spaceShipGun.Ammunition; } }
     public bool IsReloading { get => isReloadingGun; }
+    public int Damage { get { return spaceShip.Damage; } }
 
     private ISpaceShip spaceShip;
     private ISpaceShipGun spaceShipGun;
 
-    private float gunReloadingTime;
     private bool isReloadingGun;
-    public PlayerModel(int health, Transform transform, int ammunition, float gunRecoilTime, float gunReloadingTime)
+    public PlayerModel(ISpaceShip spaceShip, ISpaceShipGun spaceShipGun)
     {
         isReloadingGun = false;
-        this.gunReloadingTime = gunReloadingTime;
-        spaceShip = new SpaceShip(health, transform);
-        spaceShipGun = new SpaceShipGun(ammunition, gunRecoilTime);
+
+        this.spaceShip = spaceShip;
+        this.spaceShipGun = spaceShipGun;
     }
 
     public void SetSpaceShip(ISpaceShip spaceShip)
@@ -41,7 +40,7 @@ public class PlayerModel
     public void DamageTake(int damag)
     {
         spaceShip.DamageTake(damag);
-        if (Health <= 0)
+        if (spaceShip.DeathCheck())
         {
             OnDead?.Invoke();
         }
@@ -56,11 +55,26 @@ public class PlayerModel
         else
         {
             Timer aTimer = new Timer();
-            aTimer.Interval = gunReloadingTime * MILLSEC_MUL;
+            aTimer.Interval = spaceShipGun.GunReloadingTime * MILLSEC_MUL;
             aTimer.Elapsed += ReloadGunAmmunition;
             aTimer.AutoReset = false;
             aTimer.Enabled = true;
         }
+    }
+
+    public void RotationLeft()
+    {
+        spaceShip.RotationLeft();
+    }
+
+    public void RotationRight()
+    {
+        spaceShip.RotationRight();
+    }
+
+    public void Moving()
+    {
+        spaceShip.Moving();
     }
 
     private void ReloadGunAmmunition(object sender, ElapsedEventArgs e)

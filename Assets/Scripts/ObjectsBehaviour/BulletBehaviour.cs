@@ -16,7 +16,7 @@ public class BulletBehaviour : MonoBehaviour, IDamage
     }
     private void Start()
     {
-        movingBullet = new MovingBullet(transform);
+        movingBullet = new MovingBullet(transform, speed);
     }
     public void BulletInitParametr(float speed, int damage)
     {
@@ -25,7 +25,7 @@ public class BulletBehaviour : MonoBehaviour, IDamage
     }
     private void FixedUpdate()
     {
-        movingBullet.Moving(speed);
+        movingBullet.Moving();
     }
     private void Update()
     {
@@ -41,7 +41,7 @@ public class BulletBehaviour : MonoBehaviour, IDamage
     }
     private void OnTriggerEnter(Collider other)
     {
-        Death();
+       Death();
     }
     private void ReturnToPool()
     {

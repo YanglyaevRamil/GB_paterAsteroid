@@ -3,12 +3,14 @@ using UnityEngine;
 public class SpaceObjectRotation : IRotation
 {
     protected Transform transformSpaceObject;
-    public SpaceObjectRotation(Transform transform)
+    protected Quaternion rotation;
+    public SpaceObjectRotation(Transform transform, Quaternion rotation)
     {
         transformSpaceObject = transform;
+        this.rotation = rotation;
     }
-    public void Rotation(Quaternion rotate)
+    public void Rotation()
     {
-        transformSpaceObject.rotation *= rotate;
+        transformSpaceObject.rotation *= rotation;
     }
 }
