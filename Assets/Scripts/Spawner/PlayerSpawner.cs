@@ -45,12 +45,9 @@ public class PlayerSpawner : MonoBehaviour
 
         GameObject StarShipWeaponRight = playerObject.transform.Find("StarShipModel/StarShipWeaponRight/BulletSpawnerRight").gameObject;
         GameObject StarShipWeaponLeft = playerObject.transform.Find("StarShipModel/StarShipWeaponLeft/BulletSpawnerLeft").gameObject;
-
         BulletSpawner bulletSpawnerRight = StarShipWeaponRight.AddComponent<BulletSpawner>();
         BulletSpawner bulletSpawnerLeft = StarShipWeaponLeft.AddComponent<BulletSpawner>();
-
         playerView = playerObject.GetComponent<PlayerView>();
-
         playerModel = new PlayerModel(
             new SpaceShip(health, playerObject.transform, speed, rotatesLeftY, rotatesRightY, spaceShipDamag), 
             new SpaceShipGun(ammunition, gunRecoilTime, gunReloadingTime));

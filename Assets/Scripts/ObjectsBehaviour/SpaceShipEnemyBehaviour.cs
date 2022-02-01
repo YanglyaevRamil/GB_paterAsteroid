@@ -26,7 +26,7 @@ public class SpaceShipEnemyBehaviour : MonoBehaviour, IDamage, IPricePoints
     {
         if (targetTransform != null)
         {
-            shipEnemy = new ShipEnemy(health, transform, speed, GetNormVector(transform.position, targetTransform.position), ammunition, gunRecoilTime);
+            shipEnemy = new ShipEnemy(health, transform, speed, targetTransform, ammunition, gunRecoilTime);
         }
     }
 

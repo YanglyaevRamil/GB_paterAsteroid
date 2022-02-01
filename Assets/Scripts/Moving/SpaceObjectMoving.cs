@@ -5,16 +5,21 @@ public class SpaceObjectMoving : IMoving
     public float Speed { get { return speed; } }
 
     private Transform transformSpaceObject;
-    private Vector3 normVectorTarget;
     private float speed;
-    public SpaceObjectMoving(Transform transformSpaceObject, Vector3 normVectorTarget, float speed)
+    private Vector3 normVectorTarget;
+    public SpaceObjectMoving(Transform transformSpaceObject, Transform target, float speed)
     {
         this.transformSpaceObject = transformSpaceObject;
-        this.normVectorTarget = normVectorTarget;
         this.speed = speed;
+
+        GetNormVector(target.position, transformSpaceObject.position);
     }
     public void Moving()
     {
         transformSpaceObject.position += normVectorTarget * speed;
+    }
+    private Vector3 GetNormVector(Vector3 a, Vector3 b)
+    {
+        return (b - a) / (b - a).magnitude;
     }
 }

@@ -8,7 +8,15 @@ public class AsteroidModel
     public event Action OnDead;
 
     private IAsteroid asteroid;
-    public AsteroidModel(IAsteroid asteroid)
+    private MeshRenderer meshRenderer;
+    private SphereCollider sphereCollider;
+
+    public AsteroidModel(IAsteroid asteroid, MeshRenderer meshRenderer, SphereCollider sphereCollider)
+    {
+        this.asteroid = asteroid;
+    }
+
+    public void SetAsteroid(IAsteroid asteroid)
     {
         this.asteroid = asteroid;
     }
@@ -18,6 +26,8 @@ public class AsteroidModel
         asteroid.DamageTake(damageTaken);
         if (asteroid.DeathCheck())
         {
+            meshRenderer.enabled = false;
+            sphereCollider.enabled = false;
             OnDead?.Invoke();
         }
     }

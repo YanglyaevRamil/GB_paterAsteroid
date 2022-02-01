@@ -14,8 +14,20 @@ public class AsteroidPresenter
         this.asteroidView = asteroidView;
 
         asteroidView.OnDamageTaken += DamageTaken;
+        asteroidView.OnMoving += Moving;
+        asteroidView.OnRotation += Rotation;
 
-        asteroidModel.OnDead += AsteroidDead;
+        asteroidModel.OnDead += Dead;
+    }
+
+    private void Rotation()
+    {
+        asteroidModel.Rotation();
+    }
+
+    private void Moving()
+    {
+        asteroidModel.Moving();
     }
 
     private void DamageTaken(IDamage damage)
@@ -23,8 +35,8 @@ public class AsteroidPresenter
         asteroidModel.DamageTake(damage.Damage);
     }
 
-    private void AsteroidDead()
+    private void Dead()
     {
-        
+        asteroidView.Dead();
     }
 }

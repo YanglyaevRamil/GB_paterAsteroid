@@ -6,6 +6,18 @@ using UnityEngine;
 public class AsteroidView : MonoBehaviour
 {
     public event Action<IDamage> OnDamageTaken;
+    public event Action OnMoving;
+    public event Action OnRotation;
+
+    private void OnEnable()
+    {
+    }
+    
+    private void FixedUpdate()
+    {
+        OnMoving?.Invoke();
+        OnRotation?.Invoke();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -14,5 +26,15 @@ public class AsteroidView : MonoBehaviour
         {
             OnDamageTaken?.Invoke(damage);
         }
+    }
+
+    public void Dead()
+    {
+        DestructionAsteroid();
+    }
+
+    private void DestructionAsteroid()
+    {
+
     }
 }

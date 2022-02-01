@@ -7,9 +7,9 @@ public class SpaceObject
     protected IDead spaceObjectDead;
     protected IRotation spaceObjectRotation;
 
-    protected SpaceObject(int helth, Transform transform, float speed, Quaternion rotation, Vector3 direction)
+    public SpaceObject(int helth, Transform transform, float speed, Quaternion rotation, Transform target)
     {
-        spaceObjectMoving = new SpaceObjectMoving(transform, direction, speed);
+        spaceObjectMoving = new SpaceObjectMoving(transform, target, speed);
         spaceObjectDead = new SpaceObjectDead(helth);
         spaceObjectRotation = new SpaceObjectRotation(transform, rotation);
     }
