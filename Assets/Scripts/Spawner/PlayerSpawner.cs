@@ -21,11 +21,16 @@ public class PlayerSpawner : MonoBehaviour
 
     private Quaternion rotatesRightY, rotatesLeftY;
 
-    public GameObject playerPrefab;
+    public GameObject playerObject;
 
     private PlayerPresenter playerPresenter;
     private PlayerModel playerModel;
     private PlayerView playerView;
+
+    private void Awake()
+    {
+        
+    }
 
     public void Start()
     {
@@ -40,8 +45,6 @@ public class PlayerSpawner : MonoBehaviour
         rotatesRightY = Quaternion.AngleAxis(rotatesSpeedRightY, Vector3.up);
         rotatesSpeedLeftY = -ROTATESPEED_PLAYER;
         rotatesLeftY = Quaternion.AngleAxis(rotatesSpeedLeftY, Vector3.up);
-
-        var playerObject = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
 
         GameObject StarShipWeaponRight = playerObject.transform.Find("StarShipModel/StarShipWeaponRight/BulletSpawnerRight").gameObject;
         GameObject StarShipWeaponLeft = playerObject.transform.Find("StarShipModel/StarShipWeaponLeft/BulletSpawnerLeft").gameObject;

@@ -21,7 +21,7 @@ public class SpaceObject
 
     public bool Death()
     {
-        spaceObjectDead.Health = 0;
+        //spaceObjectDead.Health = 0;
         return true;
     }
 

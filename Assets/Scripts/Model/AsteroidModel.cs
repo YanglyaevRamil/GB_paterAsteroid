@@ -1,19 +1,28 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AsteroidModel
 {
     public event Action OnDead;
 
+    private AsteroidData asteroidData;
+
     private IAsteroid asteroid;
     private MeshRenderer meshRenderer;
     private SphereCollider sphereCollider;
 
-    public AsteroidModel(IAsteroid asteroid, MeshRenderer meshRenderer, SphereCollider sphereCollider)
+    public AsteroidModel(AsteroidData asteroidData)
     {
-        this.asteroid = asteroid;
+        this.asteroidData = asteroidData;
+
+        meshRenderer = asteroidData.AsteroidGameObject?.GetComponent<MeshRenderer>();
+        sphereCollider = asteroidData.AsteroidGameObject?.GetComponent<SphereCollider>();
+        asteroid = new Asteroid(
+            asteroidData.Health,
+            asteroidData.AsteroidGameObject.gameObject.transform,
+            asteroidData.Speed,
+            asteroidData.RotationSpeed,
+            asteroidData.AsteroidTarget);
     }
 
     public void SetAsteroid(IAsteroid asteroid)
@@ -40,5 +49,11 @@ public class AsteroidModel
     public void Rotation()
     {
         asteroid.Rotation();
+    }
+    protected void ReturnToPool()
+    {
+        asteroidData.AsteroidGameObject.transform.localPosition = Vector3.zero;
+        asteroidData.AsteroidGameObject.transform.localRotation = Quaternion.identity;
+        asteroidData.AsteroidGameObject.SetActive(false);
     }
 }

@@ -12,14 +12,19 @@ public class SpaceObjectMoving : IMoving
         this.transformSpaceObject = transformSpaceObject;
         this.speed = speed;
 
-        GetNormVector(target.position, transformSpaceObject.position);
+        Vector3 targetPosition;
+        if (target == null)
+        {
+            targetPosition = new Vector3(0, 0, 0);
+        }
+        else
+        {
+            targetPosition = target.position;
+        }
+        normVectorTarget = (targetPosition - transformSpaceObject.position)/(targetPosition - transformSpaceObject.position).magnitude;
     }
     public void Moving()
     {
         transformSpaceObject.position += normVectorTarget * speed;
-    }
-    private Vector3 GetNormVector(Vector3 a, Vector3 b)
-    {
-        return (b - a) / (b - a).magnitude;
     }
 }
