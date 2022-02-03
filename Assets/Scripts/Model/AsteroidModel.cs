@@ -3,20 +3,21 @@ using UnityEngine;
 
 public class AsteroidModel
 {
-    public event Action OnDead;
+    public event Action<AsteroidData> OnDead;
+
+    public int Damage { get { return asteroidData.Damage; } }
 
     private AsteroidData asteroidData;
-
-    private IAsteroid asteroid;
+    private Asteroid asteroid;
     private MeshRenderer meshRenderer;
-    private SphereCollider sphereCollider;
+    private Collider collider;
 
     public AsteroidModel(AsteroidData asteroidData)
     {
         this.asteroidData = asteroidData;
 
-        meshRenderer = asteroidData.AsteroidGameObject?.GetComponent<MeshRenderer>();
-        sphereCollider = asteroidData.AsteroidGameObject?.GetComponent<SphereCollider>();
+        meshRenderer = asteroidData.AsteroidGameObject?.GetComponentInChildren<MeshRenderer>();
+        collider = asteroidData.AsteroidGameObject?.GetComponent<Collider>();
         asteroid = new Asteroid(
             asteroidData.Health,
             asteroidData.AsteroidGameObject.gameObject.transform,
@@ -25,9 +26,29 @@ public class AsteroidModel
             asteroidData.AsteroidTarget);
     }
 
-    public void SetAsteroid(IAsteroid asteroid)
+    public void SetAsteroid(Asteroid asteroid)
     {
         this.asteroid = asteroid;
+        meshRenderer.enabled = true;
+        collider.enabled = true;
+    }
+
+    public void SetAsteroid()
+    {
+        asteroid = new Asteroid(
+            asteroidData.Health,
+            asteroidData.AsteroidGameObject.gameObject.transform,
+            asteroidData.Speed,
+            asteroidData.RotationSpeed,
+            asteroidData.AsteroidTarget);
+
+        meshRenderer.enabled = true;
+        collider.enabled = true;
+    }
+
+    public void SetAsteroidData(AsteroidData asteroidData)
+    {
+        this.asteroidData = asteroidData;
     }
 
     public void DamageTake(int damageTaken)
@@ -36,9 +57,14 @@ public class AsteroidModel
         if (asteroid.DeathCheck())
         {
             meshRenderer.enabled = false;
-            sphereCollider.enabled = false;
-            OnDead?.Invoke();
+            collider.enabled = false;
+            OnDead?.Invoke(asteroidData);
         }
+    }
+
+    public void Dead()
+    {
+        ReturnToPool();
     }
 
     public void Moving()
@@ -50,7 +76,8 @@ public class AsteroidModel
     {
         asteroid.Rotation();
     }
-    protected void ReturnToPool()
+
+    private void ReturnToPool()
     {
         asteroidData.AsteroidGameObject.transform.localPosition = Vector3.zero;
         asteroidData.AsteroidGameObject.transform.localRotation = Quaternion.identity;

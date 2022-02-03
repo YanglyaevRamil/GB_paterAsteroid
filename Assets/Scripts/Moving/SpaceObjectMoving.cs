@@ -7,12 +7,12 @@ public class SpaceObjectMoving : IMoving
     private Transform transformSpaceObject;
     private float speed;
     private Vector3 normVectorTarget;
+    Vector3 targetPosition;
     public SpaceObjectMoving(Transform transformSpaceObject, Transform target, float speed)
     {
         this.transformSpaceObject = transformSpaceObject;
         this.speed = speed;
 
-        Vector3 targetPosition;
         if (target == null)
         {
             targetPosition = new Vector3(0, 0, 0);
@@ -21,10 +21,16 @@ public class SpaceObjectMoving : IMoving
         {
             targetPosition = target.position;
         }
-        normVectorTarget = (targetPosition - transformSpaceObject.position)/(targetPosition - transformSpaceObject.position).magnitude;
+        SetTarget();
     }
+
     public void Moving()
     {
         transformSpaceObject.position += normVectorTarget * speed;
+    }
+
+    public void SetTarget()
+    {
+        normVectorTarget = (targetPosition - transformSpaceObject.position) / (targetPosition - transformSpaceObject.position).magnitude;
     }
 }

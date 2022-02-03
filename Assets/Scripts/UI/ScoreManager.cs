@@ -5,7 +5,6 @@ public class ScoreManager
     public ScoreManager()
     {
         score = 0;
-        AsteroidBehaviour.onAsteroidDead += OnAsteroidtDied;
         SpaceShipEnemyBehaviour.onShipEnemyDead += OnAsteroidtDied;
     }
 

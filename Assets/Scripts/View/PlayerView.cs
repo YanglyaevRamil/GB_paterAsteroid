@@ -10,7 +10,6 @@ public class PlayerView : MonoBehaviour, IDamage
     public event Action OnKeyButtonRotationRight;
     public event Action OnKeyButtonMoving;
     public event Action OnGetDamage;
-    private InputSystem inputSystem;
 
     private int damage;
     public int Damage 

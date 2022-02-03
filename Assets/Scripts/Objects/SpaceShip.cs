@@ -7,10 +7,10 @@ public class SpaceShip : SpaceObject, ISpaceShip
 
     private int damag;
     public int Damage { get { return damag; } }
-    public SpaceShip(int helth, Transform transform, float speed, Quaternion rotationLeft, Quaternion rotationRight, int damag) 
+    public SpaceShip(int helth, Transform transform, float speed, Quaternion rotationLeft, Quaternion rotationRight, int damag, Rigidbody rigidbody) 
         : base(helth, transform, speed, new Quaternion(), null)
     {
-        spaceObjectMoving = new SpaceShipMoving(transform, speed);
+        spaceObjectMoving = new SpaceShipMoving(transform, rigidbody, speed);
         spaceShipMovingLeft = new SpaceObjectRotation(transform, rotationLeft);
         spaceShipMovingRight = new SpaceObjectRotation(transform, rotationRight);
         this.damag = damag;

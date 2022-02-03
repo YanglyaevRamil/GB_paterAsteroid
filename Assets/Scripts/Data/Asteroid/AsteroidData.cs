@@ -29,14 +29,6 @@ public class AsteroidData : ScriptableObject
 
     [SerializeField]
     private Transform asteroidTarget;
-    //[SerializeField]
-    //private MeshFilter meshFilter;
-    //
-    //[SerializeField]
-    //private MeshRenderer meshRenderer;
-
-    [SerializeField]
-    private ParticleSystem explosionParticleSystem;
 
     public AsteroidType AsteroidType { get { return asteroidType; } }
     public string Description { get { return description; } }

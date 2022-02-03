@@ -16,9 +16,8 @@ MonoBehaviour:
   description: 
   health: 15
   damage: 15
-  speed: 1
+  speed: 0.5
   rotationSpeed: {x: 0, y: 0, z: 0, w: 0}
   pricePoints: 15
   asteroidGameObject: {fileID: 0}
   asteroidTarget: {fileID: 0}
-  explosionParticleSystem: {fileID: 8038344524183138615, guid: 0277167a12290af47801444830a2be97, type: 3}

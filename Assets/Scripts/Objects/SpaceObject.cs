@@ -13,7 +13,6 @@ public class SpaceObject
         spaceObjectDead = new SpaceObjectDead(helth);
         spaceObjectRotation = new SpaceObjectRotation(transform, rotation);
     }
-
     public void DamageTake(int damageTaken)
     {
         spaceObjectDead.DamageTake(damageTaken);

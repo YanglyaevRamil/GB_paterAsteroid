@@ -3,14 +3,16 @@ using UnityEngine;
 public class SpaceShipMoving : IMoving
 {
     private Transform transformSpaceShip;
+    private Rigidbody rigidbodySpaceShip;
     private float speed;
-    public SpaceShipMoving(Transform transform, float speed)
+    public SpaceShipMoving(Transform transform, Rigidbody rigidbody, float speed)
     {
         transformSpaceShip = transform;
-        this.speed = speed;
+        this.speed = 200f;
+        rigidbodySpaceShip = rigidbody;
     }
     public void Moving()
     {
-        transformSpaceShip.Translate(new Vector3(0, 0, speed));
+        rigidbodySpaceShip.AddForce(transformSpaceShip.forward * speed);
     }
 }

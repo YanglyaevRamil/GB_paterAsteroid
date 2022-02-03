@@ -1,6 +1,11 @@
 
+using System;
+using UnityEngine;
+
 public class AsteroidPresenter
 {
+    public Action<AsteroidData> OnDeadAsteroid;
+
     private AsteroidModel asteroidModel;
     private AsteroidView asteroidView;
 
@@ -12,8 +17,27 @@ public class AsteroidPresenter
         asteroidView.OnDamageTaken += DamageTaken;
         asteroidView.OnMoving += Moving;
         asteroidView.OnRotation += Rotation;
+        asteroidView.OnEnableEvent += Enable;
+        asteroidView.OnGetDamage += GetDamage;
+        asteroidView.OnEndDestruction += EndDestruction;
 
         asteroidModel.OnDead += Dead;
+        asteroidModel.OnDead += Destruction;
+    }
+
+    private void EndDestruction()
+    {
+        asteroidModel.Dead();
+    }
+
+    private void GetDamage()
+    {
+        asteroidView.GetDamage(asteroidModel.Damage);
+    }
+
+    private void Enable()
+    {
+        asteroidModel.SetAsteroid();
     }
 
     private void Rotation()
@@ -31,8 +55,14 @@ public class AsteroidPresenter
         asteroidModel.DamageTake(damage.Damage);
     }
 
-    private void Dead()
+    private void Dead(AsteroidData asteroidData)
     {
-        asteroidView.Dead();
+        OnDeadAsteroid?.Invoke(asteroidData);
+        
+    }
+
+    private void Destruction(AsteroidData asteroidData)
+    {
+        asteroidView.DestructionAsteroid();
     }
 }

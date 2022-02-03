@@ -2,58 +2,48 @@ using UnityEngine;
 
 public class PlayerSpawner : MonoBehaviour
 {
-    private const float SPEED_PLAYER = 0.5f;
-    private const int HEALTH_PLAYER = 100;
-    private const int AMMUNITION_PLAYER = 20;
-    private const float GUN_RECOIL_TIME_PLAYER = 0.1f;
-    private const float GUN_RELOADING_TIME_PLAYER = 3.0f;
-    private const float ROTATESPEED_PLAYER = 3.0f;
-    private const int SPACE_SHIP_DAMAG_PLAYER = 200;
-
-    [SerializeField] private float speed;
-    [SerializeField] private int health;
-    [SerializeField] private int ammunition;
-    [SerializeField] private float gunRecoilTime;
-    [SerializeField] private float gunReloadingTime;
-    [SerializeField] private float rotatesSpeedRightY;
-    [SerializeField] private float rotatesSpeedLeftY;
-    private int spaceShipDamag;
-
-    private Quaternion rotatesRightY, rotatesLeftY;
-
-    public GameObject playerObject;
-
     private PlayerPresenter playerPresenter;
     private PlayerModel playerModel;
     private PlayerView playerView;
 
+    public GameObject PlayerObject { get { return playerObject; } }
+    private GameObject playerObject;
+
+    private SpaceShipDataFactory spaceShipDataFactory;
+    private GunDataFactory gunDataFactory;
+
     private void Awake()
     {
-        
-    }
+        spaceShipDataFactory = new SpaceShipDataFactory();
+        gunDataFactory = new GunDataFactory();
 
-    public void Start()
-    {
-        speed = SPEED_PLAYER;
-        health = HEALTH_PLAYER;
-        ammunition = AMMUNITION_PLAYER;
-        gunRecoilTime = GUN_RECOIL_TIME_PLAYER;
-        gunReloadingTime = GUN_RELOADING_TIME_PLAYER;
-        spaceShipDamag = SPACE_SHIP_DAMAG_PLAYER;
+        var spaceShipData = spaceShipDataFactory.InstantiateSpaceShip(SpaceShipType.DefaultSpaceShip);
+        var gunData = gunDataFactory.InstantiateGun(GunType.DefaultGun);
 
-        rotatesSpeedRightY = ROTATESPEED_PLAYER;
-        rotatesRightY = Quaternion.AngleAxis(rotatesSpeedRightY, Vector3.up);
-        rotatesSpeedLeftY = -ROTATESPEED_PLAYER;
-        rotatesLeftY = Quaternion.AngleAxis(rotatesSpeedLeftY, Vector3.up);
+        playerObject = spaceShipData.SpaceShipGameObject;
+        var playerObjectRB = playerObject?.GetComponent<Rigidbody>();
 
         GameObject StarShipWeaponRight = playerObject.transform.Find("StarShipModel/StarShipWeaponRight/BulletSpawnerRight").gameObject;
         GameObject StarShipWeaponLeft = playerObject.transform.Find("StarShipModel/StarShipWeaponLeft/BulletSpawnerLeft").gameObject;
+
         BulletSpawner bulletSpawnerRight = StarShipWeaponRight.AddComponent<BulletSpawner>();
         BulletSpawner bulletSpawnerLeft = StarShipWeaponLeft.AddComponent<BulletSpawner>();
+
         playerView = playerObject.GetComponent<PlayerView>();
         playerModel = new PlayerModel(
-            new SpaceShip(health, playerObject.transform, speed, rotatesLeftY, rotatesRightY, spaceShipDamag), 
-            new SpaceShipGun(ammunition, gunRecoilTime, gunReloadingTime));
+            new SpaceShip(
+                spaceShipData.Health,
+                playerObject.transform,
+                spaceShipData.Speed,
+                spaceShipData.RotationSpeedLeft,
+                spaceShipData.RotationSpeedRight,
+                spaceShipData.Damage,
+                playerObjectRB),
+
+            new SpaceShipGun(
+                gunData.Ammunition,
+                gunData.GunRecoilTime,
+                gunData.GunReloadingTime));
 
         playerPresenter = new PlayerPresenter(playerModel, playerView);
 
