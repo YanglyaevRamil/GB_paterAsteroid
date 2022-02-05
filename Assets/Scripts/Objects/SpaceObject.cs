@@ -29,12 +29,12 @@ public class SpaceObject
         return spaceObjectDead.DeathCheck();
     }
 
-    public void Moving()
+    public virtual void Moving()
     {
         spaceObjectMoving.Moving();
     }
 
-    public void Rotation()
+    public virtual void Rotation()
     {
         spaceObjectRotation.Rotation();
     }

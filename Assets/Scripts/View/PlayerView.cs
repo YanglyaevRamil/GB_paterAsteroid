@@ -6,12 +6,12 @@ public class PlayerView : MonoBehaviour, IDamage
 {
     public event Action<IDamage> OnDamageTaken;
     public event Action OnKeyDownButtonShooting;
-    public event Action OnKeyButtonRotationLeft;
-    public event Action OnKeyButtonRotationRight;
+    public event Action<Vector3> OnKeyButtonRotation;
     public event Action OnKeyButtonMoving;
     public event Action OnGetDamage;
 
     private int damage;
+    private float horizontalAxis;
     public int Damage 
     { 
         get 
@@ -30,14 +30,11 @@ public class PlayerView : MonoBehaviour, IDamage
     }
     private void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.A))
+        if((horizontalAxis = Input.GetAxis("Horizontal")) != 0)
         {
-            OnKeyButtonRotationLeft?.Invoke();
+            OnKeyButtonRotation?.Invoke(new Vector3(0f, horizontalAxis, 0f));
         }
-        if (Input.GetKey(KeyCode.D))
-        {
-            OnKeyButtonRotationRight?.Invoke();
-        }
+
         if (Input.GetKey(KeyCode.W))
         {
             OnKeyButtonMoving?.Invoke();

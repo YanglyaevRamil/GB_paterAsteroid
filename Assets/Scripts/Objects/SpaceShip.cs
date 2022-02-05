@@ -2,27 +2,24 @@ using UnityEngine;
 
 public class SpaceShip : SpaceObject, ISpaceShip
 {
-    private SpaceObjectRotation spaceShipMovingLeft;
-    private SpaceObjectRotation spaceShipMovingRight;
-
+    private SpaceShipRotation spaceShipRotation;
+    private SpaceShipMoving spaceShipMoving;
     private int damag;
     public int Damage { get { return damag; } }
-    public SpaceShip(int helth, Transform transform, float speed, Quaternion rotationLeft, Quaternion rotationRight, int damag, Rigidbody rigidbody) 
+    public SpaceShip(int helth, Transform transform, float speed, Vector3 rotationSpeed, int damag, Rigidbody rigidbody) 
         : base(helth, transform, speed, new Quaternion(), null)
     {
-        spaceObjectMoving = new SpaceShipMoving(transform, rigidbody, speed);
-        spaceShipMovingLeft = new SpaceObjectRotation(transform, rotationLeft);
-        spaceShipMovingRight = new SpaceObjectRotation(transform, rotationRight);
+        spaceShipMoving = new SpaceShipMoving(transform, rigidbody, speed);
+        spaceShipRotation = new SpaceShipRotation(rigidbody, rotationSpeed);
         this.damag = damag;
     }
-
-    public void RotationLeft()
+    public override void Moving()
     {
-        spaceShipMovingLeft.Rotation();
+        spaceShipMoving.Moving();
     }
 
-    public void RotationRight()
+    public void Rotation(Vector3 vector3)
     {
-        spaceShipMovingRight.Rotation();
+        spaceShipRotation.Rotation(vector3);
     }
 }

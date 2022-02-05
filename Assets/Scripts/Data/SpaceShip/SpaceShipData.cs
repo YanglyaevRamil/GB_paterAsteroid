@@ -19,10 +19,7 @@ public class SpaceShipData : ScriptableObject
     private float speed;
 
     [SerializeField]
-    private Quaternion rotationSpeedLeft;
-
-    [SerializeField]
-    private Quaternion rotationSpeedRight;
+    private Vector3 rotationSpeed;
 
     [SerializeField]
     private int pricePoints;
@@ -35,8 +32,7 @@ public class SpaceShipData : ScriptableObject
     public int Health { get { return health; } }
     public int Damage { get { return damage; } }
     public float Speed { get { return speed; } }
-    public Quaternion RotationSpeedLeft { get { return rotationSpeedLeft; } }
-    public Quaternion RotationSpeedRight { get { return rotationSpeedRight; } }
+    public Vector3 RotationSpeed { get { return rotationSpeed; } }
     public int PricePoints { get { return pricePoints; } }
     public GameObject SpaceShipGameObject { get { return spaceShipGameObject; } set { spaceShipGameObject = value; } }
 }

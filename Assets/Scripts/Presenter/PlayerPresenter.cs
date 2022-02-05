@@ -15,8 +15,7 @@ public class PlayerPresenter
         this.playerView = playerView;
 
         playerView.OnKeyDownButtonShooting += KeyDownButtonShooting;
-        playerView.OnKeyButtonRotationLeft += KeyButtonRotationLeft;
-        playerView.OnKeyButtonRotationRight += KeyButtonRotationRight;
+        playerView.OnKeyButtonRotation += KeyButtonRotation;
         playerView.OnKeyButtonMoving += KeyButtonMoving;
 
         playerView.OnDamageTaken += PlayerDamageTaken;
@@ -24,6 +23,11 @@ public class PlayerPresenter
 
         playerModel.OnDead += PlayerDead;
         playerModel.OnShooting += PlayerShooting;
+    }
+
+    private void KeyButtonRotation(Vector3 dir)
+    {
+        playerModel.Rotation(dir);
     }
 
     private void GetDamage()
@@ -34,16 +38,6 @@ public class PlayerPresenter
     private void KeyButtonMoving()
     {
         playerModel.Moving();
-    }
-
-    private void KeyButtonRotationRight()
-    {
-        playerModel.RotationRight();
-    }
-
-    private void KeyButtonRotationLeft()
-    {
-        playerModel.RotationLeft();
     }
 
     private void KeyDownButtonShooting()

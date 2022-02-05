@@ -8,11 +8,11 @@ public class SpaceShipMoving : IMoving
     public SpaceShipMoving(Transform transform, Rigidbody rigidbody, float speed)
     {
         transformSpaceShip = transform;
-        this.speed = 200f;
+        this.speed = speed;
         rigidbodySpaceShip = rigidbody;
     }
     public void Moving()
     {
-        rigidbodySpaceShip.AddForce(transformSpaceShip.forward * speed);
+        rigidbodySpaceShip.MovePosition(transformSpaceShip.position + transformSpaceShip.forward * speed);
     }
 }

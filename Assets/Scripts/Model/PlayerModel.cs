@@ -62,14 +62,9 @@ public class PlayerModel
         }
     }
 
-    public void RotationLeft()
+    public void Rotation(Vector3 dir)
     {
-        spaceShip.RotationLeft();
-    }
-
-    public void RotationRight()
-    {
-        spaceShip.RotationRight();
+        spaceShip.Rotation(dir);
     }
 
     public void Moving()

@@ -8,6 +8,5 @@ public interface ISpaceShip
     public bool Death();
     public bool DeathCheck();
     public void Moving();
-    public void RotationLeft();
-    public void RotationRight();
+    public void Rotation(Vector3 dir);
 }

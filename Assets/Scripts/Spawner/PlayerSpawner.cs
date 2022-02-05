@@ -35,8 +35,7 @@ public class PlayerSpawner : MonoBehaviour
                 spaceShipData.Health,
                 playerObject.transform,
                 spaceShipData.Speed,
-                spaceShipData.RotationSpeedLeft,
-                spaceShipData.RotationSpeedRight,
+                spaceShipData.RotationSpeed,
                 spaceShipData.Damage,
                 playerObjectRB),
 
