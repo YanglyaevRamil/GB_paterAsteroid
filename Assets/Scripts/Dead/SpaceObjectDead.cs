@@ -1,19 +1,22 @@
+using UnityEngine;
+
 public class SpaceObjectDead : IDead
 {
-    public int Health { get; set; }
-    public SpaceObjectDead(int health)
+    private int _health;
+    public SpaceObjectDead(ref int health)
     {
-        this.Health = health;
+        _health = health;
     }
     public void DamageTake(int damageTaken)
     {
-        Health -= damageTaken;
+        _health -= damageTaken;
     }
     public bool DeathCheck()
     {
-        if (Health <= 0)
+        Debug.Log(_health);
+        if (_health <= 0)
         {
-            Health = 0;
+            _health = 0;
             return true;
         }
         else

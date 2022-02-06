@@ -5,7 +5,7 @@ public class ScoreManager
     public ScoreManager()
     {
         score = 0;
-        SpaceShipEnemyBehaviour.onShipEnemyDead += OnAsteroidtDied;
+     //   SpaceShipEnemyBehaviour.onShipEnemyDead += OnAsteroidtDied;
     }
 
     private void OnAsteroidtDied(IPricePoints obj)

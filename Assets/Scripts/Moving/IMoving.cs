@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IMoving
 {
-    void Moving();
+    void Moving(Vector3 dir);
 }

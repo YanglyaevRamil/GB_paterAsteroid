@@ -35,9 +35,9 @@ public class PlayerPresenter
         playerView.GetDamage(playerModel.Damage);
     }
 
-    private void KeyButtonMoving()
+    private void KeyButtonMoving(Vector3 dir)
     {
-        playerModel.Moving();
+        playerModel.Moving(dir);
     }
 
     private void KeyDownButtonShooting()

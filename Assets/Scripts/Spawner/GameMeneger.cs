@@ -17,7 +17,9 @@ public class GameMeneger : MonoBehaviour
         asteroidSpawner.target = playerSpawner.PlayerObject.transform;
         asteroidSpawner.OnDeadAsteroid += DeadAsteroid;
 
-        var asteroidDatas = Instantiate(Resources.Load<GameObject>("PrefabsAsset/UI/CanvasUI"));
+        var playerUIGameObject = Instantiate(Resources.Load<GameObject>("PrefabsAsset/UI/CanvasUI"));
+        var playerUI = playerUIGameObject?.GetComponent<PlayerShipUIManager>();
+
     }
 
     private void DeadAsteroid(AsteroidData asteroidData)

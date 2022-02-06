@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Asteroid : SpaceObject, IAsteroid
 {
-    public Asteroid(int helth, Transform transform, float speed, Quaternion rotation, Transform target) : 
-        base(helth, transform, speed, rotation, target)
+    public Asteroid(Transform transform, float speed, Rigidbody rigidbody, Vector3 rotationSpeed, int helth) : 
+        base(transform, speed, rigidbody, rotationSpeed,ref helth)
     {
     }
 }

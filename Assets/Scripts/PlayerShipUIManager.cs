@@ -7,9 +7,6 @@ public class PlayerShipUIManager : MonoBehaviour
     private const int COLOR_HEALTH_MEDIUM = 40;
     private const int COLOR_HEALTH_LOW = 20;
 
-    public GameObject playerCameObject;
-    public GameObject manager;
-
     public Text ScoreText;
     public Text HealthText;
     public Text AmmunitionText;
@@ -19,8 +16,6 @@ public class PlayerShipUIManager : MonoBehaviour
 
     private void Start()
     {
-        //player = playerCameObject.GetComponent<PlayerView>();
-
         scoreManager = new ScoreManager();
     }
 

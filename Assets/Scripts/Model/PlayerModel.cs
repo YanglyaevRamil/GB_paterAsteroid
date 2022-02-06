@@ -10,20 +10,27 @@ public class PlayerModel
     public event Action OnDead;
     public event Action OnShooting;
 
-    public int Health { get { return spaceShip.Health; } }
     public int Ammunition { get { return spaceShipGun.Ammunition; } }
-    public bool IsReloading { get => isReloadingGun; }
     public int Damage { get { return spaceShip.Damage; } }
 
     private ISpaceShip spaceShip;
     private ISpaceShipGun spaceShipGun;
 
     private bool isReloadingGun;
-    public PlayerModel(ISpaceShip spaceShip, ISpaceShipGun spaceShipGun)
+    private int health;
+    public PlayerModel(SpaceShipData spaceShipData, ISpaceShipGun spaceShipGun)
     {
         isReloadingGun = false;
+        health = spaceShipData.Health;
 
-        this.spaceShip = spaceShip;
+        spaceShip = new SpaceShip(
+            spaceShipData.SpaceShipGameObject.transform,
+            spaceShipData.SpaceShipGameObject?.GetComponent<Rigidbody>(),
+            spaceShipData.Speed,
+            spaceShipData.RotationSpeed,
+            spaceShipData.Damage,
+            ref health);
+
         this.spaceShipGun = spaceShipGun;
     }
 
@@ -67,9 +74,9 @@ public class PlayerModel
         spaceShip.Rotation(dir);
     }
 
-    public void Moving()
+    public void Moving(Vector3 dir)
     {
-        spaceShip.Moving();
+        spaceShip.Moving(dir);
     }
 
     private void ReloadGunAmmunition(object sender, ElapsedEventArgs e)

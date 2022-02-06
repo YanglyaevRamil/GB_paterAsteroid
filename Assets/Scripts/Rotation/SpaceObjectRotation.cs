@@ -2,15 +2,19 @@ using UnityEngine;
 
 public class SpaceObjectRotation : IRotation
 {
-    protected Transform transformSpaceObject;
-    protected Quaternion rotation;
-    public SpaceObjectRotation(Transform transform, Quaternion rotation)
+    protected Rigidbody rigidbody;
+    protected Vector3 rotationSpeed;
+    public SpaceObjectRotation(Rigidbody rigidbody, Vector3 rotationSpeed)
     {
-        transformSpaceObject = transform;
-        this.rotation = rotation;
+        this.rigidbody = rigidbody;
+        this.rotationSpeed = rotationSpeed;
     }
-    public void Rotation()
+    public void Rotation(Vector3 dir)
     {
-        transformSpaceObject.rotation *= rotation;
+        dir.x *= rotationSpeed.x;
+        dir.y *= rotationSpeed.y;
+        dir.z *= rotationSpeed.z;
+        Quaternion deltaRotation = Quaternion.Euler(dir);
+        rigidbody.MoveRotation(rigidbody.rotation * deltaRotation);
     }
 }

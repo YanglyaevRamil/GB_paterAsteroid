@@ -12,13 +12,17 @@ public class PlayerSpawner : MonoBehaviour
     private SpaceShipDataFactory spaceShipDataFactory;
     private GunDataFactory gunDataFactory;
 
+    private SpaceShipData spaceShipData;
+    private GunData gunData;
+    public SpaceShipData SpaceShipData { get { return spaceShipData; } }
+    public GunData GunData { get { return gunData; } }
     private void Awake()
     {
         spaceShipDataFactory = new SpaceShipDataFactory();
         gunDataFactory = new GunDataFactory();
 
-        var spaceShipData = spaceShipDataFactory.InstantiateSpaceShip(SpaceShipType.DefaultSpaceShip);
-        var gunData = gunDataFactory.InstantiateGun(GunType.DefaultGun);
+        spaceShipData = spaceShipDataFactory.InstantiateSpaceShip(SpaceShipType.DefaultSpaceShip);
+        gunData = gunDataFactory.InstantiateGun(GunType.DefaultGun);
 
         playerObject = spaceShipData.SpaceShipGameObject;
         var playerObjectRB = playerObject?.GetComponent<Rigidbody>();
@@ -30,14 +34,8 @@ public class PlayerSpawner : MonoBehaviour
         BulletSpawner bulletSpawnerLeft = StarShipWeaponLeft.AddComponent<BulletSpawner>();
 
         playerView = playerObject.GetComponent<PlayerView>();
-        playerModel = new PlayerModel(
-            new SpaceShip(
-                spaceShipData.Health,
-                playerObject.transform,
-                spaceShipData.Speed,
-                spaceShipData.RotationSpeed,
-                spaceShipData.Damage,
-                playerObjectRB),
+        playerModel = new PlayerModel(spaceShipData,
+
 
             new SpaceShipGun(
                 gunData.Ammunition,

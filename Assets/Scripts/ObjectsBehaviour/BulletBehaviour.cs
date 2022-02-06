@@ -25,7 +25,7 @@ public class BulletBehaviour : MonoBehaviour, IDamage
     }
     private void FixedUpdate()
     {
-        movingBullet.Moving();
+        movingBullet.Moving(new Vector3(1,1,1));
     }
     private void Update()
     {

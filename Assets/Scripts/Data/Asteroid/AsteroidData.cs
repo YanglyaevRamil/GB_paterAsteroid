@@ -19,7 +19,7 @@ public class AsteroidData : ScriptableObject
     private float speed;
 
     [SerializeField]
-    private Quaternion rotationSpeed;
+    private Vector3 rotationSpeed;
 
     [SerializeField]
     private int pricePoints;
@@ -35,7 +35,7 @@ public class AsteroidData : ScriptableObject
     public int Health { get { return health; } }
     public int Damage { get { return damage; } }
     public float Speed { get { return speed; } }
-    public Quaternion RotationSpeed { get { return rotationSpeed; } }
+    public Vector3 RotationSpeed { get { return rotationSpeed; } }
     public int PricePoints { get { return pricePoints; } }
     public GameObject AsteroidGameObject { get { return asteroidGameObject; } set { asteroidGameObject = value; } }
     public Transform AsteroidTarget { get { return asteroidTarget; } set { asteroidTarget = value; } }

@@ -11,36 +11,39 @@ public class AsteroidModel
     private Asteroid asteroid;
     private MeshRenderer meshRenderer;
     private Collider collider;
-
+    private Rigidbody rigidbody;
+    private Vector3 direction;
+    private Vector3 directionRotation;
     public AsteroidModel(AsteroidData asteroidData)
     {
         this.asteroidData = asteroidData;
 
         meshRenderer = asteroidData.AsteroidGameObject?.GetComponentInChildren<MeshRenderer>();
         collider = asteroidData.AsteroidGameObject?.GetComponent<Collider>();
+        rigidbody = asteroidData.AsteroidGameObject?.GetComponent<Rigidbody>();
         asteroid = new Asteroid(
-            asteroidData.Health,
             asteroidData.AsteroidGameObject.gameObject.transform,
             asteroidData.Speed,
+            rigidbody,
             asteroidData.RotationSpeed,
-            asteroidData.AsteroidTarget);
+            asteroidData.Health
+            );
     }
 
     public void SetAsteroid(Asteroid asteroid)
     {
         this.asteroid = asteroid;
+
         meshRenderer.enabled = true;
         collider.enabled = true;
     }
 
     public void SetAsteroid()
     {
-        asteroid = new Asteroid(
-            asteroidData.Health,
-            asteroidData.AsteroidGameObject.gameObject.transform,
-            asteroidData.Speed,
-            asteroidData.RotationSpeed,
-            asteroidData.AsteroidTarget);
+        var targetPos = asteroidData.AsteroidTarget.position;
+        var transformPos = asteroidData.AsteroidGameObject.gameObject.transform.position;
+        direction = GetDirection(targetPos, transformPos);
+        directionRotation = new Vector3(1,1,1);
 
         meshRenderer.enabled = true;
         collider.enabled = true;
@@ -69,12 +72,12 @@ public class AsteroidModel
 
     public void Moving()
     {
-        asteroid.Moving();
+        asteroid.Moving(direction);
     }
 
     public void Rotation()
     {
-        asteroid.Rotation();
+        asteroid.Rotation(directionRotation);
     }
 
     private void ReturnToPool()
@@ -82,5 +85,10 @@ public class AsteroidModel
         asteroidData.AsteroidGameObject.transform.localPosition = Vector3.zero;
         asteroidData.AsteroidGameObject.transform.localRotation = Quaternion.identity;
         asteroidData.AsteroidGameObject.SetActive(false);
+    }
+
+    private Vector3 GetDirection(Vector3 a, Vector3 b)
+    {
+        return (a - b) / (a - b).magnitude;
     }
 }

@@ -9,7 +9,7 @@ public class MovingBullet : IMoving
         this.transform = transform;
         this.speed = speed;
     }
-    public void Moving()
+    public void Moving(Vector3 dir)
     {
         transform.Translate(Vector3.forward * speed);
     }

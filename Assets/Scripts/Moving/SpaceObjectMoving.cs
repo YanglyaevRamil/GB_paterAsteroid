@@ -4,33 +4,20 @@ public class SpaceObjectMoving : IMoving
 {
     public float Speed { get { return speed; } }
 
-    private Transform transformSpaceObject;
+    private Rigidbody rigidbody;
+    private Transform transform;
     private float speed;
     private Vector3 normVectorTarget;
     Vector3 targetPosition;
-    public SpaceObjectMoving(Transform transformSpaceObject, Transform target, float speed)
+    public SpaceObjectMoving(Transform transform, Rigidbody rigidbody, float speed)
     {
-        this.transformSpaceObject = transformSpaceObject;
+        this.transform = transform;
         this.speed = speed;
-
-        if (target == null)
-        {
-            targetPosition = new Vector3(0, 0, 0);
-        }
-        else
-        {
-            targetPosition = target.position;
-        }
-        SetTarget();
+        this.rigidbody = rigidbody;
     }
 
-    public void Moving()
+    public void Moving(Vector3 dir)
     {
-        transformSpaceObject.position += normVectorTarget * speed;
-    }
-
-    public void SetTarget()
-    {
-        normVectorTarget = (targetPosition - transformSpaceObject.position) / (targetPosition - transformSpaceObject.position).magnitude;
+        rigidbody.MovePosition(rigidbody.position + dir * speed);
     }
 }

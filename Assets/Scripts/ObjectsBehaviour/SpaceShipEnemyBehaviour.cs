@@ -19,14 +19,14 @@ public class SpaceShipEnemyBehaviour : MonoBehaviour, IDamage, IPricePoints
     public int PricePoints { get => pricePoints; }
 
     private ShipEnemy shipEnemy;
-    public delegate void OnShipEnemyDead(IPricePoints shipEnemyPricePoints);
-    public static event OnShipEnemyDead onShipEnemyDead;
+   // public delegate void OnShipEnemyDead(IPricePoints shipEnemyPricePoints);
+   // public static event OnShipEnemyDead onShipEnemyDead;
     //private 
     private void OnEnable()
     {
         if (targetTransform != null)
         {
-            shipEnemy = new ShipEnemy(health, transform, speed, targetTransform, ammunition, gunRecoilTime);
+         //   shipEnemy = new ShipEnemy(health, transform, speed, targetTransform, ammunition, gunRecoilTime);
         }
     }
 
@@ -40,27 +40,27 @@ public class SpaceShipEnemyBehaviour : MonoBehaviour, IDamage, IPricePoints
         this.pricePoints = pricePoints;
     }
 
-    private void FixedUpdate()
-    {
-        shipEnemy.Moving();
-        if (targetTransform != null)
-            transform.LookAt(targetTransform.position);
-    }
+  //  private void FixedUpdate()
+  //  {
+  //      shipEnemy.Moving();
+  //      if (targetTransform != null)
+  //          transform.LookAt(targetTransform.position);
+  //  }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        IDamage damage;
-        if ((damage = other.gameObject.GetComponent<IDamage>()) != null)
-        {
-            shipEnemy.DamageTake(damage.Damage - armor);
-            if (shipEnemy.DeathCheck())
-            {
-                onShipEnemyDead.Invoke(this);
-                //shipEnemy.Death();
-                ReturnToPool();
-            }
-        }
-    }
+  //  private void OnTriggerEnter(Collider other)
+  //  {
+  //      IDamage damage;
+  //      if ((damage = other.gameObject.GetComponent<IDamage>()) != null)
+  //      {
+  //          shipEnemy.DamageTake(damage.Damage - armor);
+  //          if (shipEnemy.DeathCheck())
+  //          {
+  //              onShipEnemyDead.Invoke(this);
+  //              //shipEnemy.Death();
+  //              ReturnToPool();
+  //          }
+  //      }
+  //  }
     protected Vector3 GetNormVector(Vector3 a, Vector3 b)
     {
         return (b - a) / (b - a).magnitude;

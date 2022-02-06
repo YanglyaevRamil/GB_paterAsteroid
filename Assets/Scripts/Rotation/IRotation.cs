@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IRotation
 {
-    void Rotation();
+    void Rotation(Vector3 dir);
 }

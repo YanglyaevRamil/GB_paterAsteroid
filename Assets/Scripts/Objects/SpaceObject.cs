@@ -1,27 +1,19 @@
 using UnityEngine;
 public class SpaceObject
 {
-    public int Health { get { return spaceObjectDead.Health; } }
-
     protected IMoving spaceObjectMoving;
     protected IDead spaceObjectDead;
     protected IRotation spaceObjectRotation;
 
-    public SpaceObject(int helth, Transform transform, float speed, Quaternion rotation, Transform target)
+    public SpaceObject(Transform transform, float speed, Rigidbody rigidbody, Vector3 rotationSpeed,ref int helth)
     {
-        spaceObjectMoving = new SpaceObjectMoving(transform, target, speed);
-        spaceObjectDead = new SpaceObjectDead(helth);
-        spaceObjectRotation = new SpaceObjectRotation(transform, rotation);
+        spaceObjectMoving = new SpaceObjectMoving(transform, rigidbody, speed);
+        spaceObjectRotation = new SpaceObjectRotation(rigidbody, rotationSpeed);
+        spaceObjectDead = new SpaceObjectDead(ref helth);
     }
     public void DamageTake(int damageTaken)
     {
         spaceObjectDead.DamageTake(damageTaken);
-    }
-
-    public bool Death()
-    {
-        //spaceObjectDead.Health = 0;
-        return true;
     }
 
     public bool DeathCheck()
@@ -29,13 +21,13 @@ public class SpaceObject
         return spaceObjectDead.DeathCheck();
     }
 
-    public virtual void Moving()
+    public virtual void Moving(Vector3 dir)
     {
-        spaceObjectMoving.Moving();
+        spaceObjectMoving.Moving(dir);
     }
 
-    public virtual void Rotation()
+    public virtual void Rotation(Vector3 dir)
     {
-        spaceObjectRotation.Rotation();
+        spaceObjectRotation.Rotation(dir);
     }
 }
