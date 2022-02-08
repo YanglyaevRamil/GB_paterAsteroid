@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
 public class SoundManager : MonoBehaviour
@@ -7,20 +9,19 @@ public class SoundManager : MonoBehaviour
 
     public Sound[] sounds;
     public Sound[] backgroundMusic;
+    
 
     private int currentPlayingMusic;
-    private bool shouldPlayMusic = false;
+    //private bool shouldPlayMusic = false;
     public static SoundManager Instance;
 
     private float backgroundMusicVolume;
     private float soundsVolume;
+    
 
     void Start()
     {
-        /*if (shouldPlayMusic == true)
-        {
-            PlayMusic("BattleMusic");
-        }*/
+       
         PlayMusic("BattleMusic");
     }
 
@@ -39,10 +40,13 @@ public class SoundManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         backgroundMusicVolume = PlayerPrefs.GetFloat("MusicVolume", 0.75f);
+        
+
         soundsVolume = PlayerPrefs.GetFloat("GameSoundsVolume", 0.75f);
 
         CreateAudioSources(sounds, soundsVolume);
         CreateAudioSources(backgroundMusic, backgroundMusicVolume);
+        
 
     }
 
@@ -59,6 +63,9 @@ public class SoundManager : MonoBehaviour
 
             backgroundMusic[currentPlayingMusic].source.Play();
         }*/
+
+        
+        
     }
 
     private void CreateAudioSources(Sound[] sounds, float volume)
@@ -98,14 +105,14 @@ public class SoundManager : MonoBehaviour
 
     public void StopMusic()
     {
-        if (shouldPlayMusic == true)
+        /*if (shouldPlayMusic == true)
         {
             shouldPlayMusic = false;
             backgroundMusic[currentPlayingMusic].source.Stop();
             
             //currentPlayingMusic = 999;
             
-        }
+        }*/
         /*
                 Sound s = Array.Find(backgroundMusic, sound => sound.audioClipName == name);
                 if (s == null)
@@ -129,8 +136,11 @@ public class SoundManager : MonoBehaviour
     {
         foreach (Sound music in backgroundMusic)
         {
-            backgroundMusicVolume = PlayerPrefs.GetFloat("MusicVolume", 0.75f);
-            music.source.volume = backgroundMusic[currentPlayingMusic].volume * backgroundMusicVolume;
+           // backgroundMusicVolume = PlayerPrefs.GetFloat("MusicVolume", 0.75f);
+            backgroundMusicVolume = PlayerPrefs.GetFloat("MusicVolume");
+
+            // music.source.volume = backgroundMusic[currentPlayingMusic].volume * backgroundMusicVolume;
+            music.source.volume = backgroundMusicVolume;
         }
     }
 
@@ -142,7 +152,7 @@ public class SoundManager : MonoBehaviour
             sound.source.volume = sound.volume * soundsVolume;
         }
 
-        sounds[0].source.Play();
+        sounds[0].source.PlayDelayed(0.3f);
     }
 
     public void PlaySound(string name)
@@ -156,4 +166,8 @@ public class SoundManager : MonoBehaviour
 
         s.source.Play();
     }
+
+    
+    
+    
 }
