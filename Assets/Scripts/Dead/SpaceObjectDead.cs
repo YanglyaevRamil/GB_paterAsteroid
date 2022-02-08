@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class SpaceObjectDead : IDead
 {
+    public int Health { get { return _health; } }
+
     private int _health;
-    public SpaceObjectDead(ref int health)
+    public SpaceObjectDead(int health)
     {
         _health = health;
     }
@@ -13,7 +15,6 @@ public class SpaceObjectDead : IDead
     }
     public bool DeathCheck()
     {
-        Debug.Log(_health);
         if (_health <= 0)
         {
             _health = 0;

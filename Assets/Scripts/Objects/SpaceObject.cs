@@ -5,11 +5,13 @@ public class SpaceObject
     protected IDead spaceObjectDead;
     protected IRotation spaceObjectRotation;
 
-    public SpaceObject(Transform transform, float speed, Rigidbody rigidbody, Vector3 rotationSpeed,ref int helth)
+    public int Health { get { return spaceObjectDead.Health; } }
+
+    public SpaceObject(Transform transform, float speed, Rigidbody rigidbody, Vector3 rotationSpeed, int helth)
     {
         spaceObjectMoving = new SpaceObjectMoving(transform, rigidbody, speed);
         spaceObjectRotation = new SpaceObjectRotation(rigidbody, rotationSpeed);
-        spaceObjectDead = new SpaceObjectDead(ref helth);
+        spaceObjectDead = new SpaceObjectDead(helth);
     }
     public void DamageTake(int damageTaken)
     {

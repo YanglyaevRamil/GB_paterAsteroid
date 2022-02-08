@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class PlayerPresenter
 {
-    public Action OnPlayerShooting;
+    public Action<int> OnPlayerShooting;
+    public Action<int> OnDamageTaken;
+    public Action<int> OnReloadGun;
 
     private PlayerModel playerModel;
     private PlayerView playerView;
@@ -17,12 +19,17 @@ public class PlayerPresenter
         playerView.OnKeyDownButtonShooting += KeyDownButtonShooting;
         playerView.OnKeyButtonRotation += KeyButtonRotation;
         playerView.OnKeyButtonMoving += KeyButtonMoving;
-
         playerView.OnDamageTaken += PlayerDamageTaken;
         playerView.OnGetDamage += GetDamage;
 
         playerModel.OnDead += PlayerDead;
         playerModel.OnShooting += PlayerShooting;
+        playerModel.OnReloadGun += ReloadGun;
+    }
+
+    private void ReloadGun(int info)
+    {
+        OnReloadGun.Invoke(info);
     }
 
     private void KeyButtonRotation(Vector3 dir)
@@ -47,6 +54,7 @@ public class PlayerPresenter
     private void PlayerDamageTaken(IDamage damage)
     {
         playerModel.DamageTake(damage.Damage);
+        OnDamageTaken.Invoke(playerModel.Health);
     }
 
     private void PlayerDead()
@@ -55,6 +63,6 @@ public class PlayerPresenter
     }
     public void PlayerShooting()
     {
-        OnPlayerShooting?.Invoke();
+        OnPlayerShooting?.Invoke(playerModel.Ammunition);
     }
 }

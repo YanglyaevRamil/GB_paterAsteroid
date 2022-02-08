@@ -3,10 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagers : MonoBehaviour
 {
-    private void Awake()
-    {
-        EventAggregator.SpaceObjectDied.Subscribe(LoadDeathScreen);
-    }
     public void LoadNewGame()
     {
         SceneManager.LoadScene("Game");

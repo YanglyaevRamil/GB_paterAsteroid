@@ -1,37 +1,38 @@
 using System;
+using System.Threading.Tasks;
 using System.Timers;
 using UnityEngine;
 
 public class PlayerModel
 {
     private const float MILLSEC_MUL = 1000.0f;
-    private const int START_AMMUNITION_PLAYER = 20;
 
     public event Action OnDead;
     public event Action OnShooting;
+    public event Action<int> OnReloadGun;
 
     public int Ammunition { get { return spaceShipGun.Ammunition; } }
     public int Damage { get { return spaceShip.Damage; } }
+    public int Health { get { return spaceShip.Health; } }
 
     private ISpaceShip spaceShip;
     private ISpaceShipGun spaceShipGun;
 
-    private bool isReloadingGun;
-    private int health;
-    public PlayerModel(SpaceShipData spaceShipData, ISpaceShipGun spaceShipGun)
+    private Timer aTimer;
+    public PlayerModel(SpaceShipData spaceShipData, GunData gunData)
     {
-        isReloadingGun = false;
-        health = spaceShipData.Health;
-
-        spaceShip = new SpaceShip(
+        spaceShip =  new SpaceShip(
             spaceShipData.SpaceShipGameObject.transform,
             spaceShipData.SpaceShipGameObject?.GetComponent<Rigidbody>(),
             spaceShipData.Speed,
             spaceShipData.RotationSpeed,
             spaceShipData.Damage,
-            ref health);
+            spaceShipData.Health);
 
-        this.spaceShipGun = spaceShipGun;
+        spaceShipGun = new SpaceShipGun(
+            gunData.Ammunition,
+            gunData.GunRecoilTime,
+            gunData.GunReloadingTime);
     }
 
     public void SetSpaceShip(ISpaceShip spaceShip)
@@ -59,10 +60,10 @@ public class PlayerModel
         {
             OnShooting?.Invoke();
         }
-        else
+
+        if (spaceShipGun.Ammunition == 0)
         {
-            Timer aTimer = new Timer();
-            aTimer.Interval = spaceShipGun.GunReloadingTime * MILLSEC_MUL;
+            aTimer = new Timer(spaceShipGun.GunReloadingTime * MILLSEC_MUL);
             aTimer.Elapsed += ReloadGunAmmunition;
             aTimer.AutoReset = false;
             aTimer.Enabled = true;
@@ -81,6 +82,7 @@ public class PlayerModel
 
     private void ReloadGunAmmunition(object sender, ElapsedEventArgs e)
     {
-        spaceShipGun.Ammunition = START_AMMUNITION_PLAYER;
+        spaceShipGun.Reload();
+        OnReloadGun?.Invoke(spaceShipGun.Ammunition);
     }
 }
