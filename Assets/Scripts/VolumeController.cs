@@ -33,7 +33,7 @@ public class VolumeController : MonoBehaviour
         float musicVolumeValue = musicVolumeSlider.value;
         music.SetFloat("MusicVol", Mathf.Log10(musicVolumeValue) * 20);
         PlayerPrefs.SetFloat("MusicVolume", musicVolumeValue);
-        SoundManager.Instance.MusicVolumeChanged();
+        SoundManager.Instance?.MusicVolumeChanged();
 
        
     }
@@ -45,7 +45,7 @@ public class VolumeController : MonoBehaviour
         float soundsVolumeValue = soundsVolumeSlider.value;
         sounds.SetFloat("SoundVol", Mathf.Log10(soundsVolumeValue) * 20);
         PlayerPrefs.SetFloat("GameSoundsVolume", soundsVolumeValue);
-        SoundManager.Instance.SoundsVolumeChanged();
+        SoundManager.Instance?.SoundsVolumeChanged();
     }
 
     
