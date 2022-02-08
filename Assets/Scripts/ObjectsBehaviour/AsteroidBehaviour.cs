@@ -74,6 +74,7 @@ public class AsteroidBehaviour : Enemy
         sphereCollider.enabled = false;
         partsSystem.Play();
         SoundManager.Instance.PlaySound("Blow1");
+        
     }
     private IEnumerator CountToDeath()
     {

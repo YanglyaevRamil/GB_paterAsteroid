@@ -30,4 +30,16 @@ public class SceneManagers : MonoBehaviour
         Debug.Log("Exit - � ��������� �� ���������");
         Application.Quit();
     }
+
+    public void PlayMenuSound()
+    {
+        SoundManager.Instance.PlaySound("ButtonClick");
+    }
+
+    public void StopMusic()
+    {
+        SoundManager.Instance.StopMusic();
+        SoundManager.Instance.PlayMusic("BattleMusic");
+        
+    }
 }

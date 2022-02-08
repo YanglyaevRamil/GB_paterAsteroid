@@ -41,4 +41,6 @@ public class PauseGameManager : MonoBehaviour
         menuObject.SetActive(gamePaused);
         Debug.Log(gamePaused);
     }
+
+    
 }
