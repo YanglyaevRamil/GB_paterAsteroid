@@ -4,7 +4,7 @@ using UnityEngine;
 public class AsteroidManager : MonoBehaviour
 {
     private const float START_DELAY_ASTEROID = 0f;
-    private const float SPAWN_INTERVAL_ASTEROID = 2f;
+    private const float SPAWN_INTERVAL_ASTEROID = 1f;
     private const float MAX_ANGL_X_RESP_ASTEROID = -20.0f;
     private const float MIN_ANGL_X_RESP_ASTEROID = 20.0f;
     private const int NUM_LAVA_ASTEROID_IN_GRUP = 3;
@@ -43,7 +43,7 @@ public class AsteroidManager : MonoBehaviour
             }
             for (int l = 0; l < NUM_ICE_ASTEROID_IN_GRUP; l++)
             {
-                var asteroidData = asteroidDataFactory.InstantiateAsteroid(AsteroidType.Fire);
+                var asteroidData = asteroidDataFactory.InstantiateAsteroid(AsteroidType.Ice);
 
                 DeploymentAsteroidData(asteroidData);
             }
