@@ -2,22 +2,23 @@ using UnityEngine;
 
 public class SpaceObjectDead : IDead
 {
-    public int Health { get { return _health; } }
+    public int Health { get { return health; } }
+    private int health;
 
-    private int _health;
     public SpaceObjectDead(int health)
     {
-        _health = health;
+        this.health = health;
     }
+
     public void DamageTake(int damageTaken)
     {
-        _health -= damageTaken;
+        health -= damageTaken;
     }
     public bool DeathCheck()
     {
-        if (_health <= 0)
+        if (health <= 0)
         {
-            _health = 0;
+            health = 0;
             return true;
         }
         else

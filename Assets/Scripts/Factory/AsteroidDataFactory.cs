@@ -11,12 +11,14 @@ public class AsteroidDataFactory
         asteroidDatas = Resources.LoadAll<AsteroidData>("ScriptableObject/Asteroid");
         asteroidGameObjekts = Resources.LoadAll<GameObject>("PrefabsAsset/Asteroid");
     }
+
     public AsteroidDataFactory(Transform targetTransform)
     {
         asteroidDatas = Resources.LoadAll<AsteroidData>("ScriptableObject/Asteroid");
         asteroidGameObjekts = Resources.LoadAll<GameObject>("PrefabsAsset/Asteroid");
         this.targetTransform = targetTransform;
     }
+
     public AsteroidData InstantiateAsteroid(AsteroidType asteroidType)
     {
         switch (asteroidType)
@@ -34,6 +36,7 @@ public class AsteroidDataFactory
                 return Instantiate(0);
         }
     }
+
     private AsteroidData Instantiate(int index)
     {
         var asteroidData = Object.Instantiate(asteroidDatas[index]);

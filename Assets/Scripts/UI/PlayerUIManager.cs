@@ -3,10 +3,6 @@ using UnityEngine.UI;
 
 public class PlayerUIManager : MonoBehaviour
 {
-    private const int COLOR_HEALTH_HIGH = 70;
-    private const int COLOR_HEALTH_MEDIUM = 40;
-    private const int COLOR_HEALTH_LOW = 20;
-
     public Text ScoreText;
     public Text HealthText;
     public Text AmmunitionText;
@@ -46,22 +42,22 @@ public class PlayerUIManager : MonoBehaviour
 
     private void HealthColorManagement(int info)
     {
-        if (info > COLOR_HEALTH_HIGH)
+        if (info > UIConst.COLOR_HEALTH_HIGH)
         {
             HealthText.material.color = Color.green;
         }
         
-        if (info <= COLOR_HEALTH_HIGH)
+        if (info <= UIConst.COLOR_HEALTH_HIGH)
         {
             HealthText.material.color = Color.cyan;
         }
         
-        if (info <= COLOR_HEALTH_MEDIUM)
+        if (info <= UIConst.COLOR_HEALTH_MEDIUM)
         {
             HealthText.material.color = Color.yellow;
         }
         
-        if (info <= COLOR_HEALTH_LOW)
+        if (info <= UIConst.COLOR_HEALTH_LOW)
         {
             HealthText.material.color = Color.red;
         }

@@ -47,6 +47,7 @@ public class SpaceShipGun : ISpaceShipGun
     {
         ammunition = ammunitionMax;
     }
+
     public bool CheckGunAmunition()
     {
         return emptyAmmunition;

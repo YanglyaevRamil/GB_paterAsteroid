@@ -22,7 +22,6 @@ public class AsteroidModel
         collider = asteroidData.AsteroidGameObject?.GetComponent<Collider>();
         rigidbody = asteroidData.AsteroidGameObject?.GetComponent<Rigidbody>();
         asteroid = new Asteroid(
-            asteroidData.AsteroidGameObject.gameObject.transform,
             asteroidData.Speed,
             rigidbody,
             asteroidData.RotationSpeed,

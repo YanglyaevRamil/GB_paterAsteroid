@@ -8,6 +8,7 @@ public class ScriptIntro : MonoBehaviour
     {
         StartCoroutine(SwitchScene());
     }
+
     IEnumerator SwitchScene()
     {
         yield return new WaitForSecondsRealtime(13f);

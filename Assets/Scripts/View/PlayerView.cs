@@ -28,6 +28,7 @@ public class PlayerView : MonoBehaviour, IDamage
             OnKeyDownButtonShooting?.Invoke();
         }
     }
+
     private void FixedUpdate()
     {
         if((horizontalAxis = Input.GetAxis("Horizontal")) != 0)
@@ -40,6 +41,7 @@ public class PlayerView : MonoBehaviour, IDamage
             OnKeyButtonMoving?.Invoke(transform.forward * verticalAxis);
         }
     }
+
     private void OnTriggerEnter(Collider other)
     {
         IDamage damage;
@@ -48,6 +50,7 @@ public class PlayerView : MonoBehaviour, IDamage
             OnDamageTaken?.Invoke(damage);
         }
     }
+
     public void Dead()
     {
         SceneManager.LoadScene("DeathScreen");

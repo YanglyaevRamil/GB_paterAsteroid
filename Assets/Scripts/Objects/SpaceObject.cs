@@ -7,9 +7,9 @@ public class SpaceObject
 
     public int Health { get { return spaceObjectDead.Health; } }
 
-    public SpaceObject(Transform transform, float speed, Rigidbody rigidbody, Vector3 rotationSpeed, int helth)
+    public SpaceObject(float speed, Rigidbody rigidbody, Vector3 rotationSpeed, int helth)
     {
-        spaceObjectMoving = new SpaceObjectMoving(transform, rigidbody, speed);
+        spaceObjectMoving = new SpaceObjectMoving(rigidbody, speed);
         spaceObjectRotation = new SpaceObjectRotation(rigidbody, rotationSpeed);
         spaceObjectDead = new SpaceObjectDead(helth);
     }

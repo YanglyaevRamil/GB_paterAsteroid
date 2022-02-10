@@ -8,6 +8,7 @@ public class GunDataFactory
     {
         gunDatas = Resources.LoadAll<GunData>("ScriptableObject/Gun");
     }
+
     public GunData InstantiateGun(GunType gunType)
     {
         switch (gunType)
@@ -19,6 +20,7 @@ public class GunDataFactory
                 return Instantiate(0);
         }
     }
+
     private GunData Instantiate(int index)
     {
         var gunData = Object.Instantiate(gunDatas[index]);

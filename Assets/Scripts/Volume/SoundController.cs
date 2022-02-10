@@ -43,14 +43,13 @@ public class SoundController : MonoBehaviour
     
         SetAudioSources(sounds, soundsVolume);
         SetAudioSources(backgroundMusic, backgroundMusicVolume);
-
     }
 
     private void SetAudioSources(AudioSource[] sounds, float volume)
     {
         foreach (AudioSource audio in sounds)
         {
-            audio.volume = audio.volume * volume;
+            audio.volume = volume;
         }
     }
 
@@ -116,7 +115,7 @@ public class SoundController : MonoBehaviour
         soundsVolume = value;
         foreach (AudioSource sound in sounds)
         {
-            sound.volume = sound.volume * soundsVolume;
+            sound.volume = soundsVolume;
         }
     }
 
@@ -125,7 +124,7 @@ public class SoundController : MonoBehaviour
         soundsVolume = PlayerPrefs.GetFloat("GameSoundsVolume", 0.75f);
         foreach (AudioSource sound in sounds)
         {
-            sound.volume = sound.volume * soundsVolume;
+            sound.volume = soundsVolume;
         }
     }
 

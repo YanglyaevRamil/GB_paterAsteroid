@@ -5,25 +5,32 @@ public class SceneManagers : MonoBehaviour
 {
     public void LoadNewGame()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene(SceneType.GameScene);
     }
+
     public void LoadRetry()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene(SceneType.GameScene);
     }
+
     public void LoadMainMenu()
     {
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene(SceneType.MenuScene);
         
     }
+
     public void LoadDeathScreen(SpaceObject spaceObject)
     {
         if (spaceObject is SpaceShip)
-            SceneManager.LoadScene("DeathScreen");
+            SceneManager.LoadScene(SceneType.DeathScreenScene);
     }
-    public void LoadExit() 
+
+    public void LoadExit()
     {
-        Debug.Log("Exit - � ��������� �� ���������");
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
 }

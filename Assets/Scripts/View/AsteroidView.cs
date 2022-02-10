@@ -5,8 +5,6 @@ using UnityEngine.Events;
 
 public class AsteroidView : MonoBehaviour, IDamage
 {
-    private const float DURATION_OF_DEATH = 3.0f;
-
     public event Action<IDamage> OnDamageTaken;
     public event Action OnMoving;
     public event Action OnRotation;
@@ -56,7 +54,7 @@ public class AsteroidView : MonoBehaviour, IDamage
 
     private IEnumerator CountToDeath()
     {
-        yield return new WaitForSecondsRealtime(DURATION_OF_DEATH);
+        yield return new WaitForSecondsRealtime(AsteroidConst.DURATION_OF_DEATH);
         OnEndDestruction.Invoke();
         StopCoroutine(CountToDeath());
     }

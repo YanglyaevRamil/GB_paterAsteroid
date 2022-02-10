@@ -1,4 +1,3 @@
-
 public enum GunType
 {
     DefaultGun,

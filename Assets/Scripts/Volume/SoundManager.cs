@@ -1,7 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.Audio;
-using UnityEngine.UI;
 
 [System.Serializable]
 public class SoundManager : MonoBehaviour
@@ -35,7 +32,6 @@ public class SoundManager : MonoBehaviour
 
     public void OnClikButton()
     {
-        Debug.Log("OnClikButton");
         soundController.PlaySound(SoundsEnum.ButtonClick);
     }
 }
