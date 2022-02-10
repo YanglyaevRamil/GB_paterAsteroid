@@ -38,9 +38,9 @@ public class SoundController : MonoBehaviour
     private void OnEnable()
     {
         backgroundMusicVolume = PlayerPrefs.GetFloat("MusicVolume", 0.75f);
-    
+
         soundsVolume = PlayerPrefs.GetFloat("GameSoundsVolume", 0.75f);
-    
+
         SetAudioSources(sounds, soundsVolume);
         SetAudioSources(backgroundMusic, backgroundMusicVolume);
 
@@ -50,7 +50,7 @@ public class SoundController : MonoBehaviour
     {
         foreach (AudioSource audio in sounds)
         {
-            audio.volume = audio.volume * volume;
+            audio.volume = volume;
         }
     }
 
@@ -74,11 +74,11 @@ public class SoundController : MonoBehaviour
     {
         StopMusic();
         AudioSource s = Array.Find(backgroundMusic, sound => sound.name == name);
-            if (s == null)
-            {
-                Debug.LogWarning("Music: " + name + " not found");
-                return;
-            }
+        if (s == null)
+        {
+            Debug.LogWarning("Music: " + name + " not found");
+            return;
+        }
 
         s.PlayDelayed(1f);
         currentPlayingMusic = Array.IndexOf(backgroundMusic, s, 0);
@@ -116,7 +116,7 @@ public class SoundController : MonoBehaviour
         soundsVolume = value;
         foreach (AudioSource sound in sounds)
         {
-            sound.volume = sound.volume * soundsVolume;
+            sound.volume = soundsVolume;
         }
     }
 
@@ -125,7 +125,7 @@ public class SoundController : MonoBehaviour
         soundsVolume = PlayerPrefs.GetFloat("GameSoundsVolume", 0.75f);
         foreach (AudioSource sound in sounds)
         {
-            sound.volume = sound.volume * soundsVolume;
+            sound.volume = soundsVolume;
         }
     }
 

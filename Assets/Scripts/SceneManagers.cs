@@ -21,9 +21,12 @@ public class SceneManagers : MonoBehaviour
         if (spaceObject is SpaceShip)
             SceneManager.LoadScene("DeathScreen");
     }
-    public void LoadExit() 
+    public void LoadExit()
     {
-        Debug.Log("Exit - � ��������� �� ���������");
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
 }

@@ -35,7 +35,6 @@ public class SoundManager : MonoBehaviour
 
     public void OnClikButton()
     {
-        Debug.Log("OnClikButton");
         soundController.PlaySound(SoundsEnum.ButtonClick);
     }
 }
