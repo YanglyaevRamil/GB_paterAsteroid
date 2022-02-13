@@ -3,9 +3,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class AsteroidView : MonoBehaviour, IDamage
+public class AsteroidView : MonoBehaviour, IDamageProvider
 {
-    public event Action<IDamage> OnDamageTaken;
+    public event Action<IDamageProvider> OnDamageTaken;
     public event Action OnMoving;
     public event Action OnRotation;
     public event Action OnEnableEvent;
@@ -35,8 +35,8 @@ public class AsteroidView : MonoBehaviour, IDamage
 
     private void OnTriggerEnter(Collider other)
     {
-        IDamage damage;
-        if ((damage = other.GetComponent<IDamage>()) != null)
+        IDamageProvider damage;
+        if ((damage = other.GetComponent<IDamageProvider>()) != null)
         {
             OnDamageTaken?.Invoke(damage);
         }

@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerPresenter
@@ -11,6 +9,18 @@ public class PlayerPresenter
 
     private PlayerModel playerModel;
     private PlayerView playerView;
+
+    private SpaceSpipPresenter _spaceSpipPresenter;
+    private GunPresenter _gunPresenter;
+    private UserInputPresenter _userInputPresenter;
+
+    public PlayerPresenter(SpaceSpipPresenter spaceSpipPresenter, GunPresenter gunPresenter, UserInputPresenter userInputPresenter)
+    {
+        _spaceSpipPresenter = spaceSpipPresenter;
+        _gunPresenter = gunPresenter;
+        _userInputPresenter = userInputPresenter;
+    }
+
     public PlayerPresenter(PlayerModel playerModel, PlayerView playerView)
     {
         this.playerModel = playerModel;
@@ -51,7 +61,7 @@ public class PlayerPresenter
     {
         playerModel.Shooting();
     }
-    private void PlayerDamageTaken(IDamage damage)
+    private void PlayerDamageTaken(IDamageProvider damage)
     {
         playerModel.DamageTake(damage.Damage);
         OnDamageTaken.Invoke(playerModel.Health);

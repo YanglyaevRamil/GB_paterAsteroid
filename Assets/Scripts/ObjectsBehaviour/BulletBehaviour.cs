@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BulletBehaviour : MonoBehaviour, IDamage
+public class BulletBehaviour : MonoBehaviour, IDamageProvider
 {
 
 

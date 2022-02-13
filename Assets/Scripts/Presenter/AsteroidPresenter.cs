@@ -50,7 +50,7 @@ public class AsteroidPresenter
         asteroidModel.Moving();
     }
 
-    private void DamageTaken(IDamage damage)
+    private void DamageTaken(IDamageProvider damage)
     {
         asteroidModel.DamageTake(damage.Damage);
     }

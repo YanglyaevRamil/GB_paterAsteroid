@@ -11,7 +11,7 @@ public class SpaceObjectRotation : IRotation
         this.rotationSpeed = rotationSpeed;
     }
 
-    public void Rotation(Vector3 dir)
+    public virtual void Rotation(Vector3 dir)
     {
         dir.x *= rotationSpeed.x;
         dir.y *= rotationSpeed.y;

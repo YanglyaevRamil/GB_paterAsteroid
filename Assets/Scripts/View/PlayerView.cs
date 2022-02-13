@@ -2,9 +2,9 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerView : MonoBehaviour, IDamage
+public class PlayerView : MonoBehaviour, IDamageProvider
 {
-    public event Action<IDamage> OnDamageTaken;
+    public event Action<IDamageProvider> OnDamageTaken;
     public event Action OnKeyDownButtonShooting;
     public event Action<Vector3> OnKeyButtonRotation;
     public event Action<Vector3> OnKeyButtonMoving;
@@ -44,8 +44,8 @@ public class PlayerView : MonoBehaviour, IDamage
 
     private void OnTriggerEnter(Collider other)
     {
-        IDamage damage;
-        if ((damage = other.gameObject.GetComponent<IDamage>()) != null)
+        IDamageProvider damage;
+        if ((damage = other.gameObject.GetComponent<IDamageProvider>()) != null)
         {
             OnDamageTaken?.Invoke(damage);
         }

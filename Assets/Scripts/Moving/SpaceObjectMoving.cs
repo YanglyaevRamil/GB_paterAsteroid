@@ -12,7 +12,7 @@ public class SpaceObjectMoving : IMoving
         this.rigidbody = rigidbody;
     }
 
-    public void Moving(Vector3 dir)
+    public virtual void Moving(Vector3 dir)
     {
         rigidbody.MovePosition(rigidbody.position + dir * speed);
     }

@@ -1,7 +1,7 @@
 using System;
-using System.Threading.Tasks;
 using System.Timers;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerModel
 {
@@ -28,6 +28,9 @@ public class PlayerModel
             spaceShipData.RotationSpeed,
             spaceShipData.Damage,
             spaceShipData.Health);
+
+        Collider collider = spaceShipData.SpaceShipGameObject.GetComponent<Collider>();
+        var rigidBody = spaceShipData.SpaceShipGameObject?.GetComponent<Rigidbody>();
 
         spaceShipGun = new SpaceShipGun(
             gunData.Ammunition,

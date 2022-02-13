@@ -4,7 +4,7 @@ using UnityEngine;
 public class SpaceShipData : ScriptableObject
 {
     [SerializeField]
-    private SpaceShipType playerType;
+    private SpaceShipType shipType;
 
     [SerializeField]
     private string description;
@@ -27,7 +27,7 @@ public class SpaceShipData : ScriptableObject
     [SerializeField]
     private GameObject spaceShipGameObject;
 
-    public SpaceShipType PlayerType { get { return playerType; } }
+    public SpaceShipType PlayerType { get { return shipType; } }
     public string Description { get { return description; } }
     public int Health { get { return health; } }
     public int Damage { get { return damage; } }
