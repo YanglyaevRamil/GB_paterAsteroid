@@ -18,9 +18,21 @@ public class GunData : ScriptableObject
     [SerializeField]
     private float gunReloadingTime;
 
+    [SerializeField]
+    private int bulletNumber;
+
+    [SerializeField]
+    private GameObject gunGO;
+
+    [SerializeField]
+    private BulletSpawnerModel bulletSpawnerModel;
+
     public GunType GunType { get { return gunType; } }
     public string Description { get { return description; } }
     public int Ammunition { get { return ammunition; } }
     public float GunRecoilTime { get { return gunRecoilTime; } }
     public float GunReloadingTime { get { return gunReloadingTime; } }
+    public int BulletNumber { get { return bulletNumber; } }
+    public GameObject GunGO { get { return gunGO; } set { gunGO = value; } }
+    public BulletSpawnerModel BulletSpawnerModel { get { return bulletSpawnerModel; } set { bulletSpawnerModel = value; } }
 }

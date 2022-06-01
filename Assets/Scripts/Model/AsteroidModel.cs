@@ -1,66 +1,74 @@
 using System;
 using UnityEngine;
 
-public class AsteroidModel
-{
-    public event Action<AsteroidData> OnDead;
+public class AsteroidModel : IFixedExecute, IPointsProvider
+{ 
+    public event Action<IPointsProvider> OnDead;
 
-    public int Damage { get { return asteroidData.Damage; } }
+    public int Damage { get { return _asteroidData.Damage; } } 
+    public int PricePoints { get { return _asteroidData.PricePoints; } }
 
-    private AsteroidData asteroidData;
-    private Asteroid asteroid;
+    private AsteroidData _asteroidData;
+
     private MeshRenderer meshRenderer;
     private Collider collider;
-    private Rigidbody rigidbody;
+    private Rigidbody rbAsteroid;
     private Vector3 direction;
     private Vector3 directionRotation;
+
+    private IMoving moving;
+    private IRotation rotation;
+    private IDead dead—ycle;
+
     public AsteroidModel(AsteroidData asteroidData)
     {
-        this.asteroidData = asteroidData;
+        _asteroidData = asteroidData;
 
-        meshRenderer = asteroidData.AsteroidGameObject?.GetComponentInChildren<MeshRenderer>();
-        collider = asteroidData.AsteroidGameObject?.GetComponent<Collider>();
-        rigidbody = asteroidData.AsteroidGameObject?.GetComponent<Rigidbody>();
-        asteroid = new Asteroid(
-            asteroidData.Speed,
-            rigidbody,
-            asteroidData.RotationSpeed,
-            asteroidData.Health
-            );
+        meshRenderer = _asteroidData.AsteroidGO?.GetComponentInChildren<MeshRenderer>();
+        collider = _asteroidData.AsteroidGO?.GetComponent<Collider>();
+        rbAsteroid = _asteroidData.AsteroidGO?.GetComponent<Rigidbody>();
+        direction = GetDirection(
+            _asteroidData.AsteroidTarget.position,
+            _asteroidData.AsteroidGO.gameObject.transform.position);
+        directionRotation = _asteroidData.RotationSpeed;
+
+        moving = new SpaceObjectMoving(
+            rbAsteroid,
+            _asteroidData.Speed);
+
+        rotation = new SpaceObjectRotation(
+            rbAsteroid,
+            _asteroidData.RotationSpeed);
+
+        dead—ycle = new SpaceObjectDead(
+            _asteroidData.Health);
     }
 
-    public void SetAsteroid(Asteroid asteroid)
+    public void FixedExecute()
     {
-        this.asteroid = asteroid;
+        moving.Moving(direction);
+        rotation.Rotation(directionRotation);
+    }
 
+    private void InvisibleAsteroidOff()
+    {
         meshRenderer.enabled = true;
         collider.enabled = true;
     }
 
-    public void SetAsteroid()
+    private void InvisibleAsteroidOn()
     {
-        var targetPos = asteroidData.AsteroidTarget.position;
-        var transformPos = asteroidData.AsteroidGameObject.gameObject.transform.position;
-        direction = GetDirection(targetPos, transformPos);
-        directionRotation = new Vector3(1,1,1);
-
-        meshRenderer.enabled = true;
-        collider.enabled = true;
-    }
-
-    public void SetAsteroidData(AsteroidData asteroidData)
-    {
-        this.asteroidData = asteroidData;
+        meshRenderer.enabled = false;
+        collider.enabled = false;
     }
 
     public void DamageTake(int damageTaken)
     {
-        asteroid.DamageTake(damageTaken);
-        if (asteroid.DeathCheck())
+        dead—ycle.DamageTake(damageTaken);
+        if (dead—ycle.DeathCheck())
         {
-            meshRenderer.enabled = false;
-            collider.enabled = false;
-            OnDead?.Invoke(asteroidData);
+            InvisibleAsteroidOn();
+            OnDead?.Invoke(this);
         }
     }
 
@@ -69,21 +77,24 @@ public class AsteroidModel
         ReturnToPool();
     }
 
-    public void Moving()
-    {
-        asteroid.Moving(direction);
-    }
-
-    public void Rotation()
-    {
-        asteroid.Rotation(directionRotation);
-    }
-
     private void ReturnToPool()
     {
-        asteroidData.AsteroidGameObject.transform.localPosition = Vector3.zero;
-        asteroidData.AsteroidGameObject.transform.localRotation = Quaternion.identity;
-        asteroidData.AsteroidGameObject.SetActive(false);
+        _asteroidData.AsteroidGO.transform.localPosition = Vector3.zero;
+        _asteroidData.AsteroidGO.transform.localRotation = Quaternion.identity;
+        _asteroidData.AsteroidGO.SetActive(false);
+    }
+    public void ReturnFromPool()
+    {
+        var targetPos = _asteroidData.AsteroidTarget.position;
+
+        float rndX = UnityEngine.Random.Range(AsteroidConst.MIN_ANGL_X_RESP_ASTEROID, AsteroidConst.MAX_ANGL_X_RESP_ASTEROID);
+        var transformPos = _asteroidData.AsteroidTarget.TransformPoint(rndX, 0, _asteroidData.DistanceSpawn);
+        _asteroidData.AsteroidGO.gameObject.transform.position = transformPos;
+
+        direction = GetDirection(targetPos, transformPos);
+        directionRotation = _asteroidData.RotationSpeed;
+
+        InvisibleAsteroidOff();
     }
 
     private Vector3 GetDirection(Vector3 a, Vector3 b)

@@ -1,5 +1,5 @@
 using System.Timers;
-public class GameTimer
+public sealed class GameTimer
 {
     public float TimeWatch { get { return timeSec/10; } }
     public bool FlagStopWatch { get { return flagStopWatch; } }

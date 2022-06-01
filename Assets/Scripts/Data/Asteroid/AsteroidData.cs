@@ -9,7 +9,7 @@ public class AsteroidData : ScriptableObject
     [SerializeField]
     private string description;
 
-    [SerializeField]
+    [SerializeField, Range(0, 100)]
     private int health;
 
     [SerializeField]
@@ -25,10 +25,13 @@ public class AsteroidData : ScriptableObject
     private int pricePoints;
 
     [SerializeField]
-    private GameObject asteroidGameObject;
+    private GameObject asteroidGO;
 
     [SerializeField]
     private Transform asteroidTarget;
+
+    [SerializeField]
+    private int distanceSpawn;
 
     public AsteroidType AsteroidType { get { return asteroidType; } }
     public string Description { get { return description; } }
@@ -37,6 +40,7 @@ public class AsteroidData : ScriptableObject
     public float Speed { get { return speed; } }
     public Vector3 RotationSpeed { get { return rotationSpeed; } }
     public int PricePoints { get { return pricePoints; } }
-    public GameObject AsteroidGameObject { get { return asteroidGameObject; } set { asteroidGameObject = value; } }
+    public GameObject AsteroidGO { get { return asteroidGO; } set { asteroidGO = value; } }
     public Transform AsteroidTarget { get { return asteroidTarget; } set { asteroidTarget = value; } }
+    public int DistanceSpawn { get { return distanceSpawn; } }
 }

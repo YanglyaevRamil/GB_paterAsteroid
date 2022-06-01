@@ -1,8 +1,8 @@
 
 public enum AsteroidType
 {
-    Lava,
-    Fire,
-    Ice
+    Lava = 0,
+    Fire = 1,
+    Ice  = 2
 }
 

@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class GameObjectPool
 {
+    public int Count { get { return _pool.Count; } }
+
     private readonly HashSet<GameObject> _pool = new HashSet<GameObject>();
     private readonly Transform _root;
+
+    public object Current => throw new System.NotImplementedException();
 
     public GameObjectPool(string prefabName)
     {

@@ -5,5 +5,7 @@ public static class BulletConst
     public const int BULLET_NUMBER = 20;
 
     public const float MAX_DELETION = 300.0f;
+
+    public const string PRFS_PATH = "PrefabsAsset/Bullet";
 }
 

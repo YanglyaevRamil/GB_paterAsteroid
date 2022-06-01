@@ -5,40 +5,25 @@ using UnityEngine.Events;
 
 public class AsteroidView : MonoBehaviour, IDamageProvider
 {
-    public event Action<IDamageProvider> OnDamageTaken;
-    public event Action OnMoving;
-    public event Action OnRotation;
+    public event Action<IDamageProvider> OnCollision;
     public event Action OnEnableEvent;
-    public event Action OnGetDamage;
     public event Action OnEndDestruction;
+
     public UnityEvent destructionEvent;
-    private int damage;
-    public int Damage
-    {
-        get
-        {
-            OnGetDamage?.Invoke();
-            return damage;
-        }
-    }
+
+    public int Damage { get; set; }
 
     private void OnEnable()
     {
         OnEnableEvent?.Invoke();
     }
-    
-    private void FixedUpdate()
-    {
-        OnMoving?.Invoke();
-        OnRotation?.Invoke();
-    }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
         IDamageProvider damage;
-        if ((damage = other.GetComponent<IDamageProvider>()) != null)
+        if ((damage = collision.gameObject?.GetComponent<IDamageProvider>()) != null)
         {
-            OnDamageTaken?.Invoke(damage);
+            OnCollision?.Invoke(damage);
         }
     }
 
@@ -47,15 +32,11 @@ public class AsteroidView : MonoBehaviour, IDamageProvider
         destructionEvent.Invoke();
         StartCoroutine(CountToDeath());
     }
-    public void GetDamage(int damage)
-    {
-        this.damage = damage;
-    }
 
     private IEnumerator CountToDeath()
     {
         yield return new WaitForSecondsRealtime(AsteroidConst.DURATION_OF_DEATH);
-        OnEndDestruction.Invoke();
+        OnEndDestruction?.Invoke();
         StopCoroutine(CountToDeath());
     }
 }

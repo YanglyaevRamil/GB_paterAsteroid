@@ -1,68 +1,44 @@
 
 using System;
-using UnityEngine;
-
 public class AsteroidPresenter
 {
-    public Action<AsteroidData> OnDeadAsteroid;
+    private AsteroidModel _asteroidModel;
+    private AsteroidView _asteroidView;
 
-    private AsteroidModel asteroidModel;
-    private AsteroidView asteroidView;
+    private Action<IDamageProvider> collision;
+    private Action enableEvent;
+    private Action endDestruction;
 
     public AsteroidPresenter(AsteroidModel asteroidModel, AsteroidView asteroidView)
     {
-        this.asteroidModel = asteroidModel;
-        this.asteroidView = asteroidView;
+        _asteroidModel = asteroidModel;
+        _asteroidView = asteroidView;
 
-        asteroidView.OnDamageTaken += DamageTaken;
-        asteroidView.OnMoving += Moving;
-        asteroidView.OnRotation += Rotation;
-        asteroidView.OnEnableEvent += Enable;
-        asteroidView.OnGetDamage += GetDamage;
-        asteroidView.OnEndDestruction += EndDestruction;
+        collision = dp =>
+        {
+            _asteroidModel.DamageTake(dp.Damage);
+            _asteroidView.Damage = _asteroidModel.Damage;
+        };
 
-        asteroidModel.OnDead += Dead;
-        asteroidModel.OnDead += Destruction;
+        enableEvent = () =>
+        {
+            _asteroidModel.ReturnFromPool();
+        };
+
+        endDestruction = () =>
+        {
+            _asteroidModel.Dead();
+        };
+
+        _asteroidView.OnCollision += collision;
+        _asteroidView.OnEnableEvent += enableEvent;
+        _asteroidView.OnEndDestruction += endDestruction;
     }
 
-    private void EndDestruction()
+    ~AsteroidPresenter()
     {
-        asteroidModel.Dead();
-    }
-
-    private void GetDamage()
-    {
-        asteroidView.GetDamage(asteroidModel.Damage);
-    }
-
-    private void Enable()
-    {
-        asteroidModel.SetAsteroid();
-    }
-
-    private void Rotation()
-    {
-        asteroidModel.Rotation();
-    }
-
-    private void Moving()
-    {
-        asteroidModel.Moving();
-    }
-
-    private void DamageTaken(IDamageProvider damage)
-    {
-        asteroidModel.DamageTake(damage.Damage);
-    }
-
-    private void Dead(AsteroidData asteroidData)
-    {
-        OnDeadAsteroid?.Invoke(asteroidData);
-        
-    }
-
-    private void Destruction(AsteroidData asteroidData)
-    {
-        asteroidView.DestructionAsteroid();
+        _asteroidView.OnCollision -= collision;
+        _asteroidView.OnEnableEvent -= enableEvent;
+        _asteroidView.OnEndDestruction -= endDestruction;
     }
 }

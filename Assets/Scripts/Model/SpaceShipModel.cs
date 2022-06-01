@@ -1,49 +1,68 @@
 using UnityEngine;
 
-public class SpaceShipModel : IMoving, IRotation, IDead
+public class SpaceShipModel : ICleanup
 {
     private SpaceShipData _spaceShipData;
 
-    private IMoving moving;
-    private IRotation rotation;
-    private IDead dead—ycle;
+    private IMoving _moving;
+    private IRotation _rotation;
+    private IDead _dead—ycle;
+
+    private IShoot _gun;
     public SpaceShipModel(SpaceShipData spaceShipData)
     {
         _spaceShipData = spaceShipData;
-        var rbSpaceShip =_spaceShipData.SpaceShipGameObject?.GetComponent<Rigidbody>();
+        var rbSpaceShip =_spaceShipData.SpaceShipGO?.GetComponent<Rigidbody>();
 
-        moving = new SpaceShipMoving(
+        _moving = new SpaceShipMoving(
             rbSpaceShip, 
             _spaceShipData.Speed);
 
-        rotation = new SpaceShipRotation(
+        _rotation = new SpaceShipRotation(
             rbSpaceShip,
             _spaceShipData.RotationSpeed);
 
-        dead—ycle = new SpaceShipDead(
+        _dead—ycle = new SpaceShipDead(
             _spaceShipData.Health);
+
+        _gun = spaceShipData.GunModel;
+
+        _spaceShipData.UserInputModel.OnInputHorizontal += Moving;
+        _spaceShipData.UserInputModel.OninputVertical += Rotation;
+        _spaceShipData.UserInputModel.OninputFire += Fire;
     }
 
-    public int Health { get { return dead—ycle.Health; } }
+    public int Health { get { return _dead—ycle.Health; } }
     public int Damage { get { return _spaceShipData.Damage; } }
 
     public void DamageTake(int damageTaken)
     {
-        dead—ycle.DamageTake(damageTaken);
+        _dead—ycle.DamageTake(damageTaken);
+
+        if (_dead—ycle.DeathCheck())
+        {
+            Debug.Log(")= SpaceShip - DEAD =(");
+        }
     }
 
-    public bool DeathCheck()
+    private void Moving(float dir)
     {
-        return dead—ycle.DeathCheck();
+        _moving.Moving(new Vector3(0f, dir, 0f));
     }
 
-    public void Moving(Vector3 dir)
+    private void Rotation(float dir)
     {
-        moving.Moving(dir);
+        _rotation.Rotation(_spaceShipData.SpaceShipGO.transform.forward * dir);
     }
 
-    public void Rotation(Vector3 dir)
+    public void Cleanup()
     {
-        rotation.Rotation(dir);
+        _spaceShipData.UserInputModel.OnInputHorizontal -= Moving;
+        _spaceShipData.UserInputModel.OninputVertical -= Rotation;
+    }
+
+    public void Fire(float dir)
+    {
+        _gun.Shoot();
     }
 }

@@ -1,5 +1,5 @@
 public enum SpaceShipType
 {
-    DefaultSpaceShip,
+    DefaultSpaceShip = 0,
 }
 
